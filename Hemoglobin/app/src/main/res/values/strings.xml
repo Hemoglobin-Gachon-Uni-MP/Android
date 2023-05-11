@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">P-Line</string>
+
+    <!-- Naming Rules -->
+
+    <!-- 도메인명_컴포넌트함축어_용도(=목적) -->
+
+    <!-- Main -->
+    <string name="main_btm_nav_home_title">홈</string>
+    <string name="main_btm_nav_map_title">헌혈의 집</string>
+    <string name="main_btm_nav_info_title">헌혈 정보</string>
+    <string name="main_btm_nav_my_page_title">마이페이지</string>
+    <!-- Home -->
+
+    <!--Map-->
+
+    <!--Info-->
+
+    <!-- MyPage -->
+</resources>
