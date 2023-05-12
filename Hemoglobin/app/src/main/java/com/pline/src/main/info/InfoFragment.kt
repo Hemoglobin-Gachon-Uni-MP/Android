@@ -1,14 +1,17 @@
 package com.pline.src.main.info
 
 import android.os.Bundle
+import android.text.Html
 import android.view.View
 import com.pline.R
 import com.pline.config.BaseFragment
 import com.pline.databinding.FragmentInfoBinding
 
 
-class InfoFragment : BaseFragment<FragmentInfoBinding>(FragmentInfoBinding::bind, R.layout.fragment_home) {
+class InfoFragment : BaseFragment<FragmentInfoBinding>(FragmentInfoBinding::bind, R.layout.fragment_info) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.fragmentInfoWvConditionsDesc.settings.javaScriptEnabled = true
+        binding.fragmentInfoWvConditionsDesc.loadUrl("file:///android_asset/conditions.html")
     }
 }

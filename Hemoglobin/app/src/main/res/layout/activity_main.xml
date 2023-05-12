@@ -16,7 +16,7 @@
         android:id="@+id/main_btm_nav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@drawable/btm_nav_topline"
         app:itemBackground="@color/white"
         app:itemIconTint="@drawable/main_btm_nav_item_color"
         app:itemTextColor="@drawable/main_btm_nav_item_color"
