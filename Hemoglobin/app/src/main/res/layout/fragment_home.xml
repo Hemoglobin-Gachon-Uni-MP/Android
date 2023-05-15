@@ -2,5 +2,344 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/fragment_home_toolbar_tv"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:background="@drawable/toolbar_underline"
+        android:gravity="center_vertical"
+        android:paddingStart="16dp"
+        android:text="게시글 보기"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/home_btn_new_post_iv"
+        android:layout_width="41dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="10dp"
+        android:padding="6dp"
+        android:src="@drawable/ic_add"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/fragment_home_toolbar_tv"
+        app:layout_constraintBottom_toBottomOf="@+id/fragment_home_toolbar_tv"/>
+
+    <ImageView
+        android:id="@+id/home_btn_filter_iv"
+        android:layout_width="37dp"
+        android:layout_height="37dp"
+        android:padding="6dp"
+        android:src="@drawable/ic_filter"
+        app:layout_constraintEnd_toStartOf="@+id/home_btn_new_post_iv"
+        app:layout_constraintTop_toTopOf="@+id/fragment_home_toolbar_tv"
+        app:layout_constraintBottom_toBottomOf="@+id/fragment_home_toolbar_tv"/>
+
+    <HorizontalScrollView
+        android:id="@+id/home_selected_filter_list_sv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_home_toolbar_tv"
+        app:layout_constraintStart_toStartOf="parent"
+        android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="11dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/home_post_selected_rh_plus_tv"
+                style="@style/home_filter_blood_type_tv"
+                android:textColor="@color/red6"
+                android:text="Rh+"
+                android:background="@drawable/style_filter_unselected"/>
+            <TextView
+                android:id="@+id/home_post_selected_rh_minus_tv"
+                style="@style/home_filter_blood_type_tv"
+                android:textColor="@color/red6"
+                android:text="Rh-"
+                android:background="@drawable/style_filter_unselected"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/home_post_selected_a_tv"
+                style="@style/home_filter_blood_type_tv"
+                android:textColor="@color/red6"
+                android:paddingHorizontal="15dp"
+                android:text="A"
+                android:background="@drawable/style_filter_unselected"/>
+            <TextView
+                android:id="@+id/home_post_selected_b_tv"
+                style="@style/home_filter_blood_type_tv"
+                android:textColor="@color/red6"
+                android:paddingHorizontal="15dp"
+                android:text="B"
+                android:background="@drawable/style_filter_unselected"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/home_post_selected_ab_tv"
+                style="@style/home_filter_blood_type_tv"
+                android:textColor="@color/red6"
+                android:text="AB"
+                android:background="@drawable/style_filter_unselected"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/home_post_selected_o_tv"
+                style="@style/home_filter_blood_type_tv"
+                android:textColor="@color/red6"
+                android:paddingHorizontal="15dp"
+                android:text="O"
+                android:background="@drawable/style_filter_unselected"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/home_post_selected_area_tv"
+                style="@style/home_filter_blood_type_tv"
+                android:background="@drawable/style_filter_unselected"
+                android:text="서울시 강남구"
+                android:textColor="@color/red6" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="5dp"
+                android:text="주변의 게시물"
+                android:textSize="16sp"/>
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grayD9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_selected_filter_list_sv"/>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/home_position_tab_tl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_selected_filter_list_sv"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grayD9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_position_tab_tl"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/home_post_list_rv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingHorizontal="7dp"
+        android:orientation="vertical"
+        tools:listitem="@layout/item_post"
+        app:layout_constraintTop_toBottomOf="@id/home_position_tab_tl"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+
+    <!-- floating -->
+
+    <ImageView
+        android:id="@+id/home_filter_menu_triangle_iv"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_polygon"
+        app:layout_constraintTop_toBottomOf="@+id/home_btn_filter_iv"
+        app:layout_constraintStart_toStartOf="@+id/home_btn_filter_iv"
+        app:layout_constraintEnd_toEndOf="@+id/home_btn_filter_iv"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/home_filter_menu_layout_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/style_corner_radius_5_pink"
+        android:orientation="horizontal"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_filter_menu_triangle_iv">
+
+        <TextView
+            android:id="@+id/filter_menu_text_abo_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="ABO식"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/filter_menu_text_rh_tv" />
+
+        <TextView
+            android:id="@+id/filter_menu_text_rh_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rh식"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/home_filter_menu_rh_options_ll"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/home_filter_menu_rh_options_ll" />
+
+        <TextView
+            android:id="@+id/filter_menu_text_area_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="지역구"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/filter_menu_text_abo_tv" />
+
+        <LinearLayout
+            android:id="@+id/home_filter_menu_rh_options_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toEndOf="@+id/filter_menu_text_rh_tv"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/home_filter_menu_plus_empty_tv"
+                style="@style/home_filter_floating_tv"
+                android:background="@drawable/style_filter_unselected"
+                android:text="Rh+"
+                android:textColor="@color/black"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/home_filter_menu_plus_selected_tv"
+                style="@style/home_filter_floating_tv"
+                android:background="@drawable/style_filter_selected"
+                android:text="Rh+"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/home_filter_menu_minus_empty_tv"
+                style="@style/home_filter_floating_tv"
+                android:background="@drawable/style_filter_unselected"
+                android:text="Rh-"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/home_filter_menu_minus_selected_tv"
+                style="@style/home_filter_floating_tv"
+                android:background="@drawable/style_filter_selected"
+                android:text="Rh-"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/home_filter_menu_abo_options_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/filter_menu_text_abo_tv"
+            app:layout_constraintStart_toStartOf="@+id/home_filter_menu_rh_options_ll"
+            app:layout_constraintTop_toTopOf="@+id/filter_menu_text_abo_tv">
+
+            <TextView
+                android:id="@+id/home_filter_menu_a_empty_tv"
+                style="@style/home_filter_floating_tv"
+                android:background="@drawable/style_filter_unselected"
+                android:paddingHorizontal="15dp"
+                android:text="A"
+                android:textColor="@color/black"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/home_filter_menu_a_selected_tv"
+                style="@style/home_filter_floating_tv"
+                android:background="@drawable/style_filter_selected"
+                android:paddingHorizontal="15dp"
+                android:text="A"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/home_filter_menu_b_empty_tv"
+                style="@style/home_filter_floating_tv"
+                android:background="@drawable/style_filter_unselected"
+                android:paddingHorizontal="15dp"
+                android:text="B"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/home_filter_menu_b_selected_tv"
+                style="@style/home_filter_floating_tv"
+                android:background="@drawable/style_filter_selected"
+                android:paddingHorizontal="15dp"
+                android:text="B"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/home_filter_menu_ab_empty_tv"
+                style="@style/home_filter_floating_tv"
+                android:background="@drawable/style_filter_unselected"
+                android:text="AB"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/home_filter_menu_ab_selected_tv"
+                style="@style/home_filter_floating_tv"
+                android:background="@drawable/style_filter_selected"
+                android:text="AB"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/home_filter_menu_o_empty_tv"
+                style="@style/home_filter_floating_tv"
+                android:background="@drawable/style_filter_unselected"
+                android:paddingHorizontal="15dp"
+                android:text="O"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/home_filter_menu_o_selected_tv"
+                style="@style/home_filter_floating_tv"
+                android:background="@drawable/style_filter_selected"
+                android:paddingHorizontal="15dp"
+                android:text="O"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <Spinner
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingVertical="2dp"
+            app:layout_constraintStart_toStartOf="@+id/home_filter_menu_rh_options_ll"
+            app:layout_constraintTop_toTopOf="@+id/filter_menu_text_area_tv"
+            app:layout_constraintBottom_toBottomOf="@+id/filter_menu_text_area_tv"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
