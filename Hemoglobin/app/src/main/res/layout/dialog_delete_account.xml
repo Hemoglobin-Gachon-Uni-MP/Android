@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/dialog_background">
     <TextView
@@ -13,8 +13,12 @@
         android:textStyle="bold"
         android:textColor="@color/black"
         android:text="'P-line'을 탈퇴하시겠습니까?"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="25dp" />
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="31dp"
+        android:layout_marginRight="31dp"/>
     <TextView
         android:id="@+id/tv_delete_guide"
         android:layout_width="match_parent"
@@ -24,14 +28,16 @@
         android:textStyle="bold"
         android:textColor="@color/red6"
         android:text="한번 탈퇴하면 되돌릴 수 없습니다"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_delete_account"
+        app:layout_constraintRight_toRightOf="@+id/tv_delete_account"
         app:layout_constraintTop_toBottomOf="@id/tv_delete_account"
         android:layout_marginTop="3dp" />
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_delete_guide"
+        app:layout_constraintTop_toBottomOf="@+id/tv_delete_guide"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="17dp"
         android:layout_marginRight="17dp">
