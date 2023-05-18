@@ -3,7 +3,6 @@ package com.pline.src.main.home
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.google.android.material.tabs.TabLayoutMediator
@@ -47,5 +46,11 @@ class MyPostListFragment : BaseFragment<FragmentMyPostListBinding>(FragmentMyPos
         TabLayoutMediator(binding.tabMyPostList, binding.vpMyPostList) { tab, pos ->
             tab.customView = tapTextViewArr[pos]
         }.attach()
+
+        // Set click event of back button
+        binding.imgbtnBack.setOnClickListener {
+            // Move to previous page
+            activity?.let { it.onBackPressed() }
+        }
     }
 }
