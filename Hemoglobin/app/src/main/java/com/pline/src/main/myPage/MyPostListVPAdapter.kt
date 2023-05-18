@@ -3,7 +3,7 @@ package com.pline.src.main.myPage
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.pline.src.main.home.MyPostRVFragment
+import com.pline.src.main.home.MyPostListRVVFragment
 
 // ViewPager adapter for my post list
 class MyPostListVPAdapter(fragmentActivity: FragmentActivity): FragmentStateAdapter(fragmentActivity) {
@@ -13,9 +13,9 @@ class MyPostListVPAdapter(fragmentActivity: FragmentActivity): FragmentStateAdap
     // Set page according to clicked position
     override fun createFragment(position: Int): Fragment {
         return when(position) {
-            0 -> MyPostRVFragment()
-            1 -> MyPostRVFragment()
-            else -> MyPostRVFragment()
+            0 -> MyPostListRVVFragment()
+            1 -> MyPostListRVVFragment()
+            else -> MyPostListRVVFragment()
         }
     }
 }
