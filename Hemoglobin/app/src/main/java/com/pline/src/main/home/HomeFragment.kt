@@ -2,6 +2,8 @@ package com.pline.src.main.home
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import com.google.android.material.tabs.TabLayoutMediator
 import com.pline.R
 import com.pline.config.BaseFragment
@@ -39,11 +41,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
             }
         }
 
-        // 시작할 때 선택한 필터부분을 본인 기본 혈액형으로 하는 코드 필요
+
     }
 
     override fun onResume() {
         super.onResume()
+
+
+        // 필터 클릭 모음집...
+        binding.homeFilterMenuPlusEmptyTv.setOnClickListener {
+            rhPlus(true)
+        }
+        binding.homeFilterMenuPlusSelectedTv.setOnClickListener {
+            rhPlus(false)
+        }
     }
 
     // 필터 버튼 클릭 함수
@@ -55,12 +66,24 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
         } else { // 필터 선택창 안보이게
             binding.homeFilterMenuLayoutCl.visibility = View.GONE
             filterVisible = false
+
+            // 닫으면서 선택한 필터 적용해서 게시물 불러오기
         }
     }
 
     // 필터 Rh+
-    private fun rhPlus(){
-
+    private fun rhPlus(isSelected: Boolean){
+        if (isSelected){ // true 들어오면 해제상태 -> 선택상태
+            binding.homeFilterMenuPlusSelectedTv.visibility = View.VISIBLE
+            binding.homeFilterMenuPlusEmptyTv.visibility = View.GONE
+            // 필터 밖에도 보여야함
+            binding.homePostSelectedRhPlusTv.visibility = View.VISIBLE
+        } else{ // false 들어오면 선택된상태 -> 해제된 상태
+            binding.homeFilterMenuPlusSelectedTv.visibility = View.GONE
+            binding.homeFilterMenuPlusEmptyTv.visibility = View.VISIBLE
+            // 필터 밖에도 보여야함
+            binding.homePostSelectedRhPlusTv.visibility = View.GONE
+        }
     }
 
 }

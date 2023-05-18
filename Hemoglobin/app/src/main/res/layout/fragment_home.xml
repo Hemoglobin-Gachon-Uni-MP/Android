@@ -154,7 +154,7 @@
         android:paddingVertical="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/home_btn_filter_iv"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <TextView
             android:id="@+id/filter_menu_text_abo_tv"
@@ -318,6 +318,21 @@
             app:layout_constraintTop_toTopOf="@+id/filter_menu_text_area_tv"
             app:layout_constraintBottom_toBottomOf="@+id/filter_menu_text_area_tv"
             app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/filter_menu_apply_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/filter_menu_text_area_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/style_filter_selected"
+            android:text="적용하기"
+            android:layout_marginTop="16dp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:paddingVertical="3dp"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
