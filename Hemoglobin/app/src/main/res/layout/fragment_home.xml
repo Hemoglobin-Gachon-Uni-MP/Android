@@ -13,7 +13,7 @@
         android:background="@drawable/toolbar_underline"
         android:gravity="center_vertical"
         android:paddingStart="16dp"
-        android:text="홈"
+        android:text="P-Line"
         android:textColor="@color/black"
         android:textSize="22sp"
         android:textStyle="bold"
