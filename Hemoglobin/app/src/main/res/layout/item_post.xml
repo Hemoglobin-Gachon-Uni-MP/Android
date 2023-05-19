@@ -85,7 +85,6 @@
         app:layout_constraintTop_toBottomOf="@+id/item_post_profile_cv"
         app:layout_constraintStart_toStartOf="parent"
         android:textSize="14sp"
-        android:textColor="@color/black"
         android:maxLines="3"/>
 
 <!--    <View-->
