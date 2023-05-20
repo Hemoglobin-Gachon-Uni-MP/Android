@@ -129,7 +129,7 @@
                 android:background="@drawable/style_filter_unselected"
                 android:text="Rh+"
                 android:textColor="@color/black"
-                android:visibility="gone" />
+                android:visibility="visible" />
 
             <TextView
                 android:id="@+id/new_post_receiver_plus_selected_tv"
@@ -137,7 +137,8 @@
                 android:background="@drawable/style_filter_selected"
                 android:text="Rh+"
                 android:textColor="@color/white"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/new_post_receiver_minus_empty_tv"
@@ -172,8 +173,7 @@
                 android:background="@drawable/style_filter_unselected"
                 android:paddingHorizontal="15dp"
                 android:text="A"
-                android:textColor="@color/black"
-                android:visibility="gone" />
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/new_post_receiver_a_selected_tv"
@@ -182,7 +182,8 @@
                 android:paddingHorizontal="15dp"
                 android:text="A"
                 android:textColor="@color/white"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/new_post_receiver_b_empty_tv"
