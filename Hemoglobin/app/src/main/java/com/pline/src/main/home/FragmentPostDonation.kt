@@ -6,7 +6,7 @@ import com.pline.R
 import com.pline.config.BaseFragment
 import com.pline.databinding.FragmentPostProviderBinding
 
-class FragmentPostProvider: BaseFragment<FragmentPostProviderBinding>(FragmentPostProviderBinding::bind, R.layout.fragment_post_provider) {
+class FragmentPostDonation: BaseFragment<FragmentPostProviderBinding>(FragmentPostProviderBinding::bind, R.layout.fragment_post_provider) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
