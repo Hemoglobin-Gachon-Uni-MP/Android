@@ -5,6 +5,7 @@ plugins {
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 def googleMapKey = properties.getProperty('google_map_api_key')
+def kakaoApiKey = properties.getProperty('kakao_native_key')
 android {
     compileSdkVersion 31
     buildToolsVersion "30.0.3"
@@ -21,9 +22,11 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "KAKAO_API_KEY", properties['kakao_api_key']
         buildConfigField "String", "GOOGLE_MAP_KEY", properties['google_map_key']
         // mainfest에서 쓸 수 있도록 지정
-        manifestPlaceholders = [GOOGLE_MAP_KEY : googleMapKey]
+        manifestPlaceholders = [GOOGLE_MAP_KEY : googleMapKey, KAKAO_API_KEY : kakaoApiKey]
     }
 
     buildTypes {
@@ -53,6 +56,9 @@ dependencies {
     //구글 맵
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
     implementation 'com.google.android.gms:play-services-location:21.0.1'
+
+    // 카카오 로그인
+    implementation "com.kakao.sdk:v2-user:2.13.0"
 
     // https://github.com/square/retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
