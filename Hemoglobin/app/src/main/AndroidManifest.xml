@@ -15,6 +15,31 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup">
+
+        <activity
+            android:name=".src.main.register.RegisterCompleteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".src.main.register.RegisterResidenceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".src.main.register.RegisterTypeInfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".src.main.register.RegisterPhoneActivity"
+            android:exported="false" />
+        <activity
+            android:name=".src.main.register.RegisterBirthActivity"
+            android:exported="false" />
+        <activity
+            android:name=".src.main.register.RegisterNameActivity"
+            android:exported="false" />
+        <activity
+            android:name=".src.main.register.RegisterNicknameActivity"
+            android:exported="false" />
+        <activity
+            android:name=".src.main.register.LoginActivity"
+            android:exported="true" />
         <activity
             android:name="com.pline.src.main.myPage.EditInfoActivity"
             android:exported="false"
@@ -30,9 +55,29 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.pline.src.main.MainActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="oauth"
+                    android:scheme="kakao${KAKAO_API_KEY}" />
+            </intent-filter>
+        </activity>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="${GOOGLE_MAP_KEY}"/>
+            android:value="${GOOGLE_MAP_KEY}" />
     </application>
 
 </manifest>

@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Base64
 import android.util.Log
 import androidx.annotation.RequiresApi
+import com.kakao.sdk.common.util.Utility
 import com.pline.R
 import com.pline.config.BaseActivity
 import com.pline.databinding.ActivityMainBinding
@@ -22,21 +23,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     //@RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        /* 카카오 해시 키 받기 -> 각자 등록
-        try {
-            val information = packageManager.getPackageInfo(packageName, PackageManager.GET_SIGNING_CERTIFICATES)
-            val signatures = information.signingInfo.apkContentsSigners
-            for (signature in signatures) {
-                val md = MessageDigest.getInstance("SHA").apply {
-                    update(signature.toByteArray())
-                }
-                val HASH_CODE = String(Base64.encode(md.digest(), 0))
 
-                Log.d(TAG, "HASH_CODE -> $HASH_CODE")
-            }
-        } catch (e: Exception) {
-            Log.d(TAG, "Exception -> $e")
-        }*/
+
         supportFragmentManager.beginTransaction().replace(R.id.main_frm, HomeFragment()).commitAllowingStateLoss()
 
         binding.mainBtmNav.run {
