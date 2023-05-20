@@ -2,6 +2,7 @@ package com.pline.src.main.home
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ArrayAdapter
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import com.google.android.material.tabs.TabLayoutMediator
@@ -13,13 +14,11 @@ import com.pline.src.main.home.adapter.PostVPAdapter
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind, R.layout.fragment_home) {
     var filterVisible: Boolean = false
+    var plusVisible: Boolean = false
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val information = arrayListOf("수혈자", "공혈자")
-
-//        val adapter = AddGoalVPAd(this)
-//        binding.addViewpagerVp.adapter = adapter
-//
 
         binding.homePositionViewpagerVp.adapter = PostVPAdapter(this)
 
@@ -33,14 +32,40 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
         super.onStart()
 
 
+        // + 버튼 클릭
+        binding.homeBtnNewPostIv.setOnClickListener {
+            if (plusVisible){
+                plusBtn(false)
+
+            } else { // 게시물 펼치기
+                plusBtn(true)
+                filterBtn(false) // 필터 열려있으면 닫기
+
+                // 수혈자 글쓰기
+                binding.homeNewPostForReceiverTv.setOnClickListener {
+                    requireActivity().supportFragmentManager.beginTransaction().replace(R.id.main_frm, FragmentNewPostReceiver()).commit()
+                }
+                // 공혈자 글쓰기
+                binding.homeNewPostForProviderTv.setOnClickListener {
+                    requireActivity().supportFragmentManager.beginTransaction().replace(R.id.main_frm, FragmentNewPostProvider()).commit()
+                }
+            }
+        }
+
+        if (binding.homeNewPostMenuLayoutLl.isVisible){
+
+        }
+
+
+        // 필터 버튼 클릭
         binding.homeBtnFilterIv.setOnClickListener {
             if (filterVisible){ // 필터 보일 때
                 filterBtn(false)
             }else { // 필터 접혀있을 때
                 filterBtn(true)
+                plusBtn(false)
             }
         }
-
 
     }
 
@@ -55,6 +80,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
         binding.homeFilterMenuPlusSelectedTv.setOnClickListener {
             rhPlus(false)
         }
+
+
+        // 필터 스피너 어댑터
+        val spinnerAdapter = ArrayAdapter(requireContext(), R.layout.support_simple_spinner_dropdown_item, resources.getStringArray(R.array.spinner_area_list))
+        binding.homeFilterMenuAreaSpinner.adapter = spinnerAdapter
     }
 
     // 필터 버튼 클릭 함수
@@ -70,6 +100,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
             // 닫으면서 선택한 필터 적용해서 게시물 불러오기
         }
     }
+
+    // 글 추가 클릭 함수
+    private fun plusBtn(isVisible: Boolean){
+        if (isVisible){
+            // 글쓰기창 보이게
+            binding.homeNewPostMenuLayoutLl.visibility = View.VISIBLE
+            plusVisible = true
+        } else { // 글쓰기창 안보이게
+            binding.homeNewPostMenuLayoutLl.visibility = View.GONE
+            plusVisible = false
+
+            // 닫으면서 선택한 필터 적용해서 게시물 불러오기
+        }
+    }
+
 
     // 필터 Rh+
     private fun rhPlus(isSelected: Boolean){
