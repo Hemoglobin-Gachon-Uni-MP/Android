@@ -13,7 +13,7 @@
         android:background="@drawable/toolbar_underline"
         android:gravity="center_vertical"
         android:paddingStart="16dp"
-        android:text="게시글 보기"
+        android:text="홈"
         android:textColor="@color/black"
         android:textSize="22sp"
         android:textStyle="bold"
@@ -45,6 +45,7 @@
         android:id="@+id/home_selected_filter_list_sv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/toolbar_underline"
         app:layout_constraintTop_toBottomOf="@+id/fragment_home_toolbar_tv"
         app:layout_constraintStart_toStartOf="parent"
         android:scrollbars="none">
@@ -117,27 +118,13 @@
         </LinearLayout>
     </HorizontalScrollView>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/grayD9"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_selected_filter_list_sv"/>
-
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/home_position_tab_tl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
+        android:background="@drawable/toolbar_underline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/home_selected_filter_list_sv"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/grayD9"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_position_tab_tl"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/home_post_list_rv"
