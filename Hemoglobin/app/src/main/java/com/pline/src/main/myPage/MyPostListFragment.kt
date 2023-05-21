@@ -1,4 +1,4 @@
-package com.pline.src.main.home
+package com.pline.src.main.myPage
 
 import android.os.Bundle
 import android.view.Gravity
@@ -9,7 +9,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.pline.R
 import com.pline.config.BaseFragment
 import com.pline.databinding.FragmentMyPostListBinding
-import com.pline.src.main.myPage.MyPostListVPAdapter
 
 // My Post List Tab
 class MyPostListFragment : BaseFragment<FragmentMyPostListBinding>(FragmentMyPostListBinding::bind, R.layout.fragment_my_post_list) {

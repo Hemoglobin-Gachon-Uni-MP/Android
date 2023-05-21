@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.pline.R
 import com.pline.databinding.ItemPostBinding
-import model.Post
+import com.pline.model.Post
 
 // Vertical RecyclerView adapter for My Post List
 class PostListRVAdapter(private val postList: ArrayList<Post>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
