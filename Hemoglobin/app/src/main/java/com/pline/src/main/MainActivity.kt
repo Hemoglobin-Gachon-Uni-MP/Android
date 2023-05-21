@@ -1,13 +1,6 @@
 package com.pline.src.main
 
-import android.content.ContentValues.TAG
-import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
-import android.util.Base64
-import android.util.Log
-import androidx.annotation.RequiresApi
-import com.kakao.sdk.common.util.Utility
 import com.pline.R
 import com.pline.config.BaseActivity
 import com.pline.databinding.ActivityMainBinding
@@ -15,12 +8,9 @@ import com.pline.src.main.home.HomeFragment
 import com.pline.src.main.info.InfoFragment
 import com.pline.src.main.map.MapFragment
 import com.pline.src.main.myPage.MyPageFragment
-import java.security.MessageDigest
-
 
 class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
 
-    //@RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

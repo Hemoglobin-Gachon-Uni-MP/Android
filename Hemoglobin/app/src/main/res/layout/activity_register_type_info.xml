@@ -115,19 +115,21 @@
 
     <Spinner
         android:id="@+id/activity_register_type_info_blood_type_spinner"
-        android:layout_width="wrap_content"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
+        android:background="@drawable/activity_register_type_info_spinner_border"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/activity_register_type_info_blood_type_title" />
 
     <Spinner
         android:id="@+id/activity_register_type_info_blood_type_rh_spinner"
-        android:layout_width="wrap_content"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginStart="44dp"
+        android:background="@drawable/activity_register_type_info_spinner_border"
         app:layout_constraintStart_toEndOf="@+id/activity_register_type_info_blood_type_spinner"
         app:layout_constraintTop_toBottomOf="@+id/activity_register_type_info_blood_type_title" />
 

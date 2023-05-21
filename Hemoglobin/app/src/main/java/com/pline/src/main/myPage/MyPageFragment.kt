@@ -9,8 +9,6 @@ import com.pline.R
 import com.pline.config.BaseFragment
 import com.pline.databinding.FragmentMyPageBinding
 import com.pline.src.main.home.MyPostListFragment
-import model.MyPost
-import model.Post
 
 class MyPageFragment : BaseFragment<FragmentMyPageBinding>(FragmentMyPageBinding::bind, R.layout.fragment_my_page) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -50,6 +50,7 @@
         android:id="@+id/activity_register_phone_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="phone"
         android:textColor="@color/black"
         android:layout_marginTop="48dp"
         android:layout_marginStart="16dp"
