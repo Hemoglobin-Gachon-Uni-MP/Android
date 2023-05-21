@@ -30,6 +30,9 @@ class RegisterResidenceActivity :
                 )
             startActivity(Intent(this, RegisterCompleteActivity::class.java))
         }
+        binding.activityRegisterResidenceBackBtn.setOnClickListener {
+            onBackPressed()
+        }
     }
 
     private fun setSpinner(spinner: Spinner, arr: ArrayList<String>) {

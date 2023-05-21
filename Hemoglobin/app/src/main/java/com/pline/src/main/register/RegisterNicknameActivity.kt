@@ -30,9 +30,10 @@ class RegisterNicknameActivity : BaseActivity<ActivityRegisterNicknameBinding>(A
                     binding.btnNext.isClickable = true
                 }
             }
-
         })
-
+        binding.activityRegisterNicknameBackBtn.setOnClickListener {
+            onBackPressed()
+        }
         binding.btnNext.setOnClickListener {
             sSharedPreferences.edit()
                 .putString("registerNickname", binding.activityRegisterNicknameEt.text.toString())

@@ -54,6 +54,9 @@ class RegisterTypeInfoActivity : BaseActivity<ActivityRegisterTypeInfoBinding>(
             }
             startActivity(Intent(this, RegisterResidenceActivity::class.java))
         }
+        binding.activityRegisterTypeInfoBackBtn.setOnClickListener {
+            onBackPressed()
+        }
     }
     private fun setSpinner(spinner: Spinner, arr : ArrayList<String>) {
 

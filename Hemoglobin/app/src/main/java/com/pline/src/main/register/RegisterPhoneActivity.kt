@@ -2,6 +2,7 @@ package com.pline.src.main.register
 
 import android.content.Intent
 import android.os.Bundle
+import android.telephony.PhoneNumberFormattingTextWatcher
 import android.text.Editable
 import android.text.TextWatcher
 import com.pline.R
@@ -30,6 +31,7 @@ class RegisterPhoneActivity : BaseActivity<ActivityRegisterPhoneBinding>(Activit
             }
 
         })
+        binding.activityRegisterPhoneEt.addTextChangedListener(PhoneNumberFormattingTextWatcher())
         binding.btnNext.setOnClickListener {
             ApplicationClass.sSharedPreferences.edit()
                 .putString("registerPhone", binding.activityRegisterPhoneEt.text.toString())
