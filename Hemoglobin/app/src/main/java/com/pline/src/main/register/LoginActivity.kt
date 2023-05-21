@@ -15,12 +15,14 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        /*
-        카카오 해시 키 받기
-        var keyHash = Utility.getKeyHash(this)
-        Log.d("Hash", keyHash)*/
+//        /*
+//        카카오 해시 키 받기
+//        */
+//
+//        var keyHash = Utility.getKeyHash(this)
+//        Log.d("Hash", keyHash)
 
-        // 카카오 로그인
+        // 카카오 로그인인
         binding.btnLogin.setOnClickListener{
 
             // 카카오계정으로 로그인 공통 callback 구성

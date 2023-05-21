@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.pline.R
+import com.pline.config.ApplicationClass.Companion.sRetrofit
 import com.pline.config.BaseFragment
 import com.pline.databinding.FragmentNewPostProviderBinding
+import retrofit2.create
 
 class FragmentNewPostProvider: BaseFragment<FragmentNewPostProviderBinding> (FragmentNewPostProviderBinding::bind, R.layout.fragment_new_post_provider) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
