@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.pline.R
 import com.pline.config.BaseFragment
 import com.pline.databinding.FragmentMyPostRVBinding
-import com.pline.src.main.myPage.MyPostListRVVAdapter
-import com.pline.src.main.myPage.Post
+import com.pline.src.main.utils.PostListRVAdapter
+import model.Post
 
 // Vertical My Post List -> Only have vertical recycler view
 class MyPostListRVVFragment : BaseFragment<FragmentMyPostRVBinding>(FragmentMyPostRVBinding::bind, R.layout.fragment_my_post_r_v) {
@@ -23,10 +23,10 @@ class MyPostListRVVFragment : BaseFragment<FragmentMyPostRVBinding>(FragmentMyPo
 
         binding.rvMyPostList.run {
             // Set Recycler View Adapter
-            val postAdapter = MyPostListRVVAdapter(myPostList)
+            val postAdapter = PostListRVAdapter(myPostList)
             adapter = postAdapter
             // Set click event of my post element in recycler view
-            postAdapter.setOnItemClickListener(object: MyPostListRVVAdapter.OnItemClickListener {
+            postAdapter.setOnItemClickListener(object: PostListRVAdapter.OnItemClickListener {
                 override fun onPostClick(post: Post, pos: Int) {
                     /// todo - 글 상세 보기 화면 띄우기
                     Log.d("Seori", "Click")
