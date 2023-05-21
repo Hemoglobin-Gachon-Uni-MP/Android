@@ -1,7 +1,5 @@
 package com.pline.src.main.myPage
 
-import model.Post
-
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView

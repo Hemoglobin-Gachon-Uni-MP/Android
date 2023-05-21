@@ -8,7 +8,7 @@ import com.pline.R
 import com.pline.config.BaseFragment
 import com.pline.databinding.FragmentMyPostRVBinding
 import com.pline.src.main.myPage.MyPostListRVVAdapter
-import model.Post
+import com.pline.src.main.myPage.Post
 
 // Vertical My Post List -> Only have vertical recycler view
 class MyPostListRVVFragment : BaseFragment<FragmentMyPostRVBinding>(FragmentMyPostRVBinding::bind, R.layout.fragment_my_post_r_v) {

@@ -1,4 +1,4 @@
-package model
+package com.pline.src.main.myPage
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
