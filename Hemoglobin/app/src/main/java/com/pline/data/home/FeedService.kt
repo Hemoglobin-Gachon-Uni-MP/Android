@@ -1,7 +1,9 @@
 package com.pline.data.home
 
 import com.pline.config.ApplicationClass
+import com.pline.data.home.model.FeedInfoResult
 import com.pline.data.home.model.FeedsResponse
+import com.pline.data.home.model.GetFeedInfoResponse
 import com.pline.data.home.model.GetFeedListResponse
 import com.pline.data.home.model.postFeedReqBody
 import retrofit2.Call
@@ -47,5 +49,25 @@ class NewFeedService(val view: CreateFeedFragmentView) {
 
             })
         }
+    }
+}
+
+class FeedDetailService(val view: FeedDetailView) {
+    val homeRetrofitInterface = ApplicationClass.sRetrofit.create(HomeRetrofitInterface::class.java)
+
+    fun tryGetFeedDetail(feedId: Int){
+        homeRetrofitInterface.getFeedInfo(feedId).enqueue(object : Callback<GetFeedInfoResponse>{
+            override fun onResponse(
+                call: Call<GetFeedInfoResponse>,
+                response: Response<GetFeedInfoResponse>
+            ) {
+                view.onGetFeedInfoSuccess(response.body()!!.result)
+            }
+
+            override fun onFailure(call: Call<GetFeedInfoResponse>, t: Throwable) {
+                view.onGetFeedInfoFailure(t.message ?: "통신 오류")
+            }
+
+        })
     }
 }

@@ -1,6 +1,7 @@
 package com.pline.data.home
 
 import com.pline.data.home.model.FeedsResponse
+import com.pline.data.home.model.GetFeedInfoResponse
 import com.pline.data.home.model.GetFeedListResponse
 import com.pline.data.home.model.postFeedReqBody
 import retrofit2.Call
@@ -8,6 +9,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface HomeRetrofitInterface {
     // 게시물 생성 api
@@ -31,7 +33,10 @@ interface HomeRetrofitInterface {
     ): Call<GetFeedListResponse>
 
     // 게시물 정보 반환 api
-
+    @GET("feeds/info/{feedId}")
+    fun getFeedInfo(
+        @Path("feedId") feedId: Int
+    ): Call<GetFeedInfoResponse>
 
     // 답글 달기 api
 

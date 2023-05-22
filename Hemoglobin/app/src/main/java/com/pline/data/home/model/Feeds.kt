@@ -1,5 +1,6 @@
 package com.pline.data.home.model
 
+import android.view.inspector.IntFlagMapping
 import com.google.gson.annotations.SerializedName
 import com.pline.config.BaseResponse
 
@@ -40,4 +41,42 @@ data class FeedsResponse(
 
 data class FeedsResult(
     @SerializedName("result") val result: Int
+)
+
+data class GetFeedInfoResponse(
+    val result: FeedInfoResult
+): BaseResponse()
+
+data class Comment(
+    var commentId: Int,
+    var userId: Int,
+    var profileImg: Int,
+    var nickname: String,
+    var context: String,
+    var replyList: ArrayList<Reply>,
+    var date: String
+)
+
+data class Reply(
+    var context: String,
+    var date: String,
+    var nickname: String,
+    var profileImg: Int,
+    var replyId: Int,
+    var userId: Int
+)
+
+data class FeedInfoResult(
+    @SerializedName("feedId") var feedId: Int,
+    @SerializedName("userId") var userId: Int,
+    @SerializedName("profileImg") var profileImg: Int,
+    @SerializedName("nickname") var nickname: String,
+    @SerializedName("context") var context: String,
+    @SerializedName("commentCnt") var commentCnt: Int,
+    @SerializedName("commentList") var commentList: ArrayList<Comment>?,
+    @SerializedName("date") var date: String,
+    @SerializedName("abo") var abo: Int,
+    @SerializedName("rh") var rh: Int,
+    @SerializedName("location") var location: String,
+    @SerializedName("isReceiver") var isReceiver: String
 )
