@@ -1,5 +1,6 @@
 package com.pline.data.mypage
 
+import com.pline.data.mypage.model.MyAccountDeleteResponse
 import com.pline.data.mypage.model.MyPageEditRequest
 import com.pline.data.mypage.model.MyPageEditResponse
 import com.pline.data.mypage.model.MyPageResponse
@@ -26,4 +27,11 @@ interface MyPageRetrofitInterface {
         @Path("userId") userId: Int,
         @Body myPageEditRequest: MyPageEditRequest
     ): Call<MyPageEditResponse>
+
+    // PATCH API for deleting my account
+    @PATCH("/resign/{userId}")
+    fun deleteMyAccount(
+        @Header("X-ACCESS-TOKEN") xAccessToken : String,
+        @Path("userId") userId: Int
+    ): Call<MyAccountDeleteResponse>
 }
