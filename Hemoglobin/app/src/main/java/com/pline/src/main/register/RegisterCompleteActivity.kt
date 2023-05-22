@@ -46,7 +46,9 @@ class RegisterCompleteActivity : BaseActivity<ActivityRegisterCompleteBinding>(
                 if (response.isSuccessful){
                     if(response.body()?.isSuccess == true) {
                         Log.d("registerComplete", "registerComplete response success")
-                        sSharedPreferences.edit().putString("jwt", response.body()!!.result.jwt).apply()
+                        sSharedPreferences.edit()
+                            .putString("jwt", response.body()!!.result.jwt)
+                            .putInt("userId",response.body()!!.result.userId).apply()
                         startActivity(
                             Intent(this@RegisterCompleteActivity, MainActivity::class.java)
                                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
