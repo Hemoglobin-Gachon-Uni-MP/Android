@@ -23,15 +23,15 @@ class MyPageFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // Get my page info from server
-        getMyPageInfo()
 
         binding.apply {
             // Set click event of edit my info button
             imgbtnEditMyInfo.setOnClickListener {
-                /// todo - 데이터 전달
                 // Show(= Start) EditInfoActivity
                 val intent = Intent(activity, EditInfoActivity::class.java)
+                // Pass data
+                intent.putExtra("myLocation", tvLocation.text)
+                intent.putExtra("myNickname", tvNickname.text)
                 startActivity(intent)
             }
 
@@ -52,6 +52,13 @@ class MyPageFragment :
                 showDeleteDialog()
             }
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        // Get my page info from server
+        getMyPageInfo()
     }
 
     // Get my page info through api
