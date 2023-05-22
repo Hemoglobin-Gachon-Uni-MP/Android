@@ -29,7 +29,7 @@ class MyPostListRVVFragment : BaseFragment<FragmentMyPostRVBinding>(FragmentMyPo
             adapter = postAdapter
             // Set click event of my post element in recycler view
             postAdapter.setOnItemClickListener(object: PostListRVAdapter.OnItemClickListener {
-                override fun onPostClick(post: Post, pos: Int) {
+                override fun onPostClick(feedId:Int) {
                     /// todo - 글 상세 보기 화면 띄우기
                     Log.d("Seori", "Click")
                 }

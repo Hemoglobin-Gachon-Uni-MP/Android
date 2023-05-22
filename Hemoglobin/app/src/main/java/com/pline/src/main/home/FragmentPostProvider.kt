@@ -25,7 +25,6 @@ class FragmentPostProvider: BaseFragment<FragmentPostListProviderBinding> (Fragm
 
     override fun onResume() {
         super.onResume()
-
     }
 
     override fun onGetFeedListSuccess(response: ArrayList<FeedListResult>) {
@@ -41,11 +40,18 @@ class FragmentPostProvider: BaseFragment<FragmentPostListProviderBinding> (Fragm
 
         Log.d("feedListProvider", receiverList.toString())
 
-        binding.homePostProviderListRv.adapter = PostListRVAdapter(receiverList)
+        var postAdapter = PostListRVAdapter(receiverList)
+        binding.homePostProviderListRv.adapter = postAdapter
         var mLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         mLayoutManager.reverseLayout = true
         mLayoutManager.stackFromEnd = true
         binding.homePostProviderListRv.layoutManager = mLayoutManager
+
+        postAdapter.setOnItemClickListener(object : PostListRVAdapter.OnItemClickListener{
+            override fun onPostClick(feedId: Int) {
+                requireActivity().supportFragmentManager.beginTransaction().replace(R.id.main_frm, FragmentPostDetail(feedId)).commit()
+            }
+        })
     }
 
     override fun onGetFeedListFailure(message: String) {

@@ -41,11 +41,18 @@ class FragmentPostReceiver :BaseFragment<FragmentPostListReceiverBinding>(Fragme
 
         Log.d("feedListReceiver", receiverList.toString())
 
-        binding.homePostUserListRv.adapter = PostListRVAdapter(receiverList)
+        var postAdapter = PostListRVAdapter(receiverList)
+        binding.homePostUserListRv.adapter = postAdapter
         var mLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         mLayoutManager.reverseLayout = true
         mLayoutManager.stackFromEnd = true
         binding.homePostUserListRv.layoutManager = mLayoutManager
+
+        postAdapter.setOnItemClickListener(object : PostListRVAdapter.OnItemClickListener{
+            override fun onPostClick(feedId: Int) {
+                requireActivity().supportFragmentManager.beginTransaction().replace(R.id.main_frm, FragmentPostDetail(feedId)).commit()
+            }
+        })
     }
 
     override fun onGetFeedListFailure(message: String) {
