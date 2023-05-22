@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.pline.databinding.ItemMyPostBinding
+import com.pline.model.MyPost
 
 // Horizontal RecyclerView adapter for My Post List
 class MyPostListRVHAdapter(private val myPostList: ArrayList<MyPost>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
