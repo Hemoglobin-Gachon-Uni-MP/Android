@@ -34,7 +34,7 @@ class RegisterPhoneActivity : BaseActivity<ActivityRegisterPhoneBinding>(Activit
         binding.activityRegisterPhoneEt.addTextChangedListener(PhoneNumberFormattingTextWatcher())
         binding.btnNext.setOnClickListener {
             ApplicationClass.sSharedPreferences.edit()
-                .putString("registerPhone", binding.activityRegisterPhoneEt.text.toString())
+                .putString("registerPhone", binding.activityRegisterPhoneEt.text.toString()).apply()
             startActivity(Intent(this, RegisterTypeInfoActivity::class.java))
         }
     }

@@ -32,7 +32,7 @@ class RegisterNameActivity : BaseActivity<ActivityRegisterNameBinding>(ActivityR
         })
         binding.btnNext.setOnClickListener {
             sSharedPreferences.edit()
-                .putString("registerName", binding.activityRegisterNameEt.text.toString())
+                .putString("registerName", binding.activityRegisterNameEt.text.toString()).apply()
             startActivity(Intent(this, RegisterNicknameActivity::class.java))
         }
     }
