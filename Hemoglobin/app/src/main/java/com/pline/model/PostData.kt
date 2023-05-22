@@ -12,7 +12,12 @@ data class Post(
     val nickName: String,
     val upload_date: String,
     val content: String,
-    val commentNum: Int
+    val commentNum: Int,
+    val abo: Int,
+    val rh: Int,
+    val feedId: Int,
+    val location: String,
+    val userId: Int
 ): Parcelable
 
 
