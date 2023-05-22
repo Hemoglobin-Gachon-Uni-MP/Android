@@ -4,10 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.pline.databinding.ItemMyPostBinding
-import com.pline.model.MyPost
+import com.pline.data.mypage.model.MyPageFeedResult
 
 // Horizontal RecyclerView adapter for My Post List
-class MyPostListRVHAdapter(private val myPostList: ArrayList<MyPost>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MyPostListRVHAdapter(private val myPostList: ArrayList<MyPageFeedResult>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private lateinit var myPostBinding: ItemMyPostBinding
     private lateinit var myPostListener: OnItemClickListener
 
@@ -24,11 +24,11 @@ class MyPostListRVHAdapter(private val myPostList: ArrayList<MyPost>): RecyclerV
         }
 
         // Set data
-        fun bind(post: MyPost) {
+        fun bind(post: MyPageFeedResult) {
             myPostBinding.apply {
-                tvDate.text = post.upload_date
-                tvContent.text = post.content
-                tvCommentsNum.text = "${post.commentNum}"
+                tvDate.text = post.date
+                tvContent.text = post.context
+                tvCommentsNum.text = "${post.commentCnt}"
             }
         }
     }
@@ -54,6 +54,6 @@ class MyPostListRVHAdapter(private val myPostList: ArrayList<MyPost>): RecyclerV
 
     // Declare interface to click event
     interface OnItemClickListener {
-        fun onMyPostClick(post: MyPost, pos: Int)
+        fun onMyPostClick(post: MyPageFeedResult, pos: Int)
     }
 }
