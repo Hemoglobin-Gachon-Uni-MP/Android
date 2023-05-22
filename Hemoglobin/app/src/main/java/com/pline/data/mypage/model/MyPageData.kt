@@ -30,3 +30,14 @@ data class MyPageFeedResult(
     val profileImg: Int,
     val userId: Int
 )
+
+// Request data class for edit my page info
+data class MyPageEditRequest(
+    val location: String,
+    val nickname: String
+) : BaseResponse()
+
+// Response data class for edit my page info
+data class MyPageEditResponse(
+    val result: String
+) : BaseResponse()
