@@ -73,9 +73,9 @@ class MyPageFragment :
                                     val result = body.result
                                     binding.run {
                                         tvNickname.text = result.nickname
-                                        tvName.text = result.name + "(${result.gender})"
+                                        tvName.text = result.name + " (${result.gender})"
                                         tvBirth.text = result.birth
-    //                                        tvLocation.text = result.location
+                                        tvLocation.text = result.location
                                         tvBloodType.text = result.blood
                                         myPostList = result.feedList
 
