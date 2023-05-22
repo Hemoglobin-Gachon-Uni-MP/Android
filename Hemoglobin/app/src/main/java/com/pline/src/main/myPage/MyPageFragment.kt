@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.View.GONE
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pline.R
@@ -86,22 +87,10 @@ class MyPageFragment :
                                         tvBloodType.text = result.blood
                                         myPostList = result.feedList
 
-                                        rvPostList.run {
-                                            // Set Recycler View Adapter
-                                            val myPostAdapter = MyPostListRVHAdapter(myPostList)
-                                            adapter = myPostAdapter
-                                            // Set click event of my post element in recycler view
-                                            myPostAdapter.setOnItemClickListener(object :
-                                                MyPostListRVHAdapter.OnItemClickListener {
-                                                override fun onMyPostClick(post: MyPageFeedResult, pos: Int) {
-                                                    /// todo - 글 상세 보기 화면 띄우기
-                                                    Log.d("Seori", "Click my post")
-                                                }
-                                            })
-                                            // Set layout of recycler view
-                                            layoutManager =
-                                                LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
-                                            addItemDecoration(MyPostListRVHDecoration(30))
+                                        if (myPostList.isEmpty()) {
+                                            rvPostList.visibility = GONE
+                                        } else {
+                                            setPostRecyclerView()
                                         }
                                     }
                                 }
@@ -119,6 +108,34 @@ class MyPageFragment :
                         Toast.makeText(activity, "네트워크 연결에 실패했습니다", Toast.LENGTH_SHORT).show()
                     }
                 })
+        }
+    }
+
+    // Set RecyclerView of my post list
+    private fun setPostRecyclerView() {
+        binding.rvPostList.run {
+            // Set Recycler View Adapter
+            val myPostAdapter = MyPostListRVHAdapter(myPostList)
+            adapter = myPostAdapter
+            // Set click event of my post element in recycler view
+            myPostAdapter.setOnItemClickListener(object :
+                MyPostListRVHAdapter.OnItemClickListener {
+                override fun onMyPostClick(
+                    post: MyPageFeedResult,
+                    pos: Int
+                ) {
+                    /// todo - 글 상세 보기 화면 띄우기
+                    Log.d("Seori", "Click my post")
+                }
+            })
+            // Set layout of recycler view
+            layoutManager =
+                LinearLayoutManager(
+                    this.context,
+                    LinearLayoutManager.HORIZONTAL,
+                    false
+                )
+            addItemDecoration(MyPostListRVHDecoration(30))
         }
     }
 
