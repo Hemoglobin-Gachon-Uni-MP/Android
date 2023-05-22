@@ -6,13 +6,15 @@ import com.pline.data.home.model.postFeedReqBody
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface HomeRetrofitInterface {
     // 게시물 생성 api
     @POST("feeds")
     fun createNewPost(
-        @Body data: postFeedReqBody
+        @Body data: postFeedReqBody,
+        @Header("X-ACCESS-TOKEN") xAccessToken: String
     ): Call<FeedsResponse>
 
     // 게시물 수정 api
@@ -29,6 +31,7 @@ interface HomeRetrofitInterface {
     ): Call<GetFeedListResponse>
 
     // 게시물 정보 반환 api
+
 
     // 답글 달기 api
 

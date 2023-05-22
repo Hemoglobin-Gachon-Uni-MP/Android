@@ -1,7 +1,9 @@
 package com.pline.data.home
 
 import com.pline.config.ApplicationClass
+import com.pline.data.home.model.FeedsResponse
 import com.pline.data.home.model.GetFeedListResponse
+import com.pline.data.home.model.postFeedReqBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,5 +26,26 @@ class FeedService(val view: HomeFragmentView) {
             }
 
         })
+    }
+}
+
+class NewFeedService(val view: CreateFeedFragmentView) {
+    val homeRetrofitInterface = ApplicationClass.sRetrofit.create(HomeRetrofitInterface::class.java)
+
+    val jwt = ApplicationClass.sSharedPreferences.getString("jwt", "")
+
+    fun tryPostNewFeed(body: postFeedReqBody){
+        if (jwt != null) {
+            homeRetrofitInterface.createNewPost(body, jwt).enqueue(object : Callback<FeedsResponse>{
+                override fun onResponse(call: Call<FeedsResponse>, response: Response<FeedsResponse>) {
+                    view.onPostNewFeedSuccess(response.body()!!)
+                }
+
+                override fun onFailure(call: Call<FeedsResponse>, t: Throwable) {
+                    view.onPostNewFeedFailure(t.message ?: "통신 오류")
+                }
+
+            })
+        }
     }
 }
