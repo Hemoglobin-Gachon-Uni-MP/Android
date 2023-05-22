@@ -36,7 +36,7 @@ class RegisterNicknameActivity : BaseActivity<ActivityRegisterNicknameBinding>(A
         }
         binding.btnNext.setOnClickListener {
             sSharedPreferences.edit()
-                .putString("registerNickname", binding.activityRegisterNicknameEt.text.toString())
+                .putString("registerNickname", binding.activityRegisterNicknameEt.text.toString()).apply()
             startActivity(Intent(this, RegisterBirthActivity::class.java))
         }
     }

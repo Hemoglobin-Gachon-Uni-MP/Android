@@ -27,7 +27,7 @@ class RegisterResidenceActivity :
                 .putString(
                     "registerResidence",
                     "서울시 ${binding.activityRegisterResidenceSpinner.selectedItem}"
-                )
+                ).apply()
             startActivity(Intent(this, RegisterCompleteActivity::class.java))
         }
         binding.activityRegisterResidenceBackBtn.setOnClickListener {

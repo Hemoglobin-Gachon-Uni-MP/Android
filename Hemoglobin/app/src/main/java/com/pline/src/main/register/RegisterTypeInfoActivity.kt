@@ -2,6 +2,7 @@ package com.pline.src.main.register
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -37,20 +38,22 @@ class RegisterTypeInfoActivity : BaseActivity<ActivityRegisterTypeInfoBinding>(
         setSpinner(binding.activityRegisterTypeInfoBloodTypeRhSpinner, rh)
 
         binding.btnNext.setOnClickListener {
+            Log.d("registerTypeInfo",
+                "${binding.activityRegisterTypeInfoCbMale.isChecked}")
             if(binding.activityRegisterTypeInfoCbMale.isChecked) {
-                sSharedPreferences.edit().putString("registerTypeInfoGender", "M")
+                sSharedPreferences.edit().putString("registerTypeInfoGender", "M").apply()
             } else {
-                sSharedPreferences.edit().putString("registerTypeInfoGender", "F")
+                sSharedPreferences.edit().putString("registerTypeInfoGender", "F").apply()
             }
             when (binding.activityRegisterTypeInfoBloodTypeSpinner.selectedItem) {
-                "A" -> sSharedPreferences.edit().putString("registerTypeInfoABO", "0")
-                "B" -> sSharedPreferences.edit().putString("registerTypeInfoABO", "1")
-                "O" -> sSharedPreferences.edit().putString("registerTypeInfoABO", "2")
-                "AB" -> sSharedPreferences.edit().putString("registerTypeInfoABO", "3")
+                "A" -> sSharedPreferences.edit().putInt("registerTypeInfoABO", 0).apply()
+                "B" -> sSharedPreferences.edit().putInt("registerTypeInfoABO", 1).apply()
+                "O" -> sSharedPreferences.edit().putInt("registerTypeInfoABO", 2).apply()
+                "AB" -> sSharedPreferences.edit().putInt("registerTypeInfoABO", 3).apply()
             }
-            when (binding.activityRegisterTypeInfoBloodTypeSpinner.selectedItem) {
-                "Rh+" -> sSharedPreferences.edit().putString("registerTypeInfoRH", "0")
-                "Rh-" -> sSharedPreferences.edit().putString("registerTypeInfoRH", "1")
+            when (binding.activityRegisterTypeInfoBloodTypeRhSpinner.selectedItem) {
+                "Rh+" -> sSharedPreferences.edit().putInt("registerTypeInfoRH", 0).apply()
+                "Rh-" -> sSharedPreferences.edit().putInt("registerTypeInfoRH", 1).apply()
             }
             startActivity(Intent(this, RegisterResidenceActivity::class.java))
         }

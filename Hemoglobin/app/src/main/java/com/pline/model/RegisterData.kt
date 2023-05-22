@@ -4,15 +4,15 @@ import com.pline.config.BaseResponse
 
 
 data class RegisterRequest(
-    val abo: String,
+    val abo: Int,
     val birth: String,
     val gender: String,
     val location: String,
     val name: String,
     val nickname: String,
     val phone: String,
-    val profileImg: String,
-    val rh: String
+    val profileImg: Int,
+    val rh: Int
 )
 
 data class RegisterResponse(

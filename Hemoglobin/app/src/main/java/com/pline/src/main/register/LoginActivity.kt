@@ -84,7 +84,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                     }
                     else if(response.body()?.code == 2028) {
                         Log.d("kakaoLogin", "response fail")
-                        sSharedPreferences.edit().putString("kToken", kToken)
+                        sSharedPreferences.edit().putString("kToken", kToken).apply()
                         startActivity(Intent(this@LoginActivity, RegisterNameActivity::class.java)
                             .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
                         finish()

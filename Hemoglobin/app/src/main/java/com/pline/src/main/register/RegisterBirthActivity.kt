@@ -3,6 +3,7 @@ package com.pline.src.main.register
 import android.content.Intent
 import android.os.Bundle
 import com.pline.R
+import com.pline.config.ApplicationClass.Companion.sSharedPreferences
 import com.pline.config.BaseActivity
 import com.pline.databinding.ActivityRegisterBirthBinding
 
@@ -10,7 +11,7 @@ class RegisterBirthActivity : BaseActivity<ActivityRegisterBirthBinding>(Activit
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // 현재 날짜 설정
-        binding.activityRegisterBirthDatePickerBtn.text = "0000.00.00"
+        binding.activityRegisterBirthDatePickerBtn.text = "2000.01.01"
 
         binding.activityRegisterBirthDatePickerBtn.setOnClickListener {
              val dialog =
@@ -23,6 +24,7 @@ class RegisterBirthActivity : BaseActivity<ActivityRegisterBirthBinding>(Activit
             dialog.show(supportFragmentManager, "datePicker")
         }
         binding.btnNext.setOnClickListener {
+            sSharedPreferences.edit().putString("registerBirth", binding.activityRegisterBirthDatePickerBtn.text.toString()).apply()
             startActivity(Intent(this, RegisterPhoneActivity::class.java))
         }
         binding.activityRegisterBirthBackBtn.setOnClickListener {
