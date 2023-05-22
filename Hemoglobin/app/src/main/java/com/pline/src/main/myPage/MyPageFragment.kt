@@ -65,9 +65,14 @@ class MyPageFragment :
     // Get my page info through api
     private fun getMyPageInfo() {
         val service = ApplicationClass.sRetrofit.create(MyPageRetrofitInterface::class.java)
-        // Get jwt from sp
+        // Get jwt, userId from sp
         val jwt = sSharedPreferences.getString("jwt", "")
-        val userId = 10 // 더미
+        val userId = sSharedPreferences.getInt("userId", 0)
+        if (jwt != null) {
+            Log.d("seori", jwt)
+            Log.d("seori", userId.toString())
+        }
+
         // Request my page info through API
         jwt?.let {
             // Jwt is in header, userId is in Path Variable
