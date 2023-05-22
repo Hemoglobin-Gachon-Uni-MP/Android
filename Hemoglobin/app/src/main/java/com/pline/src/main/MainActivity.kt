@@ -1,20 +1,25 @@
 package com.pline.src.main
 
+import android.content.Intent
 import android.os.Bundle
 import com.pline.R
+import com.pline.config.ApplicationClass.Companion.sSharedPreferences
 import com.pline.config.BaseActivity
 import com.pline.databinding.ActivityMainBinding
 import com.pline.src.main.home.HomeFragment
 import com.pline.src.main.info.InfoFragment
 import com.pline.src.main.map.MapFragment
 import com.pline.src.main.myPage.MyPageFragment
+import com.pline.src.main.register.LoginActivity
 
 class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
+        if(sSharedPreferences.getString("jwt","") == "") {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
         supportFragmentManager.beginTransaction().replace(R.id.main_frm, HomeFragment()).commitAllowingStateLoss()
 
         binding.mainBtmNav.run {

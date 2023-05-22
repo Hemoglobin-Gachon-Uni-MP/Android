@@ -77,6 +77,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                 Log.d("kakaoLogin", "postLogin success")
                 if (response.isSuccessful){
                     if(response.body()?.isSuccess == true) {
+                        sSharedPreferences.edit().putString("kToken", kToken).putString("jwt", response.body()!!.result.jwt).apply()
                         Log.d("kakaoLogin", "response success")
                         startActivity(Intent(this@LoginActivity, MainActivity::class.java)
                             .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
