@@ -28,18 +28,20 @@ class DatePickerDialogFragment(var date:String, val itemClick: (String) -> Unit)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.vDatePicker.maxDate = System.currentTimeMillis()
+        val arr = date.split(".")
+        binding.vDatePicker.apply {
+            maxDate = System.currentTimeMillis()
+            updateDate(arr[0].toInt(), arr[1].toInt(), arr[2].toInt())
+
+        }
         binding.datePickerBtn.setOnClickListener {
-            date = formatDateString(binding.vDatePicker.year, binding.vDatePicker.month, binding.vDatePicker.dayOfMonth)
+            date = String.format("%4d.%02d.%02d", binding.vDatePicker.year, binding.vDatePicker.month+1, binding.vDatePicker.dayOfMonth)
             itemClick(date)
             dialog?.dismiss()
         }
         binding.closeBtn.setOnClickListener {
             dialog?.dismiss()
         }
-    }
-    private fun formatDateString(year: Int, month: Int, day: Int): String {
-        return "${year}.${month + 1}.${day}"
     }
 
 }
