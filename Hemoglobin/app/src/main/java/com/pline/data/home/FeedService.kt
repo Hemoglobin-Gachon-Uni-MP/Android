@@ -16,7 +16,7 @@ class FeedService(val view: HomeFragmentView) {
                 call: Call<GetFeedListResponse>,
                 response: Response<GetFeedListResponse>
             ) {
-                view.onGetFeedListSuccess(response.body() as GetFeedListResponse)
+                view.onGetFeedListSuccess(response.body()!!.result)
             }
 
             override fun onFailure(call: Call<GetFeedListResponse>, t: Throwable) {

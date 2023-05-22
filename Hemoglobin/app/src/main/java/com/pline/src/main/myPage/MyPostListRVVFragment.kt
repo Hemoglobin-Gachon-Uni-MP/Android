@@ -6,9 +6,10 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pline.R
 import com.pline.config.BaseFragment
+import com.pline.data.home.model.FeedListResult
 import com.pline.databinding.FragmentMyPostRVBinding
-import com.pline.src.main.utils.PostListRVAdapter
 import com.pline.model.Post
+import com.pline.src.main.utils.PostListRVAdapter
 
 // Vertical My Post List -> Only have vertical recycler view
 class MyPostListRVVFragment : BaseFragment<FragmentMyPostRVBinding>(FragmentMyPostRVBinding::bind, R.layout.fragment_my_post_r_v) {
@@ -17,8 +18,9 @@ class MyPostListRVVFragment : BaseFragment<FragmentMyPostRVBinding>(FragmentMyPo
 
         // My Post List data
         var myPostList = arrayListOf(
-            Post(false, nickName = "서리리", upload_date = "05/18", content = "더미 텍스트입니다.", commentNum = 3),
-            Post(false, nickName = "서리리", upload_date = "05/17", content = "더미 텍스트입니다.", commentNum = 3)
+//            Post(false, nickName = "서리리", upload_date = "05/18", content = "더미 텍스트입니다.", commentNum = 3),
+//            Post(false, nickName = "서리리", upload_date = "05/17", content = "더미 텍스트입니다.", commentNum = 3)
+            Post(false, 0, "서리리", "05/18", "dummy", 0, 0, 0, 12, "location", 10)
         )
 
         binding.rvMyPostList.run {
