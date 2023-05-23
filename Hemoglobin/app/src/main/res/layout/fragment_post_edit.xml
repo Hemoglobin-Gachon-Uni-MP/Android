@@ -11,7 +11,7 @@
         android:layout_height="65dp"
         android:gravity="center"
         android:paddingStart="16dp"
-        android:text="게시글 보기"
+        android:text="게시물 수정"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="20sp"
@@ -81,10 +81,10 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginVertical="10dp"
-        android:layout_marginHorizontal="26dp"
-        app:layout_constraintTop_toBottomOf="@+id/post_profile_container_ll"
-        app:layout_constraintBottom_toTopOf="@+id/new_post_receiver_blood_type_cl">
+        android:layout_marginVertical="16dp"
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/post_edit_profile_container_ll"
+        app:layout_constraintBottom_toTopOf="@+id/post_edit_info_container_cl">
         <LinearLayout
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
@@ -92,11 +92,12 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/new_post_receiver_text_enterfield_et"
+                android:id="@+id/post_edit_receiver_text_enterfield_et"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:hint="글 입력 .."
+                android:text="글쓰기"
                 android:textColorHint="@color/grayD9"
                 android:textColor="@color/black"
                 android:inputType="textMultiLine"
@@ -106,26 +107,72 @@
     </androidx.core.widget.NestedScrollView>
 
 
-    <EditText
-        android:id="@+id/post_detail_contents_text_tv"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginHorizontal="16dp"
-        android:textColor="@color/black"
-        android:background="null"
-        android:text="여기 이렇게 텍스트가 들어갑니다."
-        android:textSize="14sp"
-        app:layout_constraintTop_toBottomOf="@+id/post_profile_container_ll"/>
+        android:id="@+id/post_edit_info_container_cl"
+        android:paddingBottom="28dp"
+        android:background="@drawable/style_line_top"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
+        <TextView
+            android:id="@+id/post_edit_info_text_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="수혈자 정보"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
+        <LinearLayout
+            android:id="@+id/post_edit_info_blood_type_container_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/post_edit_info_text_title_tv"
+            android:layout_marginStart="12dp">
 
-    <View
-        android:id="@+id/post_detail_divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/grayD9"
-        android:layout_marginTop="10dp" />
+            <TextView
+                android:id="@+id/post_edit_selected_rh_type_tv"
+                style="@style/home_filter_blood_type_tv"
+                android:textColor="@color/red6"
+                android:text="Rh+"
+                android:background="@drawable/style_filter_unselected"/>
+
+            <TextView
+                android:id="@+id/post_edit_selected_abo_type_tv"
+                style="@style/home_filter_blood_type_tv"
+                android:textColor="@color/red6"
+                android:paddingHorizontal="15dp"
+                android:text="A"
+                android:background="@drawable/style_filter_unselected"/>
+
+            <TextView
+                android:id="@+id/post_edit_selected_location_type_tv"
+                style="@style/home_filter_blood_type_tv"
+                android:textColor="@color/red6"
+                android:text="서울시 서초구"
+                android:background="@drawable/style_filter_unselected"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/post_edit_info_warning_text_tv"
+            android:text="수혈자 정보는 수정할 수 없습니다."
+            android:textColor="@color/grayAE"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/post_edit_info_blood_type_container_ll"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 

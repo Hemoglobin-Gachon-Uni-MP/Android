@@ -2,6 +2,7 @@ package com.pline.data.home
 
 import com.pline.config.ApplicationClass
 import com.pline.data.home.model.DeleteFeedResponse
+import com.pline.data.home.model.EditPostResponse
 import com.pline.data.home.model.FeedInfoResult
 import com.pline.data.home.model.FeedsResponse
 import com.pline.data.home.model.GetFeedInfoResponse
@@ -113,6 +114,30 @@ class FeedDeleteService(val view:FeedDeleteView){
 
                 override fun onFailure(call: Call<DeleteFeedResponse>, t: Throwable) {
                     view.onDeleteFeedFailure(t.message?:"통신 오류")
+                }
+
+            })
+        }
+    }
+}
+
+class EditPostService(val view:FeedEditView){
+    val homeRetrofitInterface = ApplicationClass.sRetrofit.create(HomeRetrofitInterface::class.java)
+
+    val jwt = ApplicationClass.sSharedPreferences.getString("jwt", "")
+
+    fun tryEditFeed(feedId: Int, body: PostCommentReqBody){
+        if (jwt != null){
+            homeRetrofitInterface.editPost(feedId, body, jwt).enqueue(object : Callback<EditPostResponse>{
+                override fun onResponse(
+                    call: Call<EditPostResponse>,
+                    response: Response<EditPostResponse>
+                ) {
+                    view.onEditFeedSuccess(response.body()!!)
+                }
+
+                override fun onFailure(call: Call<EditPostResponse>, t: Throwable) {
+                    view.onEditFeedFailure(t.message ?: "통신 오류")
                 }
 
             })

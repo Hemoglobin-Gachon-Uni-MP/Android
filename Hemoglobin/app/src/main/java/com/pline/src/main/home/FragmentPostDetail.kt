@@ -59,6 +59,9 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
         }
 
         // 게시물 편집
+        binding.fragmentDetailMoreMenuEditTv.setOnClickListener {
+            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.main_frm, FragmentPostEdit(feedId)).commit()
+        }
 
         // 게시물 삭제
         binding.fragmentDetailMoreMenuDeleteTv.setOnClickListener {

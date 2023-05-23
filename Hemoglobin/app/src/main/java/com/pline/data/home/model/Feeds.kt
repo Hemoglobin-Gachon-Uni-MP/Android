@@ -97,3 +97,8 @@ data class PostCommentReqBody(
 data class PostNewCommentResponse(
     @SerializedName("result") val result: Int
 ): BaseResponse()
+
+
+data class EditPostResponse(
+    @SerializedName("result") val result: String
+): BaseResponse()

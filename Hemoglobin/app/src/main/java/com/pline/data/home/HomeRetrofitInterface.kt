@@ -1,6 +1,7 @@
 package com.pline.data.home
 
 import com.pline.data.home.model.DeleteFeedResponse
+import com.pline.data.home.model.EditPostResponse
 import com.pline.data.home.model.FeedsResponse
 import com.pline.data.home.model.GetFeedInfoResponse
 import com.pline.data.home.model.GetFeedListResponse
@@ -25,6 +26,12 @@ interface HomeRetrofitInterface {
     ): Call<FeedsResponse>
 
     // 게시물 수정 api
+    @PATCH("feeds/{feedId}")
+    fun editPost(
+        @Path("feedId") feedId: Int,
+        @Body body: PostCommentReqBody,
+        @Header("X-ACCESS-TOKEN") xAccessToken: String
+    ):Call<EditPostResponse>
 
     // 게시물 삭제 api
     @PATCH("feeds/{feedId}/status")
