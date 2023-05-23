@@ -73,9 +73,9 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
                 android:background="@color/grayF5"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content" />
             <!--헌혈 전 유의사항-->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/fragment_info_cl_precaution_before"
