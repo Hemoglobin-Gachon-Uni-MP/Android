@@ -77,23 +77,6 @@ class FeedDetailService(val view: FeedDetailView) {
         })
     }
 
-    fun tryDeleteFeed(body: baseUserIdReq, feedId: Int){
-        if (jwt != null){
-            homeRetrofitInterface.deletePost(body, feedId, jwt).enqueue(object : Callback<DeleteFeedResponse>{
-                override fun onResponse(
-                    call: Call<DeleteFeedResponse>,
-                    response: Response<DeleteFeedResponse>
-                ) {
-                    view.onDeleteFeedSuccess(response.body()!!)
-                }
-
-                override fun onFailure(call: Call<DeleteFeedResponse>, t: Throwable) {
-                    view.onDeleteFeedFailure(t.message?:"통신 오류")
-                }
-
-            })
-        }
-    }
 
     fun tryPostNewComment(feedId: Int, body: PostCommentReqBody){
         if (jwt != null){
@@ -107,6 +90,29 @@ class FeedDetailService(val view: FeedDetailView) {
 
                 override fun onFailure(call: Call<PostNewCommentResponse>, t: Throwable) {
                     view.onPostNewCommentFailure(t.message ?: "통신 오류")
+                }
+
+            })
+        }
+    }
+}
+
+class FeedDeleteService(val view:FeedDeleteView){
+    val homeRetrofitInterface = ApplicationClass.sRetrofit.create(HomeRetrofitInterface::class.java)
+
+    val jwt = ApplicationClass.sSharedPreferences.getString("jwt", "")
+    fun tryDeleteFeed(body: baseUserIdReq, feedId: Int){
+        if (jwt != null){
+            homeRetrofitInterface.deletePost(body, feedId, jwt).enqueue(object : Callback<DeleteFeedResponse>{
+                override fun onResponse(
+                    call: Call<DeleteFeedResponse>,
+                    response: Response<DeleteFeedResponse>
+                ) {
+                    view.onDeleteFeedSuccess(response.body()!!)
+                }
+
+                override fun onFailure(call: Call<DeleteFeedResponse>, t: Throwable) {
+                    view.onDeleteFeedFailure(t.message?:"통신 오류")
                 }
 
             })

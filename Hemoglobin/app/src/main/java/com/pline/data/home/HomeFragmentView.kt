@@ -23,9 +23,11 @@ interface FeedDetailView {
     fun onGetFeedInfoSuccess(response: FeedInfoResult)
     fun onGetFeedInfoFailure(message: String)
 
-    fun onDeleteFeedSuccess(response: DeleteFeedResponse)
-    fun onDeleteFeedFailure(message: String)
-
     fun onPostNewCommentSuccess(response: PostNewCommentResponse)
     fun onPostNewCommentFailure(message: String)
+}
+
+interface FeedDeleteView{
+    fun onDeleteFeedSuccess(response: DeleteFeedResponse)
+    fun onDeleteFeedFailure(message: String)
 }

@@ -19,6 +19,7 @@ import com.pline.data.home.model.PostNewCommentResponse
 import com.pline.data.home.model.baseUserIdReq
 import com.pline.databinding.FragmentPostDetailBinding
 import com.pline.src.main.home.adapter.CommentRVAdapter
+import com.pline.src.main.myPage.DeleteDialog
 
 class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBinding>(FragmentPostDetailBinding::bind, R.layout.fragment_post_detail),
     FeedDetailView {
@@ -61,9 +62,7 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
 
         // 게시물 삭제
         binding.fragmentDetailMoreMenuDeleteTv.setOnClickListener {
-            val body = baseUserIdReq(postUserId)
-            FeedDetailService(this).tryDeleteFeed(body, feedId)
-            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.main_frm, HomeFragment()).commit()
+            deleteDialog()
         }
 
 
@@ -110,6 +109,13 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
         }
     }
 
+    fun deleteDialog(){
+        val body = baseUserIdReq(postUserId)
+        val dialog = FeedDeleteDialog(body, feedId)
+        dialog.isCancelable = false
+        dialog.show(this.requireFragmentManager(), "DeleteFeedDialog")
+    }
+
     override fun onGetFeedInfoSuccess(response: FeedInfoResult) {
         postUserId = response.userId
         binding.itemPostUserNameTv.text = response.nickname
@@ -126,14 +132,6 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
 
     override fun onGetFeedInfoFailure(message: String) {
         TODO("Not yet implemented")
-    }
-
-    override fun onDeleteFeedSuccess(response: DeleteFeedResponse) {
-        Log.d("onDeleteFeed", "SUCCESS")
-    }
-
-    override fun onDeleteFeedFailure(message: String) {
-        Log.d("onDeleteFeedFailed", message)
     }
 
     override fun onPostNewCommentSuccess(response: PostNewCommentResponse) {
