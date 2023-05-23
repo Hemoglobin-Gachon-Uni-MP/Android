@@ -1,6 +1,8 @@
 package com.pline.src.main.home
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,7 +12,11 @@ import com.pline.config.ApplicationClass
 import com.pline.config.BaseFragment
 import com.pline.data.home.FeedDetailService
 import com.pline.data.home.FeedDetailView
+import com.pline.data.home.model.DeleteFeedResponse
 import com.pline.data.home.model.FeedInfoResult
+import com.pline.data.home.model.PostCommentReqBody
+import com.pline.data.home.model.PostNewCommentResponse
+import com.pline.data.home.model.baseUserIdReq
 import com.pline.databinding.FragmentPostDetailBinding
 import com.pline.src.main.home.adapter.CommentRVAdapter
 
@@ -50,6 +56,38 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
                 }
             }
         }
+
+        // 게시물 편집
+
+        // 게시물 삭제
+        binding.fragmentDetailMoreMenuDeleteTv.setOnClickListener {
+            val body = baseUserIdReq(postUserId)
+            FeedDetailService(this).tryDeleteFeed(body, feedId)
+            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.main_frm, HomeFragment()).commit()
+        }
+
+
+        // 댓글 쓰기
+        var comment = ""
+        class MyEditWatcher: TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+            override fun afterTextChanged(s: Editable?) {
+                comment = binding.commentEnterfieldEt.text.toString()
+                Log.d("onPostComment", comment)
+            }
+        }
+        var watcher = MyEditWatcher()
+        binding.commentEnterfieldEt.addTextChangedListener(watcher)
+        binding.commentSendIconIv.setOnClickListener {
+            val body = PostCommentReqBody(comment, myId)
+            Log.d("onPostComment", "Send btn selected")
+            FeedDetailService(this).tryPostNewComment(feedId, body)
+            binding.commentEnterfieldEt.text.clear()
+        }
+
     }
 
     fun moreBtnMy(isVisible: Boolean){
@@ -88,6 +126,23 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
 
     override fun onGetFeedInfoFailure(message: String) {
         TODO("Not yet implemented")
+    }
+
+    override fun onDeleteFeedSuccess(response: DeleteFeedResponse) {
+        Log.d("onDeleteFeed", "SUCCESS")
+    }
+
+    override fun onDeleteFeedFailure(message: String) {
+        Log.d("onDeleteFeedFailed", message)
+    }
+
+    override fun onPostNewCommentSuccess(response: PostNewCommentResponse) {
+        Log.d("onPostNewComment", "SUCCESS")
+        FeedDetailService(this).tryGetFeedDetail(feedId)
+    }
+
+    override fun onPostNewCommentFailure(message: String) {
+        Log.d("onPostNewCommentFailure", message)
     }
 
 }

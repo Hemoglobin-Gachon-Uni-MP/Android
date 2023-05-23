@@ -1,10 +1,12 @@
 package com.pline.data.home
 
+import com.pline.data.home.model.DeleteFeedResponse
 import com.pline.data.home.model.FeedInfoResult
 import com.pline.data.home.model.FeedListResult
 import com.pline.data.home.model.FeedsResponse
 import com.pline.data.home.model.GetFeedInfoResponse
 import com.pline.data.home.model.GetFeedListResponse
+import com.pline.data.home.model.PostNewCommentResponse
 
 interface HomeFragmentView {
     // 글 목록 반환
@@ -20,4 +22,10 @@ interface CreateFeedFragmentView {
 interface FeedDetailView {
     fun onGetFeedInfoSuccess(response: FeedInfoResult)
     fun onGetFeedInfoFailure(message: String)
+
+    fun onDeleteFeedSuccess(response: DeleteFeedResponse)
+    fun onDeleteFeedFailure(message: String)
+
+    fun onPostNewCommentSuccess(response: PostNewCommentResponse)
+    fun onPostNewCommentFailure(message: String)
 }

@@ -1,10 +1,14 @@
 package com.pline.data.home
 
 import com.pline.config.ApplicationClass
+import com.pline.data.home.model.DeleteFeedResponse
 import com.pline.data.home.model.FeedInfoResult
 import com.pline.data.home.model.FeedsResponse
 import com.pline.data.home.model.GetFeedInfoResponse
 import com.pline.data.home.model.GetFeedListResponse
+import com.pline.data.home.model.PostCommentReqBody
+import com.pline.data.home.model.PostNewCommentResponse
+import com.pline.data.home.model.baseUserIdReq
 import com.pline.data.home.model.postFeedReqBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -55,6 +59,8 @@ class NewFeedService(val view: CreateFeedFragmentView) {
 class FeedDetailService(val view: FeedDetailView) {
     val homeRetrofitInterface = ApplicationClass.sRetrofit.create(HomeRetrofitInterface::class.java)
 
+    val jwt = ApplicationClass.sSharedPreferences.getString("jwt", "")
+
     fun tryGetFeedDetail(feedId: Int){
         homeRetrofitInterface.getFeedInfo(feedId).enqueue(object : Callback<GetFeedInfoResponse>{
             override fun onResponse(
@@ -69,5 +75,41 @@ class FeedDetailService(val view: FeedDetailView) {
             }
 
         })
+    }
+
+    fun tryDeleteFeed(body: baseUserIdReq, feedId: Int){
+        if (jwt != null){
+            homeRetrofitInterface.deletePost(body, feedId, jwt).enqueue(object : Callback<DeleteFeedResponse>{
+                override fun onResponse(
+                    call: Call<DeleteFeedResponse>,
+                    response: Response<DeleteFeedResponse>
+                ) {
+                    view.onDeleteFeedSuccess(response.body()!!)
+                }
+
+                override fun onFailure(call: Call<DeleteFeedResponse>, t: Throwable) {
+                    view.onDeleteFeedFailure(t.message?:"통신 오류")
+                }
+
+            })
+        }
+    }
+
+    fun tryPostNewComment(feedId: Int, body: PostCommentReqBody){
+        if (jwt != null){
+            homeRetrofitInterface.postNewComment(feedId, body, jwt).enqueue(object : Callback<PostNewCommentResponse>{
+                override fun onResponse(
+                    call: Call<PostNewCommentResponse>,
+                    response: Response<PostNewCommentResponse>
+                ) {
+                    response.body()?.let { view.onPostNewCommentSuccess(it) }
+                }
+
+                override fun onFailure(call: Call<PostNewCommentResponse>, t: Throwable) {
+                    view.onPostNewCommentFailure(t.message ?: "통신 오류")
+                }
+
+            })
+        }
     }
 }

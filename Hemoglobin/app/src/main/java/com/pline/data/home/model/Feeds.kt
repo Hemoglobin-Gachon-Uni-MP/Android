@@ -80,3 +80,20 @@ data class FeedInfoResult(
     @SerializedName("location") var location: String,
     @SerializedName("isReceiver") var isReceiver: String
 )
+
+data class baseUserIdReq(
+    val userId: Int
+)
+
+data class DeleteFeedResponse(
+    @SerializedName("result") val result: String
+): BaseResponse()
+
+data class PostCommentReqBody(
+    var context: String,
+    val userId: Int
+)
+
+data class PostNewCommentResponse(
+    @SerializedName("result") val result: Int
+): BaseResponse()
