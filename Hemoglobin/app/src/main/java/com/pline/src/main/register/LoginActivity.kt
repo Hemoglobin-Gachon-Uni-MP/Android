@@ -29,7 +29,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
 //        var keyHash = Utility.getKeyHash(this)
 //        Log.d("Hash", keyHash)
 
-        // 카카오 로그인인
+        // 카카오 로그인
         binding.btnLogin.setOnClickListener{
             kakaoLogin()
         }
