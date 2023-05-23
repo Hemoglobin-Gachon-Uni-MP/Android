@@ -31,6 +31,9 @@ class RegisterPhoneActivity : BaseActivity<ActivityRegisterPhoneBinding>(Activit
             }
 
         })
+        binding.activityRegisterPhoneBackBtn.setOnClickListener {
+            onBackPressed()
+        }
         binding.activityRegisterPhoneEt.addTextChangedListener(PhoneNumberFormattingTextWatcher())
         binding.btnNext.setOnClickListener {
             ApplicationClass.sSharedPreferences.edit()
