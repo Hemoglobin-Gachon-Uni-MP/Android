@@ -138,7 +138,7 @@
         android:layout_height="wrap_content"
         android:text="Rh+와 Rh-의 경우 잘 모른다면 Rh+일 확률이 높습니다.\n우선 Rh+로 선택해주세요."
         android:textColor="@color/grayAE"
-        android:textSize="12sp"
+        android:textSize="10sp"
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
         app:layout_constraintStart_toStartOf="parent"

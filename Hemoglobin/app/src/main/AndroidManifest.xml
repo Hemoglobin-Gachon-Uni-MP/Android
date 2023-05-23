@@ -34,8 +34,7 @@
             android:exported="false" />
         <activity
             android:name=".src.main.register.RegisterNameActivity"
-            android:exported="true" >
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".src.main.register.RegisterNicknameActivity"
             android:exported="false" />

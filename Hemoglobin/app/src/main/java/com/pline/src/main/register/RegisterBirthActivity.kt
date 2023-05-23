@@ -17,6 +17,9 @@ class RegisterBirthActivity : BaseActivity<ActivityRegisterBirthBinding>(Activit
              val dialog =
                  DatePickerDialogFragment(binding.activityRegisterBirthDatePickerBtn.text as String) { date ->
                      binding.activityRegisterBirthDatePickerBtn.text = date
+                     binding.btnNext.background = getDrawable(R.drawable.btn_next_active)
+                     binding.btnNext.setTextColor(getColor(R.color.white))
+                     binding.btnNext.isClickable = true
                 }
             dialog.show(supportFragmentManager, "datePicker")
         }
