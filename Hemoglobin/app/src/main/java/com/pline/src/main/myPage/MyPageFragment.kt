@@ -27,7 +27,7 @@ class MyPageFragment :
 
         binding.apply {
             // Set click event of my post list button
-            imgbtnMyPostList.setOnClickListener {
+            myPostListContainerCl.setOnClickListener {
                 // Show MyPostListFragment
                 activity?.let {
                     it.supportFragmentManager.beginTransaction()
@@ -36,6 +36,15 @@ class MyPageFragment :
                         .commitAllowingStateLoss()
                 }
             }
+//            imgbtnMyPostList.setOnClickListener {
+//                // Show MyPostListFragment
+//                activity?.let {
+//                    it.supportFragmentManager.beginTransaction()
+//                        .replace(R.id.main_frm, MyPostListFragment(myPostList))
+//                        .addToBackStack(null)
+//                        .commitAllowingStateLoss()
+//                }
+//            }
 
             // Set click event of delete account button
             imgbtnDeleteAccount.setOnClickListener {

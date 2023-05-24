@@ -100,32 +100,41 @@
                 android:layout_marginTop="4dp"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
-    <TextView
-        android:id="@+id/tv_post_list"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/my_post_list_container_cl"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="내 글 목록"
-        android:textColor="@color/black"
-        android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@id/framelayout_card"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="21dp"
-        android:layout_marginLeft="16dp" />
-    <ImageButton
-        android:id="@+id/imgbtn_my_post_list"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:src="@drawable/ic_arrow_right"
-        android:background="@android:color/transparent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tv_post_list"
-        app:layout_constraintBottom_toBottomOf="@id/tv_post_list"
-        android:layout_marginRight="16dp" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/tv_post_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="내 글 목록"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="21dp"
+            android:layout_marginLeft="16dp" />
+        <ImageView
+            android:id="@+id/imgbtn_my_post_list"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/ic_arrow_right"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_post_list"
+            app:layout_constraintBottom_toBottomOf="@id/tv_post_list"
+            android:layout_marginRight="16dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_post_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tv_post_list"
+        app:layout_constraintTop_toBottomOf="@id/my_post_list_container_cl"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="17dp"
         android:paddingLeft="16dp"
@@ -146,12 +155,11 @@
         android:layout_marginTop="21dp"
         android:paddingTop="21dp"
         android:paddingBottom="21dp" />
-    <ImageButton
+    <ImageView
         android:id="@+id/imgbtn_edit_my_info"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:src="@drawable/ic_arrow_right"
-        android:background="@android:color/transparent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tv_edit_my_info"
         app:layout_constraintBottom_toBottomOf="@+id/tv_edit_my_info"
@@ -169,12 +177,11 @@
         android:paddingLeft="16dp"
         android:paddingTop="21dp"
         android:paddingBottom="21dp" />
-    <ImageButton
+    <ImageView
         android:id="@+id/imgbtn_delete_account"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:src="@drawable/ic_arrow_right"
-        android:background="@android:color/transparent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tv_delete_account"
         app:layout_constraintBottom_toBottomOf="@+id/tv_delete_account"

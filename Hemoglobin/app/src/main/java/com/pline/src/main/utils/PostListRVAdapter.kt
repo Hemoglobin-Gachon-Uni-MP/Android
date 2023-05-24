@@ -36,7 +36,11 @@ class PostListRVAdapter(private val postList: ArrayList<FeedListResult>): Recycl
                 itemPostUserNameTv.text = post.nickname
                 itemPostContentsTextTv.text = post.context
                 itemPostDateTv.text = post.date
-                itemPostProfileImageIv.setImageResource(R.drawable.ic_my_page_unselected)
+                if (post.profileImg == 1){
+                    itemPostProfileImageIv.setImageResource(R.drawable.ic_profile_ver1)
+                } else {
+                    itemPostProfileImageIv.setImageResource(R.drawable.ic_profile_ver2)
+                }
                 itemPostCommentCountTv.text = "${post.commentCnt}"
             }
         }
