@@ -1,17 +1,11 @@
 package com.pline.src.main.myPage
 
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.pline.R
 import com.pline.config.ApplicationClass
 import com.pline.config.BaseActivity
 import com.pline.data.mypage.MyPageRetrofitInterface
 import com.pline.data.mypage.model.MyPageEditRequest
 import com.pline.data.mypage.model.MyPageEditResponse
-import com.pline.data.mypage.model.MyPageFeedResult
-import com.pline.data.mypage.model.MyPageResponse
 import com.pline.databinding.ActivityEditInfoBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -65,36 +59,31 @@ class EditInfoActivity : BaseActivity<ActivityEditInfoBinding>(ActivityEditInfoB
                         when (body?.code) {
                             // If success, show success message to user
                             1000 -> {
-                                Toast.makeText(this@EditInfoActivity, "정보가 수정되었습니다", Toast.LENGTH_SHORT)
-                                    .show()
+                                showCustomToast("정보가 수정되었습니다")
                                 // End this activity
                                 finish()
                             }
                             // Handle error cases through toast message
                             2011 -> {
-                                Toast.makeText(this@EditInfoActivity, "닉네임을 입력해주세요", Toast.LENGTH_SHORT)
-                                    .show()
+                                showCustomToast("닉네임을 입력해주세요")
                             }
                             2015 -> {
-                                Toast.makeText(this@EditInfoActivity, "거주지를 입력해주세요", Toast.LENGTH_SHORT)
-                                    .show()
+                                showCustomToast("거주지를 입력해주세요")
                             }
                             2020 -> {
-                                Toast.makeText(this@EditInfoActivity, "닉네임은 최대 8글자여야 합니다", Toast.LENGTH_SHORT)
-                                    .show()
+                                showCustomToast("닉네임은 최대 8글자여야 합니다")
                             }
                             // If GET fails, show fail message to user
-                            else -> Toast.makeText(this@EditInfoActivity, body?.message, Toast.LENGTH_SHORT)
-                                .show()
+                            else -> body?.message?.let { it1 -> showCustomToast(it1) }
                         }
                     } else {
                         // If fail, show fail message to user
-                        Toast.makeText(this@EditInfoActivity, "네트워크 연결에 실패했습니다", Toast.LENGTH_SHORT).show()
+                        showCustomToast("네트워크 연결에 실패했습니다")
                     }
                 }
                 // If fail, show fail message to user
                 override fun onFailure(call: Call<MyPageEditResponse>, t: Throwable) {
-                    Toast.makeText(this@EditInfoActivity, "네트워크 연결에 실패했습니다", Toast.LENGTH_SHORT).show()
+                    showCustomToast("네트워크 연결에 실패했습니다")
                 }
             })
         }
