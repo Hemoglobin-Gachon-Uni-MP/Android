@@ -10,7 +10,6 @@ import com.pline.data.home.FeedService
 import com.pline.data.home.HomeFragmentView
 import com.pline.data.home.model.FeedListResult
 import com.pline.databinding.FragmentPostListProviderBinding
-import com.pline.model.Post
 import com.pline.src.main.utils.PostListRVAdapter
 
 class FragmentPostProvider: BaseFragment<FragmentPostListProviderBinding> (FragmentPostListProviderBinding::bind, R.layout.fragment_post_list_provider), HomeFragmentView {
@@ -28,12 +27,12 @@ class FragmentPostProvider: BaseFragment<FragmentPostListProviderBinding> (Fragm
     }
 
     override fun onGetFeedListSuccess(response: ArrayList<FeedListResult>) {
-        var receiverList: ArrayList<Post> = ArrayList()
+        var receiverList: ArrayList<FeedListResult> = ArrayList()
 
         for (i in 0.. response.size - 1){
             if (response[i].isReceiver == "F"){
                 var list = response[i]
-                var post = Post(false, R.drawable.ic_my_page_unselected, list.nickname, list.date, list.context, list.commentCnt, list.abo, list.rh, list.feedId, list.location, list.userId )
+                var post = FeedListResult(list.abo, list.commentCnt, list.context, list.date, list.feedId, list.isReceiver, list.location, list.nickname, list.profileImg, list.rh, list.userId)
                 receiverList.add(post)
             }
         }

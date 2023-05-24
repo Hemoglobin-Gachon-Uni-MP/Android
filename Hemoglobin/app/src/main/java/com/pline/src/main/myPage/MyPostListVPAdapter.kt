@@ -3,18 +3,22 @@ package com.pline.src.main.myPage
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.pline.data.mypage.model.MyPageFeedResult
 
 // ViewPager adapter for my post list
-class MyPostListVPAdapter(fragmentActivity: FragmentActivity): FragmentStateAdapter(fragmentActivity) {
+class MyPostListVPAdapter(fragmentActivity: FragmentActivity, var postList: ArrayList<MyPageFeedResult>): FragmentStateAdapter(fragmentActivity) {
     // Set ViewPager total item count
     override fun getItemCount() = 2
 
     // Set page according to clicked position
     override fun createFragment(position: Int): Fragment {
+        val postListFromReceiver = postList.filter { it.isReceiver == "T" }
+        val postListFromProvider = postList.filter { it.isReceiver == "F" }
+
         return when(position) {
-            0 -> MyPostListRVVFragment()
-            1 -> MyPostListRVVFragment()
-            else -> MyPostListRVVFragment()
+            0 -> MyPostListRVVFragment(postListFromReceiver as ArrayList<MyPageFeedResult>)
+            1 -> MyPostListRVVFragment(postListFromProvider as ArrayList<MyPageFeedResult>)
+            else -> MyPostListRVVFragment(postListFromReceiver as ArrayList<MyPageFeedResult>)
         }
     }
 }

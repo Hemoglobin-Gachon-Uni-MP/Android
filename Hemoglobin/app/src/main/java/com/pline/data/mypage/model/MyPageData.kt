@@ -25,7 +25,7 @@ data class MyPageFeedResult(
     val context: String,
     val date: String,
     val feedId: Int,
-    val isReceiver: Boolean,
+    val isReceiver: String,
     val nickname: String,
     val profileImg: Int,
     val userId: Int

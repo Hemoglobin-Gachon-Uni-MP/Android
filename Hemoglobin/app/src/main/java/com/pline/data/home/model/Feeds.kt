@@ -18,16 +18,16 @@ data class postFeedReqBody(
 )
 
 data class FeedListResult(
-    val abo: Int,
+    val abo: Int?,
     val commentCnt: Int,
     val context: String,
     val date: String,
     val feedId: Int,
     val isReceiver: String,
-    val location: String,
+    val location: String?,
     val nickname: String,
     val profileImg: Int,
-    val rh: Int,
+    val rh: Int?,
     val userId: Int
 )
 

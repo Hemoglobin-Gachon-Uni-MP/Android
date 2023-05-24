@@ -4,11 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.pline.R
+import com.pline.data.home.model.FeedListResult
 import com.pline.databinding.ItemPostBinding
-import com.pline.model.Post
 
 // Vertical RecyclerView adapter for My Post List
-class PostListRVAdapter(private val postList: ArrayList<Post>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class PostListRVAdapter(private val postList: ArrayList<FeedListResult>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private lateinit var postBinding: ItemPostBinding
 
     // Declare interface to click event
@@ -31,13 +31,13 @@ class PostListRVAdapter(private val postList: ArrayList<Post>): RecyclerView.Ada
 //        var itemView = postBinding.root
 
         // Set data
-        fun bind(post: Post) {
+        fun bind(post: FeedListResult) {
             postBinding.apply {
-                itemPostUserNameTv.text = post.nickName
-                itemPostContentsTextTv.text = post.content
-                itemPostDateTv.text = post.upload_date
+                itemPostUserNameTv.text = post.nickname
+                itemPostContentsTextTv.text = post.context
+                itemPostDateTv.text = post.date
                 itemPostProfileImageIv.setImageResource(R.drawable.ic_my_page_unselected)
-                itemPostCommentCountTv.text = "${post.commentNum}"
+                itemPostCommentCountTv.text = "${post.commentCnt}"
             }
         }
     }
