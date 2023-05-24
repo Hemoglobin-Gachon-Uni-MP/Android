@@ -33,7 +33,7 @@ class FragmentPostEdit(val feedId: Int): BaseFragment<FragmentPostEditBinding>(F
 
         // 뒤로가기
         binding.postEditBackIconIv.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.main_frm, FragmentPostDetail(feedId)).commit()
+            activity?.let { it.onBackPressed() }
         }
 
     }
@@ -75,7 +75,7 @@ class FragmentPostEdit(val feedId: Int): BaseFragment<FragmentPostEditBinding>(F
                 EditPostService(this).tryEditFeed(feedId,body)
                 requireActivity().supportFragmentManager.beginTransaction().replace(R.id.main_frm, FragmentPostDetail(feedId)).commit()
             } else{
-                Toast.makeText(context, "내용을 입력해주세요", Toast.LENGTH_SHORT ).show()
+                showCustomToast("내용을 입력해주세요")
             }
         }
 
@@ -86,7 +86,11 @@ class FragmentPostEdit(val feedId: Int): BaseFragment<FragmentPostEditBinding>(F
         binding.itemPostUserNameTv.text = response.nickname
         binding.postEditReceiverTextEnterfieldEt.setText(response.context)
         content = response.context
-        binding.itemEditProfileImageIv.setImageResource(R.drawable.ic_my_page_unselected)
+        if (response.profileImg == 1){
+            binding.itemEditProfileImageIv.setImageResource(R.drawable.ic_profile_ver1)
+        } else {
+            binding.itemEditProfileImageIv.setImageResource(R.drawable.ic_profile_ver2)
+        }
 
         when (response.rh){
             0 -> binding.postEditSelectedRhTypeTv.text = "Rh+"

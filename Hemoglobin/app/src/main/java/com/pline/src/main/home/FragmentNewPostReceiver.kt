@@ -238,7 +238,7 @@ class FragmentNewPostReceiver(val isReceiver: Boolean): BaseFragment<FragmentNew
     }
 
     fun toHomeFragment(){
-        requireActivity().supportFragmentManager.beginTransaction().replace(R.id.main_frm, HomeFragment()).commit()
+        requireActivity().supportFragmentManager.beginTransaction().replace(R.id.main_frm, HomeFragment()).addToBackStack(null).commitAllowingStateLoss()
     }
 
     override fun onPostNewFeedSuccess(response: FeedsResponse) {

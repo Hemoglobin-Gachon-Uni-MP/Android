@@ -65,7 +65,7 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
 
         // 게시물 편집
         binding.fragmentDetailMoreMenuEditTv.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.main_frm, FragmentPostEdit(feedId)).commit()
+            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.main_frm, FragmentPostEdit(feedId)).addToBackStack(null).commit()
         }
 
         // 게시물 삭제
@@ -159,6 +159,11 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
         binding.itemPostDateTv.text = response.date
         binding.postDetailContentsTextTv.text = response.context
         binding.postDetailCommentCntTv.text = response.commentCnt.toString()
+        if (response.profileImg == 1){
+            binding.itemPostProfileImageIv.setImageResource(R.drawable.ic_profile_ver1)
+        } else {
+            binding.itemPostProfileImageIv.setImageResource(R.drawable.ic_profile_ver2)
+        }
 
         if (response.commentList != null){
             val adapter = CommentRVAdapter(response.commentList!!)
