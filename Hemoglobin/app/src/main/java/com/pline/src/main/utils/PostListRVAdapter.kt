@@ -10,29 +10,25 @@ import com.pline.model.Post
 // Vertical RecyclerView adapter for My Post List
 class PostListRVAdapter(private val postList: ArrayList<Post>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private lateinit var postBinding: ItemPostBinding
+
+    // Declare interface to click event
+    interface OnItemClickListener {
+        fun onPostClick(feedId: Int)
+    }
+
     private lateinit var postListener: OnItemClickListener
 
     // Connect listener
     fun setOnItemClickListener(listener: OnItemClickListener) {
-        this.postListener = listener
-    }
-
-    // Declare interface to click event
-    interface OnItemClickListener {
-        fun onPostClick(post: Post, pos: Int)
+        postListener = listener
     }
 
     // Bind post with data
     inner class PostViewHolder(private val postBinding: ItemPostBinding): RecyclerView.ViewHolder(postBinding.root) {
         init {
             // Set Click Listener
-            postBinding.root.setOnClickListener {
-                val pos = adapterPosition
-                if (pos != RecyclerView.NO_POSITION) {
-                    postListener.onPostClick(postList[pos], pos)
-                }
-            }
         }
+//        var itemView = postBinding.root
 
         // Set data
         fun bind(post: Post) {
@@ -59,5 +55,12 @@ class PostListRVAdapter(private val postList: ArrayList<Post>): RecyclerView.Ada
     // Bind view holder with data
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         (holder as PostViewHolder).bind(postList[holder.adapterPosition])
+
+        holder.itemView.setOnClickListener {
+            val pos = position
+            if (pos != RecyclerView.NO_POSITION) {
+                postListener.onPostClick(postList[pos].feedId)
+            }
+        }
     }
 }

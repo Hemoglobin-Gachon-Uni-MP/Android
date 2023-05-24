@@ -43,11 +43,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
 
                 // 수혈자 글쓰기
                 binding.homeNewPostForReceiverTv.setOnClickListener {
-                    requireActivity().supportFragmentManager.beginTransaction().replace(R.id.main_frm, FragmentNewPostReceiver()).commit()
+                    requireActivity().supportFragmentManager.beginTransaction().replace(R.id.main_frm, FragmentNewPostReceiver(true)).commit()
                 }
                 // 공혈자 글쓰기
                 binding.homeNewPostForProviderTv.setOnClickListener {
-                    requireActivity().supportFragmentManager.beginTransaction().replace(R.id.main_frm, FragmentNewPostProvider()).commit()
+                    requireActivity().supportFragmentManager.beginTransaction().replace(R.id.main_frm, FragmentNewPostReceiver(false)).commit()
                 }
             }
         }
