@@ -1,7 +1,6 @@
 package com.pline.src.main.myPage
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pline.R
@@ -29,7 +28,6 @@ class MyPostListRVVFragment(var myPostList: ArrayList<MyPageFeedResult>) : BaseF
             // Set click event of my post element in recycler view
             postAdapter.setOnItemClickListener(object: PostListRVAdapter.OnItemClickListener {
                 override fun onPostClick(feedId:Int) {
-                    Log.e("seoriri", "$feedId")
                     // Show clicked post
                     parentFragmentManager
                         .beginTransaction()

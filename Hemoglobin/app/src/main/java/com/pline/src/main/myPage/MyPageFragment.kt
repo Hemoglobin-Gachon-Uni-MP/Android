@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.View.GONE
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pline.R
 import com.pline.config.ApplicationClass
@@ -18,7 +17,6 @@ import com.pline.src.main.home.FragmentPostDetail
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
 
 class MyPageFragment :
     BaseFragment<FragmentMyPageBinding>(FragmentMyPageBinding::bind, R.layout.fragment_my_page) {
@@ -104,17 +102,16 @@ class MyPageFragment :
                                     }
                                 }
                                 // If GET fails, show toast message to user
-                                else -> Toast.makeText(activity, body?.message, Toast.LENGTH_SHORT)
-                                    .show()
+                                else -> body?.message?.let { it1 -> showCustomToast(it1) }
                             }
                         } else {
                             // If fail, show toast message to user
-                            Toast.makeText(activity, "네트워크 연결에 실패했습니다", Toast.LENGTH_SHORT).show()
+                            showCustomToast("네트워크 연결에 실패했습니다")
                         }
                     }
                     // If fail, show toast message to user
                     override fun onFailure(call: Call<MyPageResponse>, t: Throwable) {
-                        Toast.makeText(activity, "네트워크 연결에 실패했습니다", Toast.LENGTH_SHORT).show()
+                        showCustomToast("네트워크 연결에 실패했습니다")
                     }
                 })
         }
