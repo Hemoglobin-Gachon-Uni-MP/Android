@@ -8,10 +8,11 @@ import androidx.core.content.ContextCompat
 import com.google.android.material.tabs.TabLayoutMediator
 import com.pline.R
 import com.pline.config.BaseFragment
+import com.pline.data.mypage.model.MyPageFeedResult
 import com.pline.databinding.FragmentMyPostListBinding
 
 // My Post List Tab
-class MyPostListFragment : BaseFragment<FragmentMyPostListBinding>(FragmentMyPostListBinding::bind, R.layout.fragment_my_post_list) {
+class MyPostListFragment(var myPostList: ArrayList<MyPageFeedResult>) : BaseFragment<FragmentMyPostListBinding>(FragmentMyPostListBinding::bind, R.layout.fragment_my_post_list) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -40,7 +41,7 @@ class MyPostListFragment : BaseFragment<FragmentMyPostListBinding>(FragmentMyPos
         )
 
         // Set ViewPager adapter
-        binding.vpMyPostList.adapter = activity?.let { MyPostListVPAdapter(it) }
+        binding.vpMyPostList.adapter = activity?.let { MyPostListVPAdapter(it, myPostList) }
         // Set customview of each tab
         TabLayoutMediator(binding.tabMyPostList, binding.vpMyPostList) { tab, pos ->
             tab.customView = tapTextViewArr[pos]

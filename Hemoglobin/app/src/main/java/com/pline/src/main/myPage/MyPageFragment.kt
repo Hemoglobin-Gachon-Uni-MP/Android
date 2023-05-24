@@ -14,7 +14,6 @@ import com.pline.config.BaseFragment
 import com.pline.data.mypage.MyPageRetrofitInterface
 import com.pline.data.mypage.model.*
 import com.pline.databinding.FragmentMyPageBinding
-import com.pline.src.main.MainActivity
 import com.pline.src.main.home.FragmentPostDetail
 import retrofit2.Call
 import retrofit2.Callback
@@ -44,7 +43,7 @@ class MyPageFragment :
                 // Show MyPostListFragment
                 activity?.let {
                     it.supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_frm, MyPostListFragment())
+                        .replace(R.id.main_frm, MyPostListFragment(myPostList))
                         .addToBackStack(null)
                         .commitAllowingStateLoss()
                 }
