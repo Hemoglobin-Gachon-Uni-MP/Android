@@ -2,6 +2,7 @@ package com.pline.data.home
 
 import com.pline.data.home.model.DeleteCommentResponse
 import com.pline.data.home.model.DeleteFeedResponse
+import com.pline.data.home.model.DeleteReplyResponse
 import com.pline.data.home.model.EditPostResponse
 import com.pline.data.home.model.FeedInfoResult
 import com.pline.data.home.model.FeedListResult
@@ -48,6 +49,7 @@ interface CommentView{
     fun onDeleteCommentFailure(message: String)
 }
 
-interface ReplyPostView{
-
+interface DeleteReplyView{
+    fun onDeleteReplySuccess(response: DeleteReplyResponse)
+    fun onDeleteReplyFailure(message: String)
 }

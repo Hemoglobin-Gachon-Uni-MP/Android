@@ -1,6 +1,5 @@
 package com.pline.src.main.home
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -224,7 +223,7 @@ class FragmentNewPostReceiver(val isReceiver: Boolean): BaseFragment<FragmentNew
 
     fun done(){
         Log.d("data", postData.toString())
-        if (postData.abo == -1 || postData.rh == -1 || postData.loc == "지역 선택" || postData.con == ""){
+        if (postData.abo == -1 || postData.rh == -1 || postData.loc == "전체 지역" || postData.con == ""){
             binding.newPostReceiverDoneBtnEmptyTv.visibility = View.VISIBLE
             binding.newPostReceiverDoneBtnActivateTv.visibility = View.GONE
         } else{

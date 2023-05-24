@@ -3,6 +3,7 @@ package com.pline.data.home
 import com.pline.config.ApplicationClass
 import com.pline.data.home.model.DeleteCommentResponse
 import com.pline.data.home.model.DeleteFeedResponse
+import com.pline.data.home.model.DeleteReplyResponse
 import com.pline.data.home.model.EditPostResponse
 import com.pline.data.home.model.FeedInfoResult
 import com.pline.data.home.model.FeedsResponse
@@ -188,10 +189,25 @@ class DeleteCommentService(val view: CommentView){
     }
 }
 
-class PostReplyService(val view: ReplyPostView){
+class DeleteReplyService(val view: DeleteReplyView){
     val homeRetrofitInterface = ApplicationClass.sRetrofit.create(HomeRetrofitInterface::class.java)
 
     val jwt = ApplicationClass.sSharedPreferences.getString("jwt", "")
 
+    fun tryDeleteReply(body: baseUserIdReq, replyId: Int){
+        if (jwt != null){
+            homeRetrofitInterface.deleteReply(body, replyId, jwt).enqueue(object : Callback<DeleteReplyResponse>{
+                override fun onResponse(
+                    call: Call<DeleteReplyResponse>,
+                    response: Response<DeleteReplyResponse>
+                ) {
+                    view.onDeleteReplySuccess(response.body()!!)
+                }
 
+                override fun onFailure(call: Call<DeleteReplyResponse>, t: Throwable) {
+                    view.onDeleteReplyFailure(t.message ?: "통신 오류")
+                }
+            })
+        }
+    }
 }
