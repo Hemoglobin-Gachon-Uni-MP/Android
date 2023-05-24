@@ -59,6 +59,7 @@ class ReplyRVAdapter(private var replyList: ArrayList<Reply>):
             if (replyList[position].userId == userId){
                 holder.menu.text = "삭제하기"
                 holder.menu.setOnClickListener {
+                    Log.d("Reply Delete", "CLICKED")
                     // 다이얼로그 띄우기
                     myListner.dialog(replyList[position].replyId)
                 }

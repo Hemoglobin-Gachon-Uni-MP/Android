@@ -50,7 +50,7 @@ class CommentRVAdapter(private val commentList: ArrayList<Comment>): RecyclerVie
                     replyRVAdapter = ReplyRVAdapter(replyList)
                     replyRVAdapter.setMyReplyListner(object : ReplyRVAdapter.ReplyListener{
                         override fun dialog(replyId: Int) {
-                            // 답글 삭제 다이얼로그 띄우기
+                            // 답글 삭제 다이얼로그에 replyId 전달
                             myCommentListner.replyDialog(replyId)
                         }
                     })

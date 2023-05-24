@@ -136,7 +136,7 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
             }
         })
 
-        dialog.show(this.requireFragmentManager(), "DeleteFeedDialog")
+        dialog.show(this.requireFragmentManager(), "DeleteCommentDialog")
     }
 
     fun deleteReplyDialog(replyId: Int){
@@ -150,6 +150,7 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
             }
 
         })
+        dialog.show(this.requireFragmentManager(), "DeleteReplyDialog")
     }
 
     override fun onGetFeedInfoSuccess(response: FeedInfoResult) {

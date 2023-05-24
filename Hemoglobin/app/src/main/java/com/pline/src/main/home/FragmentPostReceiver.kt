@@ -42,8 +42,7 @@ class FragmentPostReceiver :BaseFragment<FragmentPostListReceiverBinding>(Fragme
 
         var postAdapter = PostListRVAdapter(receiverList)
         binding.homePostUserListRv.adapter = postAdapter
-        var mLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, true)
-        mLayoutManager.stackFromEnd = true
+        var mLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.homePostUserListRv.layoutManager = mLayoutManager
 
         postAdapter.setOnItemClickListener(object : PostListRVAdapter.OnItemClickListener{
