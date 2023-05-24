@@ -14,9 +14,12 @@ import com.pline.config.BaseFragment
 import com.pline.data.mypage.MyPageRetrofitInterface
 import com.pline.data.mypage.model.*
 import com.pline.databinding.FragmentMyPageBinding
+import com.pline.src.main.MainActivity
+import com.pline.src.main.home.FragmentPostDetail
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
 
 class MyPageFragment :
     BaseFragment<FragmentMyPageBinding>(FragmentMyPageBinding::bind, R.layout.fragment_my_page) {
@@ -129,8 +132,12 @@ class MyPageFragment :
                     post: MyPageFeedResult,
                     pos: Int
                 ) {
-                    /// todo - 글 상세 보기 화면 띄우기
-                    Log.d("Seori", "Click my post")
+                    // Show clicked post
+                    parentFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.main_frm, FragmentPostDetail(myPostList[pos].feedId))
+                        .addToBackStack(null)
+                        .commitAllowingStateLoss()
                 }
             })
             // Set layout of recycler view

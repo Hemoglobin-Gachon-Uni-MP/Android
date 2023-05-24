@@ -49,7 +49,7 @@ class FragmentPostProvider: BaseFragment<FragmentPostListProviderBinding> (Fragm
 
         postAdapter.setOnItemClickListener(object : PostListRVAdapter.OnItemClickListener{
             override fun onPostClick(feedId: Int) {
-                requireActivity().supportFragmentManager.beginTransaction().replace(R.id.main_frm, FragmentPostDetail(feedId)).commit()
+                requireActivity().supportFragmentManager.beginTransaction().replace(R.id.main_frm, FragmentPostDetail(feedId)).addToBackStack(null).commit()
             }
         })
     }
