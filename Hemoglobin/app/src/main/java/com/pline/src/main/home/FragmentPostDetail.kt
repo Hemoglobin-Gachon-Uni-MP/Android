@@ -6,13 +6,11 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.pline.R
 import com.pline.config.ApplicationClass
 import com.pline.config.BaseFragment
 import com.pline.data.home.FeedDetailService
 import com.pline.data.home.FeedDetailView
-import com.pline.data.home.model.DeleteFeedResponse
 import com.pline.data.home.model.FeedInfoResult
 import com.pline.data.home.model.PostCommentReqBody
 import com.pline.data.home.model.PostNewCommentResponse
@@ -21,7 +19,10 @@ import com.pline.data.home.model.PostReplyReqBody
 import com.pline.data.home.model.baseUserIdReq
 import com.pline.databinding.FragmentPostDetailBinding
 import com.pline.src.main.home.adapter.CommentRVAdapter
-import com.pline.src.main.myPage.DeleteDialog
+import com.pline.src.main.home.dialog.CommentDeleteDialog
+import com.pline.src.main.home.dialog.FeedDeleteDialog
+import com.pline.src.main.home.dialog.ReplyDeleteDialog
+import com.pline.src.main.home.dialog.ReportDialog
 
 class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBinding>(FragmentPostDetailBinding::bind, R.layout.fragment_post_detail),
     FeedDetailView {
@@ -31,7 +32,6 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d("FragmentPostDetail", "onCreated")
-
 
     }
 
@@ -71,6 +71,12 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
         // 게시물 삭제
         binding.fragmentDetailMoreMenuDeleteTv.setOnClickListener {
             deletePostDialog()
+        }
+
+        // 게시물 신고
+        binding.fragmentDetailMoreMenuReportTv.setOnClickListener {
+            binding.fragmentDetailMoreMenuNotMineLl.visibility = View.GONE
+            reportDialog(0)
         }
 
 
@@ -122,6 +128,12 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
         val dialog = FeedDeleteDialog(body, feedId)
         dialog.isCancelable = false
         dialog.show(this.requireFragmentManager(), "DeleteFeedDialog")
+    }
+
+    fun reportDialog(type: Int){
+        val dialog = ReportDialog(type)
+        dialog.isCancelable = false
+        dialog.show(this.requireFragmentManager(), "ReportDialog")
     }
 
     fun deleteCommentDialog(commentId: Int){
@@ -201,6 +213,14 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
 
                 override fun replyDialog(replyId: Int) {
                     deleteReplyDialog(replyId)
+                }
+
+                override fun reportComment() {
+                    ReportDialog(1)
+                }
+
+                override fun reportReply() {
+                    ReportDialog(2)
                 }
             })
         }

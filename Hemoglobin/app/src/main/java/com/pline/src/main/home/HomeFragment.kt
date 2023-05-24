@@ -353,7 +353,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
             binding.homePostSelectedAboTv.visibility = View.VISIBLE
         }
 
-        if (abo[0] == 0&&abo[2] == 0&&abo[2] == 0&&abo[3] == 0){
+        if (abo[0] == 0&&abo[1] == 0&&abo[2] == 0&&abo[3] == 0){
             binding.homePostSelectedAboTv.visibility = View.VISIBLE
             showCustomToast("ABO 필터를 한 개 이상 선택해 주세요")
             binding.homeBtnFilterIv.focusable = View.NOT_FOCUSABLE

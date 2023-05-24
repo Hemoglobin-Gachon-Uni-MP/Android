@@ -1,4 +1,4 @@
-package com.pline.src.main.home
+package com.pline.src.main.home.dialog
 
 import android.content.DialogInterface
 import android.graphics.Color
@@ -9,25 +9,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import com.pline.R
-import com.pline.config.ApplicationClass
-import com.pline.data.home.CommentView
-import com.pline.data.home.DeleteCommentService
-import com.pline.data.home.FeedDeleteService
-import com.pline.data.home.model.DeleteCommentResponse
+import com.pline.data.home.DeleteReplyService
+import com.pline.data.home.DeleteReplyView
+import com.pline.data.home.model.DeleteReplyResponse
 import com.pline.data.home.model.baseUserIdReq
 import com.pline.databinding.DialogDeleteCommentBinding
-import com.pline.databinding.DialogDeleteFeedBinding
 
-class CommentDeleteDialog(val body: baseUserIdReq, val commentId: Int): DialogFragment(), CommentView {
+class ReplyDeleteDialog(val body: baseUserIdReq, val replyId: Int): DialogFragment(),
+    DeleteReplyView {
     private lateinit var binding: DialogDeleteCommentBinding
 
-    interface Listner{
+    interface ReplyDeleteListener{
         fun reset()
     }
-    private lateinit var mListner: Listner
-    fun setmListner(listner:Listner){
-        mListner = listner
+    private lateinit var mListner: ReplyDeleteListener
+    fun setReplyListner(listener: ReplyDeleteListener){
+        mListner = listener
     }
 
     override fun onCreateView(
@@ -37,6 +34,8 @@ class CommentDeleteDialog(val body: baseUserIdReq, val commentId: Int): DialogFr
     ): View? {
         super.onCreate(savedInstanceState)
         binding = DialogDeleteCommentBinding.inflate(inflater, container, false)
+        binding.tvDeleteCommentGuide.text = "한번 삭제한 답글은 되돌릴 수 없습니다."
+        binding.tvDeleteComment.text = "답글을 삭제하시겠습니까?"
         setDialog()
         return binding.root
     }
@@ -47,7 +46,7 @@ class CommentDeleteDialog(val body: baseUserIdReq, val commentId: Int): DialogFr
 
         // Set click event of delete button
         btnDeleteComment.setOnClickListener {
-            DeleteCommentService(this@CommentDeleteDialog).tryDeleteComment(body, commentId)
+            DeleteReplyService(this@ReplyDeleteDialog).tryDeleteReply(body, replyId)
         }
         // Set click event of cancel button
         btnCancelComment.setOnClickListener {
@@ -61,12 +60,11 @@ class CommentDeleteDialog(val body: baseUserIdReq, val commentId: Int): DialogFr
         mListner.reset()
     }
 
-    override fun onDeleteCommentSuccess(response: DeleteCommentResponse) {
-        Log.d("onDeleteComment", "SUCCESS")
+    override fun onDeleteReplySuccess(response: DeleteReplyResponse) {
         dismiss()
     }
 
-    override fun onDeleteCommentFailure(message: String) {
-        Log.d("onDeleteCommentFailure", message)
+    override fun onDeleteReplyFailure(message: String) {
+        Log.d("onDeleteReplyFailure", message)
     }
 }
