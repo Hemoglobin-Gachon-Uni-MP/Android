@@ -10,6 +10,8 @@ import com.pline.data.home.model.GetFeedInfoResponse
 import com.pline.data.home.model.GetFeedListResponse
 import com.pline.data.home.model.PostCommentReqBody
 import com.pline.data.home.model.PostNewCommentResponse
+import com.pline.data.home.model.PostNewReplyResponse
+import com.pline.data.home.model.PostReplyReqBody
 import com.pline.data.home.model.baseUserIdReq
 import com.pline.data.home.model.postFeedReqBody
 import retrofit2.Call
@@ -97,6 +99,23 @@ class FeedDetailService(val view: FeedDetailView) {
             })
         }
     }
+
+    fun tryPostReply(commentId: Int, body: PostReplyReqBody){
+        if (jwt != null){
+            homeRetrofitInterface.postNewReply(commentId, body, jwt).enqueue(object : Callback<PostNewReplyResponse>{
+                override fun onResponse(
+                    call: Call<PostNewReplyResponse>,
+                    response: Response<PostNewReplyResponse>
+                ) {
+                    view.onPostReplySuccess(response.body()!!)
+                }
+
+                override fun onFailure(call: Call<PostNewReplyResponse>, t: Throwable) {
+                    view.onPostReplyFailure(t.message ?: "통신 오류")
+                }
+            })
+        }
+    }
 }
 
 class FeedDeleteService(val view:FeedDeleteView){
@@ -167,4 +186,12 @@ class DeleteCommentService(val view: CommentView){
             })
         }
     }
+}
+
+class PostReplyService(val view: ReplyPostView){
+    val homeRetrofitInterface = ApplicationClass.sRetrofit.create(HomeRetrofitInterface::class.java)
+
+    val jwt = ApplicationClass.sSharedPreferences.getString("jwt", "")
+
+
 }
