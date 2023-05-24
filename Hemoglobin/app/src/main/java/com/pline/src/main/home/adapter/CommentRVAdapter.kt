@@ -23,6 +23,8 @@ class CommentRVAdapter(private val commentList: ArrayList<Comment>): RecyclerVie
         fun dialog(commentId: Int)
         fun reply(commentId: Int)
         fun replyDialog(replyId: Int)
+        fun reportComment()
+        fun reportReply()
     }
 
     private lateinit var myCommentListner: MyCommentListner
@@ -38,7 +40,11 @@ class CommentRVAdapter(private val commentList: ArrayList<Comment>): RecyclerVie
         val reply = binding.itemCommentReplyIconIv
         fun bind(comment: Comment){
             with(binding){
-                itemCommentProfileImageIv.setImageResource(R.drawable.ic_my_page_unselected)
+                if (comment.profileImg == 1){
+                    itemCommentProfileImageIv.setImageResource(R.drawable.ic_profile_ver1)
+                } else {
+                    itemCommentProfileImageIv.setImageResource(R.drawable.ic_profile_ver2)
+                }
                 itemCommentUserNameTv.text = comment.nickname
                 itemCommentReplyCountTv.text = comment.replyList.size.toString()
                 itemCommentContentsTextTv.text = comment.context
@@ -52,6 +58,10 @@ class CommentRVAdapter(private val commentList: ArrayList<Comment>): RecyclerVie
                         override fun dialog(replyId: Int) {
                             // 답글 삭제 다이얼로그에 replyId 전달
                             myCommentListner.replyDialog(replyId)
+                        }
+
+                        override fun reportReply() {
+                            myCommentListner.reportReply()
                         }
                     })
                     itemCommentReplyRv.adapter = replyRVAdapter
@@ -88,6 +98,10 @@ class CommentRVAdapter(private val commentList: ArrayList<Comment>): RecyclerVie
             }
         } else{
             holder.menu.text = "댓글 신고하기"
+            holder.menu.setOnClickListener {
+                holder.menu.visibility = View.GONE
+                myCommentListner.reportComment()
+            }
         }
 
         holder.reply.setOnClickListener {

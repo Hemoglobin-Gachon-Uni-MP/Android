@@ -18,6 +18,7 @@ class ReplyRVAdapter(private var replyList: ArrayList<Reply>):
 
     interface ReplyListener{
         fun dialog(replyId: Int)
+        fun reportReply()
     }
     lateinit var myListner: ReplyListener
     fun setMyReplyListner(listener: ReplyListener){
@@ -31,7 +32,11 @@ class ReplyRVAdapter(private var replyList: ArrayList<Reply>):
 
         fun bind(reply: Reply){
             with(binding){
-                itemReplyProfileImageIv.setImageResource(R.drawable.ic_my_page_unselected)
+                if (reply.profileImg == 1){
+                    itemReplyProfileImageIv.setImageResource(R.drawable.ic_profile_ver1)
+                } else {
+                    itemReplyProfileImageIv.setImageResource(R.drawable.ic_profile_ver2)
+                }
                 itemReplyUserNameTv.text = reply.nickname
                 itemReplyContentsTextTv.text = reply.context
                 itemReplyDateTv.text = reply.date
@@ -64,7 +69,11 @@ class ReplyRVAdapter(private var replyList: ArrayList<Reply>):
                     myListner.dialog(replyList[position].replyId)
                 }
             } else{
-                holder.menu.text = "댓글 신고하기"
+                holder.menu.text = "신고하기"
+                holder.menu.setOnClickListener {
+                    holder.menu.visibility = View.GONE
+                    myListner.reportReply()
+                }
             }
 
         }
