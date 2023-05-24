@@ -50,7 +50,7 @@
         app:layout_constraintStart_toStartOf="parent"
         android:scrollbars="none">
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="11dp"
             android:orientation="horizontal">
@@ -60,7 +60,8 @@
                 style="@style/home_filter_blood_type_tv"
                 android:textColor="@color/red6"
                 android:text="Rh+"
-                android:background="@drawable/style_filter_unselected"/>
+                android:background="@drawable/style_filter_unselected"
+                android:visibility="gone"/>
             <TextView
                 android:id="@+id/home_post_selected_rh_minus_tv"
                 style="@style/home_filter_blood_type_tv"
@@ -69,12 +70,19 @@
                 android:background="@drawable/style_filter_unselected"
                 android:visibility="gone"/>
             <TextView
+                android:id="@+id/home_post_selected_rh_all_tv"
+                style="@style/home_filter_blood_type_tv"
+                android:textColor="@color/red6"
+                android:text="Rh 전체"
+                android:background="@drawable/style_filter_unselected"/>
+            <TextView
                 android:id="@+id/home_post_selected_a_tv"
                 style="@style/home_filter_blood_type_tv"
                 android:textColor="@color/red6"
                 android:paddingHorizontal="15dp"
                 android:text="A"
-                android:background="@drawable/style_filter_unselected"/>
+                android:background="@drawable/style_filter_unselected"
+                android:visibility="gone"/>
             <TextView
                 android:id="@+id/home_post_selected_b_tv"
                 style="@style/home_filter_blood_type_tv"
@@ -84,7 +92,7 @@
                 android:background="@drawable/style_filter_unselected"
                 android:visibility="gone"/>
             <TextView
-                android:id="@+id/home_post_selected_ab_tv"
+                android:id="@+id/home_post_selected_c_tv"
                 style="@style/home_filter_blood_type_tv"
                 android:textColor="@color/red6"
                 android:text="AB"
@@ -98,12 +106,19 @@
                 android:text="O"
                 android:background="@drawable/style_filter_unselected"
                 android:visibility="gone"/>
+            <TextView
+                android:id="@+id/home_post_selected_abo_tv"
+                style="@style/home_filter_blood_type_tv"
+                android:textColor="@color/red6"
+                android:paddingHorizontal="15dp"
+                android:text="ABO 전체"
+                android:background="@drawable/style_filter_unselected"/>
 
             <TextView
                 android:id="@+id/home_post_selected_area_tv"
                 style="@style/home_filter_blood_type_tv"
                 android:background="@drawable/style_filter_unselected"
-                android:text="서울시 강남구"
+                android:text="전체 지역"
                 android:textColor="@color/red6" />
 
             <TextView
@@ -216,7 +231,8 @@
                 style="@style/home_filter_floating_tv"
                 android:background="@drawable/style_filter_unselected"
                 android:text="Rh-"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/home_filter_menu_minus_selected_tv"
@@ -224,8 +240,7 @@
                 android:background="@drawable/style_filter_selected"
                 android:text="Rh-"
                 android:textColor="@color/white"
-                android:textStyle="bold"
-                android:visibility="gone" />
+                android:textStyle="bold"/>
 
         </LinearLayout>
 
@@ -262,7 +277,8 @@
                 android:background="@drawable/style_filter_unselected"
                 android:paddingHorizontal="15dp"
                 android:text="B"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/home_filter_menu_b_selected_tv"
@@ -272,23 +288,24 @@
                 android:text="B"
                 android:textColor="@color/white"
                 android:textStyle="bold"
-                android:visibility="gone" />
+                android:visibility="visible" />
 
             <TextView
-                android:id="@+id/home_filter_menu_ab_empty_tv"
+                android:id="@+id/home_filter_menu_c_empty_tv"
                 style="@style/home_filter_floating_tv"
                 android:background="@drawable/style_filter_unselected"
                 android:text="AB"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:visibility="gone"/>
 
             <TextView
-                android:id="@+id/home_filter_menu_ab_selected_tv"
+                android:id="@+id/home_filter_menu_c_selected_tv"
                 style="@style/home_filter_floating_tv"
                 android:background="@drawable/style_filter_selected"
                 android:text="AB"
                 android:textColor="@color/white"
                 android:textStyle="bold"
-                android:visibility="gone" />
+                android:visibility="visible" />
 
             <TextView
                 android:id="@+id/home_filter_menu_o_empty_tv"
@@ -296,7 +313,8 @@
                 android:background="@drawable/style_filter_unselected"
                 android:paddingHorizontal="15dp"
                 android:text="O"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/home_filter_menu_o_selected_tv"
@@ -306,7 +324,7 @@
                 android:text="O"
                 android:textColor="@color/white"
                 android:textStyle="bold"
-                android:visibility="gone" />
+                android:visibility="visible" />
 
         </LinearLayout>
 

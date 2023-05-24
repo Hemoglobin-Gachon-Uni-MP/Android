@@ -12,7 +12,7 @@
     <string name="main_btm_nav_my_page_title">마이페이지</string>
     <!-- Home -->
     <string-array name="spinner_area_list">
-        <item>지역 선택</item>
+        <item>전체 지역</item>
         <item>서울시 강남구</item>
         <item>서울시 강동구</item>
         <item>서울시 강북구</item>
