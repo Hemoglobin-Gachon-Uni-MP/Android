@@ -40,7 +40,8 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
 
         // 뒤로가기
         binding.postDetailBackIconIv.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.main_frm, HomeFragment()).commit()
+            // Move to previous page
+            activity?.let { it.onBackPressed() }
         }
 
         // 더보기 버튼
