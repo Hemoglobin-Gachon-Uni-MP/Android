@@ -1,6 +1,7 @@
 package com.pline.data.home
 
 import com.pline.config.ApplicationClass
+import com.pline.data.home.model.DeleteCommentResponse
 import com.pline.data.home.model.DeleteFeedResponse
 import com.pline.data.home.model.EditPostResponse
 import com.pline.data.home.model.FeedInfoResult
@@ -140,6 +141,29 @@ class EditPostService(val view:FeedEditView){
                     view.onEditFeedFailure(t.message ?: "통신 오류")
                 }
 
+            })
+        }
+    }
+}
+
+class DeleteCommentService(val view: CommentView){
+    val homeRetrofitInterface = ApplicationClass.sRetrofit.create(HomeRetrofitInterface::class.java)
+
+    val jwt = ApplicationClass.sSharedPreferences.getString("jwt", "")
+
+    fun tryDeleteComment(body: baseUserIdReq, commentId: Int){
+        if (jwt != null){
+            homeRetrofitInterface.deleteComment(body, commentId, jwt).enqueue(object : Callback<DeleteCommentResponse>{
+                override fun onResponse(
+                    call: Call<DeleteCommentResponse>,
+                    response: Response<DeleteCommentResponse>
+                ) {
+                    view.onDeleteCommentSuccess(response.body()!!)
+                }
+
+                override fun onFailure(call: Call<DeleteCommentResponse>, t: Throwable) {
+                    view.onDeleteCommentFailure(t.message ?: "통신 오류")
+                }
             })
         }
     }

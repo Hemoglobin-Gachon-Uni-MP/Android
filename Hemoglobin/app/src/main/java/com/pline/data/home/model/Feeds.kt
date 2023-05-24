@@ -102,3 +102,7 @@ data class PostNewCommentResponse(
 data class EditPostResponse(
     @SerializedName("result") val result: String
 ): BaseResponse()
+
+data class DeleteCommentResponse(
+    @SerializedName("result") val result: String
+): BaseResponse()

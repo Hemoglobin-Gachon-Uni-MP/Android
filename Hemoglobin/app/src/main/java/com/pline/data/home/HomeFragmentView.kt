@@ -1,5 +1,6 @@
 package com.pline.data.home
 
+import com.pline.data.home.model.DeleteCommentResponse
 import com.pline.data.home.model.DeleteFeedResponse
 import com.pline.data.home.model.EditPostResponse
 import com.pline.data.home.model.FeedInfoResult
@@ -36,4 +37,9 @@ interface FeedDeleteView{
 interface FeedEditView{
     fun onEditFeedSuccess(response: EditPostResponse)
     fun onEditFeedFailure(message: String)
+}
+
+interface CommentView{
+    fun onDeleteCommentSuccess(response: DeleteCommentResponse)
+    fun onDeleteCommentFailure(message: String)
 }

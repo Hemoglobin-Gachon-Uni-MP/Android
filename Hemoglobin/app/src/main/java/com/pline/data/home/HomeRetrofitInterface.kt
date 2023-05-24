@@ -1,5 +1,6 @@
 package com.pline.data.home
 
+import com.pline.data.home.model.DeleteCommentResponse
 import com.pline.data.home.model.DeleteFeedResponse
 import com.pline.data.home.model.EditPostResponse
 import com.pline.data.home.model.FeedsResponse
@@ -42,6 +43,12 @@ interface HomeRetrofitInterface {
     ): Call<DeleteFeedResponse>
 
     // 댓글 삭제 api
+    @PATCH("feeds/comment/{commentId}/status")
+    fun deleteComment(
+        @Body body: baseUserIdReq,
+        @Path("commentId") commentId: Int,
+        @Header("X-ACCESS-TOKEN") xAccessToken: String
+    ): Call<DeleteCommentResponse>
 
     // 댓글 달기 api
     @POST("feeds/comment/{feedId}")

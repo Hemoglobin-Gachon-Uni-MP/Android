@@ -30,11 +30,13 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
         super.onViewCreated(view, savedInstanceState)
         Log.d("FragmentPostDetail", "onCreated")
 
-        FeedDetailService(this).tryGetFeedDetail(feedId)
+
     }
 
     override fun onResume() {
         super.onResume()
+
+        FeedDetailService(this).tryGetFeedDetail(feedId)
 
         // 뒤로가기
         binding.postDetailBackIconIv.setOnClickListener {
@@ -65,7 +67,7 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
 
         // 게시물 삭제
         binding.fragmentDetailMoreMenuDeleteTv.setOnClickListener {
-            deleteDialog()
+            deletePostDialog()
         }
 
 
@@ -112,10 +114,25 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
         }
     }
 
-    fun deleteDialog(){
+    fun deletePostDialog(){
         val body = baseUserIdReq(postUserId)
         val dialog = FeedDeleteDialog(body, feedId)
         dialog.isCancelable = false
+        dialog.show(this.requireFragmentManager(), "DeleteFeedDialog")
+    }
+
+    fun deleteCommentDialog(commentId: Int){
+        val body = baseUserIdReq(myId)
+        val dialog = CommentDeleteDialog(body, commentId)
+        dialog.isCancelable = false
+
+        dialog.setmListner(object : CommentDeleteDialog.Listner{
+            override fun reset() {
+                Log.d("ondismiss", "postDetail")
+                onResume()
+            }
+        })
+
         dialog.show(this.requireFragmentManager(), "DeleteFeedDialog")
     }
 
@@ -130,6 +147,11 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
             val adapter = CommentRVAdapter(response.commentList!!)
             binding.postDetailCommentsListRv.adapter = adapter
             binding.postDetailCommentsListRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            adapter.setMyCommentListner(object : CommentRVAdapter.MyCommentListner{
+                override fun dialog(commentId: Int) {
+                    deleteCommentDialog(commentId)
+                }
+            })
         }
     }
 
