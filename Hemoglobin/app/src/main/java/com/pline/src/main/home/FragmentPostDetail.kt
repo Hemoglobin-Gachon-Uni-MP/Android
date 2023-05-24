@@ -16,6 +16,8 @@ import com.pline.data.home.model.DeleteFeedResponse
 import com.pline.data.home.model.FeedInfoResult
 import com.pline.data.home.model.PostCommentReqBody
 import com.pline.data.home.model.PostNewCommentResponse
+import com.pline.data.home.model.PostNewReplyResponse
+import com.pline.data.home.model.PostReplyReqBody
 import com.pline.data.home.model.baseUserIdReq
 import com.pline.databinding.FragmentPostDetailBinding
 import com.pline.src.main.home.adapter.CommentRVAdapter
@@ -152,6 +154,29 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
                 override fun dialog(commentId: Int) {
                     deleteCommentDialog(commentId)
                 }
+
+                override fun reply(commentId: Int) {
+                    // 댓글 쓰기
+                    var reply = ""
+                    class MyEditWatcher: TextWatcher {
+                        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                        }
+                        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                        }
+                        override fun afterTextChanged(s: Editable?) {
+                            reply = binding.commentEnterfieldEt.text.toString()
+                            Log.d("onPostComment", reply)
+                        }
+                    }
+                    var watcher = MyEditWatcher()
+                    binding.commentEnterfieldEt.addTextChangedListener(watcher)
+                    binding.commentSendIconIv.setOnClickListener {
+                        val body = PostReplyReqBody(reply, feedId, myId)
+                        FeedDetailService(this@FragmentPostDetail).tryPostReply(commentId, body)
+                        binding.commentEnterfieldEt.text.clear()
+                    }
+
+                }
             })
         }
     }
@@ -167,6 +192,15 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
 
     override fun onPostNewCommentFailure(message: String) {
         Log.d("onPostNewCommentFailure", message)
+    }
+
+    // New Reply 답글달기
+    override fun onPostReplySuccess(response: PostNewReplyResponse) {
+        onResume()
+    }
+
+    override fun onPostReplyFailure(message: String) {
+        Log.d("onPostREPLY", "FAIL : " + message)
     }
 
 }
