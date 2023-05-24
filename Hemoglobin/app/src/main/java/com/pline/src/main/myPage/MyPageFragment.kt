@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.View.GONE
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pline.R
@@ -13,9 +14,12 @@ import com.pline.config.BaseFragment
 import com.pline.data.mypage.MyPageRetrofitInterface
 import com.pline.data.mypage.model.*
 import com.pline.databinding.FragmentMyPageBinding
+import com.pline.src.main.MainActivity
+import com.pline.src.main.home.FragmentPostDetail
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
 
 class MyPageFragment :
     BaseFragment<FragmentMyPageBinding>(FragmentMyPageBinding::bind, R.layout.fragment_my_page) {
@@ -23,15 +27,15 @@ class MyPageFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // Get my page info from server
-        getMyPageInfo()
 
         binding.apply {
             // Set click event of edit my info button
             imgbtnEditMyInfo.setOnClickListener {
-                /// todo - 데이터 전달
                 // Show(= Start) EditInfoActivity
                 val intent = Intent(activity, EditInfoActivity::class.java)
+                // Pass data
+                intent.putExtra("myLocation", tvLocation.text)
+                intent.putExtra("myNickname", tvNickname.text)
                 startActivity(intent)
             }
 
@@ -54,12 +58,24 @@ class MyPageFragment :
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+
+        // Get my page info from server
+        getMyPageInfo()
+    }
+
     // Get my page info through api
     private fun getMyPageInfo() {
         val service = ApplicationClass.sRetrofit.create(MyPageRetrofitInterface::class.java)
-        // Get jwt from sp
+        // Get jwt, userId from sp
         val jwt = sSharedPreferences.getString("jwt", "")
-        val userId = 10 // 더미
+        val userId = sSharedPreferences.getInt("userId", 0)
+        if (jwt != null) {
+            Log.d("seori", jwt)
+            Log.d("seori", userId.toString())
+        }
+
         // Request my page info through API
         jwt?.let {
             // Jwt is in header, userId is in Path Variable
@@ -73,28 +89,16 @@ class MyPageFragment :
                                     val result = body.result
                                     binding.run {
                                         tvNickname.text = result.nickname
-                                        tvName.text = result.name + "(${result.gender})"
+                                        tvName.text = result.name + " (${result.gender})"
                                         tvBirth.text = result.birth
-    //                                        tvLocation.text = result.location
+                                        tvLocation.text = result.location
                                         tvBloodType.text = result.blood
                                         myPostList = result.feedList
 
-                                        rvPostList.run {
-                                            // Set Recycler View Adapter
-                                            val myPostAdapter = MyPostListRVHAdapter(myPostList)
-                                            adapter = myPostAdapter
-                                            // Set click event of my post element in recycler view
-                                            myPostAdapter.setOnItemClickListener(object :
-                                                MyPostListRVHAdapter.OnItemClickListener {
-                                                override fun onMyPostClick(post: MyPageFeedResult, pos: Int) {
-                                                    /// todo - 글 상세 보기 화면 띄우기
-                                                    Log.d("Seori", "Click my post")
-                                                }
-                                            })
-                                            // Set layout of recycler view
-                                            layoutManager =
-                                                LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
-                                            addItemDecoration(MyPostListRVHDecoration(30))
+                                        if (myPostList.isEmpty()) {
+                                            rvPostList.visibility = GONE
+                                        } else {
+                                            setPostRecyclerView()
                                         }
                                     }
                                 }
@@ -112,6 +116,38 @@ class MyPageFragment :
                         Toast.makeText(activity, "네트워크 연결에 실패했습니다", Toast.LENGTH_SHORT).show()
                     }
                 })
+        }
+    }
+
+    // Set RecyclerView of my post list
+    private fun setPostRecyclerView() {
+        binding.rvPostList.run {
+            // Set Recycler View Adapter
+            val myPostAdapter = MyPostListRVHAdapter(myPostList)
+            adapter = myPostAdapter
+            // Set click event of my post element in recycler view
+            myPostAdapter.setOnItemClickListener(object :
+                MyPostListRVHAdapter.OnItemClickListener {
+                override fun onMyPostClick(
+                    post: MyPageFeedResult,
+                    pos: Int
+                ) {
+                    // Show clicked post
+                    parentFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.main_frm, FragmentPostDetail(myPostList[pos].feedId))
+                        .addToBackStack(null)
+                        .commitAllowingStateLoss()
+                }
+            })
+            // Set layout of recycler view
+            layoutManager =
+                LinearLayoutManager(
+                    this.context,
+                    LinearLayoutManager.HORIZONTAL,
+                    false
+                )
+            addItemDecoration(MyPostListRVHDecoration(30))
         }
     }
 

@@ -2,7 +2,7 @@ package com.pline.data.mypage.model
 
 import com.pline.config.BaseResponse
 
-// Response data class for get my page info
+// Response data class for getting my page info
 data class MyPageResponse(
     val result: MyPageResult
 ) : BaseResponse()
@@ -30,3 +30,19 @@ data class MyPageFeedResult(
     val profileImg: Int,
     val userId: Int
 )
+
+// Request data class for editing my page info
+data class MyPageEditRequest(
+    val location: String,
+    val nickname: String
+) : BaseResponse()
+
+// Response data class for editing my page info
+data class MyPageEditResponse(
+    val result: String
+) : BaseResponse()
+
+// Response data class for deleting my account
+data class MyAccountDeleteResponse(
+    val result: String
+) : BaseResponse()
