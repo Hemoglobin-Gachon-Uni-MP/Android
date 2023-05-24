@@ -139,6 +139,19 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
         dialog.show(this.requireFragmentManager(), "DeleteFeedDialog")
     }
 
+    fun deleteReplyDialog(replyId: Int){
+        val body = baseUserIdReq(myId)
+        val dialog = ReplyDeleteDialog(body, replyId)
+        dialog.isCancelable = false
+
+        dialog.setReplyListner(object : ReplyDeleteDialog.ReplyDeleteListener{
+            override fun reset() {
+                onResume()
+            }
+
+        })
+    }
+
     override fun onGetFeedInfoSuccess(response: FeedInfoResult) {
         postUserId = response.userId
         binding.itemPostUserNameTv.text = response.nickname
@@ -156,6 +169,7 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
                 }
 
                 override fun reply(commentId: Int) {
+                    binding.postDetailCommentEnterContainerLl.setBackgroundResource(R.drawable.style_enterfield_reply)
                     // 댓글 쓰기
                     var reply = ""
                     class MyEditWatcher: TextWatcher {
@@ -171,11 +185,16 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
                     var watcher = MyEditWatcher()
                     binding.commentEnterfieldEt.addTextChangedListener(watcher)
                     binding.commentSendIconIv.setOnClickListener {
+                        binding.postDetailCommentEnterContainerLl.setBackgroundResource(R.drawable.style_filter_unselected)
                         val body = PostReplyReqBody(reply, feedId, myId)
                         FeedDetailService(this@FragmentPostDetail).tryPostReply(commentId, body)
                         binding.commentEnterfieldEt.text.clear()
                     }
 
+                }
+
+                override fun replyDialog(replyId: Int) {
+                    deleteReplyDialog(replyId)
                 }
             })
         }

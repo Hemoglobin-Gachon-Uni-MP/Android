@@ -41,8 +41,7 @@ class FragmentPostProvider: BaseFragment<FragmentPostListProviderBinding> (Fragm
 
         var postAdapter = PostListRVAdapter(receiverList)
         binding.homePostProviderListRv.adapter = postAdapter
-        var mLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        mLayoutManager.reverseLayout = true
+        var mLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, true)
         mLayoutManager.stackFromEnd = true
         binding.homePostProviderListRv.layoutManager = mLayoutManager
 

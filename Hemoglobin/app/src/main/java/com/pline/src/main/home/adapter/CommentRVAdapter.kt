@@ -22,6 +22,7 @@ class CommentRVAdapter(private val commentList: ArrayList<Comment>): RecyclerVie
     interface MyCommentListner{
         fun dialog(commentId: Int)
         fun reply(commentId: Int)
+        fun replyDialog(replyId: Int)
     }
 
     private lateinit var myCommentListner: MyCommentListner
@@ -47,6 +48,12 @@ class CommentRVAdapter(private val commentList: ArrayList<Comment>): RecyclerVie
                 if (comment.replyList.size != 0){
                     itemCommentReplyRv.visibility = View.VISIBLE
                     replyRVAdapter = ReplyRVAdapter(replyList)
+                    replyRVAdapter.setMyReplyListner(object : ReplyRVAdapter.ReplyListener{
+                        override fun dialog(replyId: Int) {
+                            // 답글 삭제 다이얼로그 띄우기
+                            myCommentListner.replyDialog(replyId)
+                        }
+                    })
                     itemCommentReplyRv.adapter = replyRVAdapter
                     itemCommentReplyRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
                 } else{
