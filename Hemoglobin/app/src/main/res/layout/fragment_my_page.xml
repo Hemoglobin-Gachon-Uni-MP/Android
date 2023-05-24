@@ -42,9 +42,9 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:clipToOutline="true">
                 <ImageView
+                    android:id="@+id/img_profile"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_my_page_unselected"/>
+                    android:layout_height="match_parent"/>
             </androidx.cardview.widget.CardView>
             <TextView
                 android:id="@+id/tv_nickname"

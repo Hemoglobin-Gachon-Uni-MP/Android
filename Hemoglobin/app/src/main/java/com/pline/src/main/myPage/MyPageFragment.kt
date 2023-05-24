@@ -28,16 +28,6 @@ class MyPageFragment :
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
-            // Set click event of edit my info button
-            imgbtnEditMyInfo.setOnClickListener {
-                // Show(= Start) EditInfoActivity
-                val intent = Intent(activity, EditInfoActivity::class.java)
-                // Pass data
-                intent.putExtra("myLocation", tvLocation.text)
-                intent.putExtra("myNickname", tvNickname.text)
-                startActivity(intent)
-            }
-
             // Set click event of my post list button
             imgbtnMyPostList.setOnClickListener {
                 // Show MyPostListFragment
@@ -87,6 +77,18 @@ class MyPageFragment :
                                 1000 -> {
                                     val result = body.result
                                     binding.run {
+                                        // Set click event of edit my info button
+                                        imgbtnEditMyInfo.setOnClickListener {
+                                            // Show(= Start) EditInfoActivity
+                                            val intent = Intent(activity, EditInfoActivity::class.java)
+                                            // Pass data
+                                            intent.putExtra("profileImgId", result.profileImg)
+                                            intent.putExtra("myLocation", tvLocation.text)
+                                            intent.putExtra("myNickname", tvNickname.text)
+                                            startActivity(intent)
+                                        }
+
+                                        setDefaultProfile(imgProfile, result.profileImg)
                                         tvNickname.text = result.nickname
                                         tvName.text = result.name + " (${result.gender})"
                                         tvBirth.text = result.birth
