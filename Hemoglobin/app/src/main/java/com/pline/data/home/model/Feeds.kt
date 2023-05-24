@@ -106,3 +106,17 @@ data class EditPostResponse(
 data class DeleteCommentResponse(
     @SerializedName("result") val result: String
 ): BaseResponse()
+
+data class PostReplyReqBody(
+    @SerializedName("context") var context: String,
+    @SerializedName("feedId") val feedId: Int,
+    @SerializedName("userId") val userId: Int
+)
+
+data class PostNewReplyResponse(
+    @SerializedName("result") val result: Int
+): BaseResponse()
+
+data class DeleteReplyResponse(
+    @SerializedName("result") val result: String
+): BaseResponse()

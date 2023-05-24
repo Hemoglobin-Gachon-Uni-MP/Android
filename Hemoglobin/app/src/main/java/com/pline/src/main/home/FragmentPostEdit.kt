@@ -19,6 +19,7 @@ import com.pline.data.home.model.EditPostResponse
 import com.pline.data.home.model.FeedInfoResult
 import com.pline.data.home.model.PostCommentReqBody
 import com.pline.data.home.model.PostNewCommentResponse
+import com.pline.data.home.model.PostNewReplyResponse
 import com.pline.databinding.FragmentPostEditBinding
 
 class FragmentPostEdit(val feedId: Int): BaseFragment<FragmentPostEditBinding>(FragmentPostEditBinding::bind, R.layout.fragment_post_edit),
@@ -108,11 +109,19 @@ class FragmentPostEdit(val feedId: Int): BaseFragment<FragmentPostEditBinding>(F
     }
 
     override fun onPostNewCommentSuccess(response: PostNewCommentResponse) {
-        TODO("Not yet implemented")
+        Log.d("onPostNewCOMMENT", "SUCCESS")
     }
 
     override fun onPostNewCommentFailure(message: String) {
-        TODO("Not yet implemented")
+        Log.d("onPostCOMMENT", "FAIL : " + message)
+    }
+
+    override fun onPostReplySuccess(response: PostNewReplyResponse) {
+        Log.d("onPostNewREPLY", "SUCCESS")
+    }
+
+    override fun onPostReplyFailure(message: String) {
+        Log.d("onPostREPLY", "FAIL : " + message)
     }
 
     override fun onEditFeedSuccess(response: EditPostResponse) {

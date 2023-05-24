@@ -9,6 +9,7 @@ import com.pline.data.home.model.FeedsResponse
 import com.pline.data.home.model.GetFeedInfoResponse
 import com.pline.data.home.model.GetFeedListResponse
 import com.pline.data.home.model.PostNewCommentResponse
+import com.pline.data.home.model.PostNewReplyResponse
 
 interface HomeFragmentView {
     // 글 목록 반환
@@ -27,6 +28,9 @@ interface FeedDetailView {
 
     fun onPostNewCommentSuccess(response: PostNewCommentResponse)
     fun onPostNewCommentFailure(message: String)
+
+    fun onPostReplySuccess(response: PostNewReplyResponse)
+    fun onPostReplyFailure(message: String)
 }
 
 interface FeedDeleteView{
@@ -42,4 +46,8 @@ interface FeedEditView{
 interface CommentView{
     fun onDeleteCommentSuccess(response: DeleteCommentResponse)
     fun onDeleteCommentFailure(message: String)
+}
+
+interface ReplyPostView{
+
 }

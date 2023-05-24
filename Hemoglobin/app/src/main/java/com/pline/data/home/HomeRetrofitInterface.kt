@@ -2,12 +2,15 @@ package com.pline.data.home
 
 import com.pline.data.home.model.DeleteCommentResponse
 import com.pline.data.home.model.DeleteFeedResponse
+import com.pline.data.home.model.DeleteReplyResponse
 import com.pline.data.home.model.EditPostResponse
 import com.pline.data.home.model.FeedsResponse
 import com.pline.data.home.model.GetFeedInfoResponse
 import com.pline.data.home.model.GetFeedListResponse
 import com.pline.data.home.model.PostCommentReqBody
 import com.pline.data.home.model.PostNewCommentResponse
+import com.pline.data.home.model.PostNewReplyResponse
+import com.pline.data.home.model.PostReplyReqBody
 import com.pline.data.home.model.baseUserIdReq
 import com.pline.data.home.model.postFeedReqBody
 import retrofit2.Call
@@ -70,7 +73,18 @@ interface HomeRetrofitInterface {
     ): Call<GetFeedInfoResponse>
 
     // 답글 달기 api
+    @POST("feeds/reply/{commentId}")
+    fun postNewReply(
+        @Path("commentId") commentId: Int,
+        @Body body: PostReplyReqBody,
+        @Header("X-ACCESS-TOKEN") xAccessToken: String
+    ): Call<PostNewReplyResponse>
 
     // 답글 삭제 api
-
+    @PATCH("feeds/reply/{replyId}/status")
+    fun deleteReply(
+        @Body body: baseUserIdReq,
+        @Path("replyId") replyId: Int,
+        @Header("X-ACCESS-TOKEN") xAccessToken: String
+    ): Call<DeleteReplyResponse>
 }
