@@ -23,10 +23,13 @@ class EditInfoActivity : BaseActivity<ActivityEditInfoBinding>(ActivityEditInfoB
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val profileImgId = intent.getIntExtra("profileImgId", 1)
         val myLocation = intent.getStringExtra("myLocation").toString()
         val myNickname = intent.getStringExtra("myNickname").toString()
 
         binding.apply {
+            setDefaultProfile(imgProfile, profileImgId)
+
             // Set text of edittext from my info
             etHome.setText(myLocation)
             etNickname.setText(myNickname)

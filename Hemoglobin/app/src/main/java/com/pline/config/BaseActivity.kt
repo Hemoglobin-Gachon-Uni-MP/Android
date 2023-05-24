@@ -3,9 +3,11 @@ package com.pline.config
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
+import com.pline.R
 
 // 액티비티의 기본을 작성, 뷰 바인딩 활용
 abstract class BaseActivity<B : ViewBinding>(private val inflate: (LayoutInflater) -> B) :
@@ -23,5 +25,14 @@ abstract class BaseActivity<B : ViewBinding>(private val inflate: (LayoutInflate
     // 토스트를 쉽게 띄울 수 있게 해줌.
     fun showCustomToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    // Set default profile
+    fun setDefaultProfile(imgView: ImageView, imgId: Int) {
+        if (imgId == 1) {
+            imgView.setImageResource(R.drawable.ic_profile_ver1)
+        } else {
+            imgView.setImageResource(R.drawable.ic_profile_ver2)
+        }
     }
 }
