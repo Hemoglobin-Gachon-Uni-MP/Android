@@ -23,14 +23,14 @@ class RegisterTypeInfoActivity : BaseActivity<ActivityRegisterTypeInfoBinding>(
             binding.activityRegisterTypeInfoCbFemale.isChecked = false
             binding.btnNext.background = getDrawable(R.drawable.btn_next_active)
             binding.btnNext.setTextColor(getColor(R.color.white))
-            binding.btnNext.isClickable = true
+            binding.btnNext.isEnabled = true
         }
         binding.activityRegisterTypeInfoCbFemale.setOnClickListener {
             binding.activityRegisterTypeInfoCbFemale.isChecked = true
             binding.activityRegisterTypeInfoCbMale.isChecked = false
             binding.btnNext.background = getDrawable(R.drawable.btn_next_active)
             binding.btnNext.setTextColor(getColor(R.color.white))
-            binding.btnNext.isClickable = true
+            binding.btnNext.isEnabled = true
         }
         val abo : ArrayList<String> = arrayListOf("A", "B", "O", "AB")
         val rh : ArrayList<String> = arrayListOf("Rh+", "Rh-")
