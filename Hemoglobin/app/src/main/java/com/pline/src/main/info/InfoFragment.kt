@@ -8,13 +8,18 @@ import com.pline.R
 import com.pline.config.BaseFragment
 import com.pline.databinding.FragmentInfoBinding
 
-
+/**
+ * Information Fragment that is bottom navigation item
+ */
 class InfoFragment : BaseFragment<FragmentInfoBinding>(FragmentInfoBinding::bind, R.layout.fragment_info) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
+            // Set up html files within a project in a Web view
             fragmentInfoWvConditionsDesc.settings.javaScriptEnabled = true
             fragmentInfoWvConditionsDesc.loadUrl("file:///android_asset/conditions.html")
+
+            // Determine the visibility of layout with content when click on each tab
             setVisibility(fragmentInfoClConditions,
                 fragmentInfoWvConditionsDesc,
                 fragmentInfoBtnCondition)
@@ -26,6 +31,7 @@ class InfoFragment : BaseFragment<FragmentInfoBinding>(FragmentInfoBinding::bind
                 fragmentInfoBtnPrecautionAfter)
         }
     }
+    // Determine the visibility of layout with content when click on each tab
     private fun setVisibility(target : View, desc : View, arrow : ImageView) {
         target.setOnClickListener {
             desc.apply {

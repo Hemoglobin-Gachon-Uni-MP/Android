@@ -9,7 +9,9 @@ import com.pline.config.ApplicationClass
 import com.pline.config.ApplicationClass.Companion.sSharedPreferences
 import com.pline.config.BaseActivity
 import com.pline.databinding.ActivityRegisterNicknameBinding
-
+/**
+ * Get nickname information
+ */
 class RegisterNicknameActivity : BaseActivity<ActivityRegisterNicknameBinding>(ActivityRegisterNicknameBinding::inflate) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

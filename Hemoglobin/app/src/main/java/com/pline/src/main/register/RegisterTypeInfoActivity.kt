@@ -12,7 +12,9 @@ import com.pline.config.ApplicationClass.Companion.sSharedPreferences
 import com.pline.config.BaseActivity
 import com.pline.databinding.ActivityRegisterTypeInfoBinding
 
-
+/**
+ * Get gender, blood type information
+ */
 class RegisterTypeInfoActivity : BaseActivity<ActivityRegisterTypeInfoBinding>(
     ActivityRegisterTypeInfoBinding::inflate) {
     override fun onCreate(savedInstanceState: Bundle?) {

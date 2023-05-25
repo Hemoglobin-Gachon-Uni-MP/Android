@@ -17,6 +17,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+/**
+ * Call the membership API with the membership register information stored in the sharedPreference
+ */
 class RegisterCompleteActivity : BaseActivity<ActivityRegisterCompleteBinding>(
     ActivityRegisterCompleteBinding::inflate) {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -18,50 +18,39 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+/**
+ * Use kakao login sdk to get kakao access token, forward to login api and get jwt token
+ */
 class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::inflate) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-//        /*
-//        카카오 해시 키 받기
-//        */
-//
-//        var keyHash = Utility.getKeyHash(this)
-//        Log.d("Hash", keyHash)
-
-        // 카카오 로그인
+        // kakao login
         binding.btnLogin.setOnClickListener{
             kakaoLogin()
         }
 
     }
+    // Get kakao access token using kakao login sdk and call login api
     private fun kakaoLogin() {
-        // 카카오계정으로 로그인 공통 callback 구성
-        // 카카오톡으로 로그인 할 수 없어 카카오계정으로 로그인할 경우 사용됨
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
             if (error != null) {
-                Log.e("LOGIN", "카카오계정으로 로그인 실패", error)
+                Log.e("LOGIN", "Login fail with kakao account", error)
             } else if (token != null) {
-                Log.i("LOGIN", "카카오계정으로 로그인 성공")
+                Log.i("LOGIN", "Login success with kakao account")
                 postLogin(token.accessToken)
             }
         }
-        // 카카오톡이 설치되어 있으면 카카오톡으로 로그인, 아니면 카카오계정으로 로그인
         if (UserApiClient.instance.isKakaoTalkLoginAvailable(this)) {
             UserApiClient.instance.loginWithKakaoTalk(this) { token, error ->
                 if (error != null) {
-                    Log.e("LOGIN", "카카오톡으로 로그인 실패", error)
-
-                    // 사용자가 카카오톡 설치 후 디바이스 권한 요청 화면에서 로그인을 취소한 경우,
-                    // 의도적인 로그인 취소로 보고 카카오계정으로 로그인 시도 없이 로그인 취소로 처리 (예: 뒤로 가기)
+                    Log.e("LOGIN", "Login fail with kakaoTalk", error)
                     if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
                         return@loginWithKakaoTalk
                     }
-
-                    // 카카오톡에 연결된 카카오계정이 없는 경우, 카카오계정으로 로그인 시도
                     UserApiClient.instance.loginWithKakaoAccount(this, callback = callback)
                 } else if (token != null) {
-                    Log.i("LOGIN", "카카오톡으로 로그인 성공")
+                    Log.i("LOGIN", "Login success with kakaoTalk")
                     postLogin(token.accessToken)
                 }
             }
@@ -69,7 +58,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
             UserApiClient.instance.loginWithKakaoAccount(this, callback = callback)
         }
     }
-
+    // Call login api and get jwt token
     private fun postLogin(kToken : String) {
         val service = sRetrofit.create(ApiInterface::class.java)
         service.postLogIn(kToken)?.enqueue(object : Callback<LoginResponse> {

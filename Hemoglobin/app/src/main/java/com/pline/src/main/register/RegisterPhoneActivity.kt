@@ -9,7 +9,9 @@ import com.pline.R
 import com.pline.config.ApplicationClass
 import com.pline.config.BaseActivity
 import com.pline.databinding.ActivityRegisterPhoneBinding
-
+/**
+ * Get phone number information
+ */
 class RegisterPhoneActivity : BaseActivity<ActivityRegisterPhoneBinding>(ActivityRegisterPhoneBinding::inflate) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
