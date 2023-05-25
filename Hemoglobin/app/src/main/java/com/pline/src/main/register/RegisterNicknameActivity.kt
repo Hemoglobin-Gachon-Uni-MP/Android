@@ -23,11 +23,11 @@ class RegisterNicknameActivity : BaseActivity<ActivityRegisterNicknameBinding>(A
                 if(s.toString() == "") {
                     binding.btnNext.background = getDrawable(R.drawable.btn_next_deactive)
                     binding.btnNext.setTextColor(getColor(R.color.red6))
-                    binding.btnNext.isClickable = false
+                    binding.btnNext.isEnabled = false
                 } else {
                     binding.btnNext.background = getDrawable(R.drawable.btn_next_active)
                     binding.btnNext.setTextColor(getColor(R.color.white))
-                    binding.btnNext.isClickable = true
+                    binding.btnNext.isEnabled = true
                 }
             }
         })
