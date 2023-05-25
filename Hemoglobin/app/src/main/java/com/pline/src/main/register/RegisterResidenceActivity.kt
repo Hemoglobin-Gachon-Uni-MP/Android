@@ -10,7 +10,9 @@ import android.widget.Spinner
 import com.pline.config.ApplicationClass
 import com.pline.config.BaseActivity
 import com.pline.databinding.ActivityRegisterResidenceBinding
-
+/**
+ * Get residence information
+ */
 class RegisterResidenceActivity :
     BaseActivity<ActivityRegisterResidenceBinding>(ActivityRegisterResidenceBinding::inflate) {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -8,7 +8,9 @@ import com.pline.R
 import com.pline.config.ApplicationClass.Companion.sSharedPreferences
 import com.pline.config.BaseActivity
 import com.pline.databinding.ActivityRegisterNameBinding
-
+/**
+ * Get name information
+ */
 class RegisterNameActivity : BaseActivity<ActivityRegisterNameBinding>(ActivityRegisterNameBinding::inflate) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

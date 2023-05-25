@@ -19,9 +19,13 @@ import com.pline.R
 import com.pline.config.BaseFragment
 import com.pline.databinding.FragmentMapBinding
 
+/**
+ * Use Google Map API to show blood donation center coordinates and my location
+ */
 class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::bind, R.layout.fragment_map), OnMapReadyCallback {
     private lateinit var mMap: GoogleMap
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    // Data class for blood donation center
     data class Place(
         val longitude: Double,
         val latitude : Double,
@@ -32,6 +36,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::bind, R
         super.onViewCreated(view, savedInstanceState)
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+        // Show my location in map
         binding.fragmentMapBtnMyLocation.setOnClickListener {
             if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
@@ -44,7 +49,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::bind, R
         }
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
     }
-
+    // Initial Map Settings
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         val seoul = LatLng(37.556, 126.97)
@@ -54,6 +59,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::bind, R
         mMap.addMarker(MarkerOptions().position(seoulBloodDonationCenter).title("서울 헌혈의 집"))*/
 
     }
+    // Save blood donation center coordinates
     private fun setCentersInMap() {
         val places = arrayListOf<Place>(
             Place(126.870715, 37.5480421, "중앙센터(원내)"),
@@ -95,6 +101,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::bind, R
             addCenterMarker(a)
         }
     }
+    // Move map to my location
     private fun moveCameraToMyLocation() {
         if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
             == PackageManager.PERMISSION_GRANTED) {
@@ -114,7 +121,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::bind, R
         }
     }
     private fun addCenterMarker(co : Place) {
-        // 마커 추가
+        // add marker in map
         val markerOptions = MarkerOptions()
         markerOptions.position(LatLng(co.latitude, co.longitude))
             .title(co.name)
