@@ -1,3 +1,5 @@
+package com.pline
+
 import org.junit.Test
 
 import org.junit.Assert.*
