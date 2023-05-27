@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/dialog_delete_my_account"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/dialog_background">
@@ -47,7 +48,7 @@
             android:layout_height="40dp"
             android:layout_marginEnd="7dp"
             android:layout_weight="1"
-            android:text="삭제"
+            android:text="탈퇴"
             android:textSize="14sp"
             android:textColor="@color/white"
             android:background="@drawable/btn_dialog_red" />
