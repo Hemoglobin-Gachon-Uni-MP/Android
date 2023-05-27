@@ -14,6 +14,7 @@ import com.pline.data.mypage.MyPageRetrofitInterface
 import com.pline.data.mypage.model.*
 import com.pline.databinding.FragmentMyPageBinding
 import com.pline.src.main.home.FragmentPostDetail
+import com.pline.src.main.register.LoginActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -36,20 +37,21 @@ class MyPageFragment :
                         .commitAllowingStateLoss()
                 }
             }
-//            imgbtnMyPostList.setOnClickListener {
-//                // Show MyPostListFragment
-//                activity?.let {
-//                    it.supportFragmentManager.beginTransaction()
-//                        .replace(R.id.main_frm, MyPostListFragment(myPostList))
-//                        .addToBackStack(null)
-//                        .commitAllowingStateLoss()
-//                }
-//            }
 
             // Set click event of delete account button
             imgbtnDeleteAccount.setOnClickListener {
                 // Show dialog for deleting account
                 showDeleteDialog()
+            }
+
+            // Set click event of logout button
+            imgbtnLogout.setOnClickListener {
+                // Clear all shared preferences
+                sSharedPreferences.edit().clear().commit()
+                // Show(= Start) LoginActivity
+                val intent = Intent(activity, LoginActivity::class.java)
+                startActivity(intent)
+                requireActivity().finish()
             }
         }
     }
