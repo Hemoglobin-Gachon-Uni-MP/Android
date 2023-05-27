@@ -188,7 +188,8 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
 
                 override fun reply(commentId: Int) {
                     binding.postDetailCommentEnterContainerLl.setBackgroundResource(R.drawable.style_enterfield_reply)
-                    // 댓글 쓰기
+                    binding.commentEnterfieldEt.hint = "답글을 입력하세요"
+                    // 답글 쓰기
                     var reply = ""
                     class MyEditWatcher: TextWatcher {
                         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {

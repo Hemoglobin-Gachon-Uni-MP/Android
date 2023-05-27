@@ -134,11 +134,10 @@
         android:id="@+id/rv_post_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="44dp"
+        android:layout_marginStart="17dp"
         android:layout_marginTop="17dp"
         android:clipToPadding="false"
         android:orientation="horizontal"
-        android:paddingLeft="16dp"
         android:paddingRight="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/my_post_list_container_cl" />
