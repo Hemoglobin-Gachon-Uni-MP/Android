@@ -13,6 +13,14 @@ import com.pline.databinding.DialogDeleteCommentBinding
 class ReportDialog(val type: Int): DialogFragment() {
     private lateinit var binding: DialogDeleteCommentBinding
 
+    interface ToastListner{
+        fun toast()
+    }
+    private lateinit var mListner: ToastListner
+    fun setReportListner(listner: ToastListner){
+        mListner = listner
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -38,6 +46,7 @@ class ReportDialog(val type: Int): DialogFragment() {
 
         // Set click event of delete button
         btnDeleteComment.setOnClickListener {
+            mListner.toast()
             dismiss()
         }
         // Set click event of cancel button
