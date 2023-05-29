@@ -65,14 +65,14 @@ class ReplyRVAdapter(private var replyList: ArrayList<Reply>):
                 holder.menu.text = "삭제하기"
                 holder.menu.setOnClickListener {
                     Log.d("Reply Delete", "CLICKED")
-                    // 다이얼로그 띄우기
+                    // deleting dialog
                     myListner.dialog(replyList[position].replyId)
                 }
             } else{
                 holder.menu.text = "신고하기"
                 holder.menu.setOnClickListener {
                     holder.menu.visibility = View.GONE
-                    myListner.reportReply()
+                    myListner.reportReply() // reporting dialog
                 }
             }
 

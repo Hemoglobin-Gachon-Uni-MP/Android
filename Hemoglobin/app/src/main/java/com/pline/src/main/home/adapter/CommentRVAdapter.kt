@@ -56,7 +56,7 @@ class CommentRVAdapter(private val commentList: ArrayList<Comment>): RecyclerVie
                     replyRVAdapter = ReplyRVAdapter(replyList)
                     replyRVAdapter.setMyReplyListner(object : ReplyRVAdapter.ReplyListener{
                         override fun dialog(replyId: Int) {
-                            // 답글 삭제 다이얼로그에 replyId 전달
+                            // send replyId to dialog fragment
                             myCommentListner.replyDialog(replyId)
                         }
 
@@ -92,7 +92,7 @@ class CommentRVAdapter(private val commentList: ArrayList<Comment>): RecyclerVie
         if (commentList[position].userId == userId){
             holder.menu.text = "댓글 삭제하기"
             holder.menu.setOnClickListener {
-                // 다이얼로그 띄우기
+                // deleting dialog
                 myCommentListner.dialog(commentList[position].commentId)
                 Log.d("Comments Delete", "Wanna Delete?")
             }

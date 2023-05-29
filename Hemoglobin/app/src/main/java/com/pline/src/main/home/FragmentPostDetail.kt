@@ -32,7 +32,6 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d("FragmentPostDetail", "onCreated")
-
     }
 
     override fun onResume() {
@@ -40,13 +39,13 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
 
         FeedDetailService(this).tryGetFeedDetail(feedId)
 
-        // 뒤로가기
+        // back
         binding.postDetailBackIconIv.setOnClickListener {
             // Move to previous page
             activity?.let { it.onBackPressed() }
         }
 
-        // 더보기 버튼
+        // feed more btn
         binding.postDetailMoreIconIv.setOnClickListener {
             if (postUserId == myId){
                 if (moreVisible){
@@ -63,24 +62,24 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
             }
         }
 
-        // 게시물 편집
+        // edit feed
         binding.fragmentDetailMoreMenuEditTv.setOnClickListener {
             requireActivity().supportFragmentManager.beginTransaction().replace(R.id.main_frm, FragmentPostEdit(feedId)).addToBackStack(null).commit()
         }
 
-        // 게시물 삭제
+        // delete feed
         binding.fragmentDetailMoreMenuDeleteTv.setOnClickListener {
             deletePostDialog()
         }
 
-        // 게시물 신고
+        // report feed
         binding.fragmentDetailMoreMenuReportTv.setOnClickListener {
             binding.fragmentDetailMoreMenuNotMineLl.visibility = View.GONE
             reportDialog(0)
         }
 
 
-        // 댓글 쓰기
+        // write comment
         var comment = ""
         class MyEditWatcher: TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -133,6 +132,13 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
     fun reportDialog(type: Int){
         val dialog = ReportDialog(type)
         dialog.isCancelable = false
+
+        dialog.setReportListner(object : ReportDialog.ToastListner{
+            override fun toast() {
+                showCustomToast("Reported Successfully")
+            }
+        })
+
         dialog.show(this.requireFragmentManager(), "ReportDialog")
     }
 
@@ -189,7 +195,7 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
                 override fun reply(commentId: Int) {
                     binding.postDetailCommentEnterContainerLl.setBackgroundResource(R.drawable.style_enterfield_reply)
                     binding.commentEnterfieldEt.hint = "답글을 입력하세요"
-                    // 답글 쓰기
+                    // reply write
                     var reply = ""
                     class MyEditWatcher: TextWatcher {
                         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -217,11 +223,11 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
                 }
 
                 override fun reportComment() {
-                    ReportDialog(1)
+                    reportDialog(1)
                 }
 
                 override fun reportReply() {
-                    ReportDialog(2)
+                    reportDialog(2)
                 }
             })
         }
@@ -240,7 +246,7 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
         Log.d("onPostNewCommentFailure", message)
     }
 
-    // New Reply 답글달기
+    // New Reply
     override fun onPostReplySuccess(response: PostNewReplyResponse) {
         onResume()
     }
