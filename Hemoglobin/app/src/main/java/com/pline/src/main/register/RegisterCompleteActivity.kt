@@ -55,7 +55,7 @@ class RegisterCompleteActivity : BaseActivity<ActivityRegisterCompleteBinding>(
                         startActivity(
                             Intent(this@RegisterCompleteActivity, MainActivity::class.java)
                                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
-                        finish()
+                        finishAffinity()
                     }
                     else {
                         Log.d("registerComplete", "registerComplete response fail")
