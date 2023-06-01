@@ -45,8 +45,11 @@ class FragmentNewPostReceiver(val isReceiver: Boolean): BaseFragment<FragmentNew
 
     override fun onResume() {
         super.onResume()
-        // 필터 스피너 어댑터
-        val spinnerAdapter = ArrayAdapter(requireContext(), R.layout.support_simple_spinner_dropdown_item, resources.getStringArray(R.array.spinner_area_list))
+        // Spinner Adapter
+        val spinnerAdapter = ArrayAdapter(
+            requireContext(), R.layout.support_simple_spinner_dropdown_item, resources.getStringArray(R.array.spinner_area_list)
+        )
+
         binding.newPostReceiverAreaSpinner.adapter = spinnerAdapter
 
         // page close
@@ -55,7 +58,7 @@ class FragmentNewPostReceiver(val isReceiver: Boolean): BaseFragment<FragmentNew
         }
 
 
-        // 본문 입력 감지
+        // get contents
         class MyEditWatcher: TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
@@ -70,7 +73,7 @@ class FragmentNewPostReceiver(val isReceiver: Boolean): BaseFragment<FragmentNew
         binding.newPostReceiverTextEnterfieldEt.addTextChangedListener(watcher)
 
 
-        // rh 버튼 선택
+        // rh btn
         binding.newPostReceiverPlusEmptyTv.setOnClickListener {
             rhPlus(true)
         }
@@ -84,7 +87,7 @@ class FragmentNewPostReceiver(val isReceiver: Boolean): BaseFragment<FragmentNew
             rhMinus(false)
         }
 
-        // abo 버튼 선택
+        // abo btn
         binding.newPostReceiverAEmptyTv.setOnClickListener { aboA(true) }
         binding.newPostReceiverASelectedTv.setOnClickListener { aboA(false) }
         binding.newPostReceiverBEmptyTv.setOnClickListener { aboB(true) }
@@ -94,7 +97,7 @@ class FragmentNewPostReceiver(val isReceiver: Boolean): BaseFragment<FragmentNew
         binding.newPostReceiverOEmptyTv.setOnClickListener { aboO(true) }
         binding.newPostReceiverOSelectedTv.setOnClickListener { aboO(false) }
 
-        // 지역 스피너 아이템
+        // area spinner item
         binding.newPostReceiverAreaSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(
                 parent: AdapterView<*>?,
@@ -104,11 +107,9 @@ class FragmentNewPostReceiver(val isReceiver: Boolean): BaseFragment<FragmentNew
             ) {
                 spinner(binding.newPostReceiverAreaSpinner.selectedItem.toString())
             }
-
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 TODO("Not yet implemented")
             }
-
         }
 
         // 완료 버튼 클릭

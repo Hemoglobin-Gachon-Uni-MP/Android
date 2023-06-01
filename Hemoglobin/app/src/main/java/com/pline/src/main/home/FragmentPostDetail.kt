@@ -177,11 +177,12 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
         binding.itemPostDateTv.text = response.date
         binding.postDetailContentsTextTv.text = response.context
         binding.postDetailCommentCntTv.text = response.commentCnt.toString()
-        if (response.profileImg == 1){
-            binding.itemPostProfileImageIv.setImageResource(R.drawable.ic_profile_ver1)
-        } else {
-            binding.itemPostProfileImageIv.setImageResource(R.drawable.ic_profile_ver2)
-        }
+        setDefaultProfile(binding.itemPostProfileImageIv, response.profileImg)
+//        if (response.profileImg == 1){
+//            binding.itemPostProfileImageIv.setImageResource(R.drawable.ic_profile_ver1)
+//        } else {
+//            binding.itemPostProfileImageIv.setImageResource(R.drawable.ic_profile_ver2)
+//        }
 
         if (response.commentList != null){
             val adapter = CommentRVAdapter(response.commentList!!)
