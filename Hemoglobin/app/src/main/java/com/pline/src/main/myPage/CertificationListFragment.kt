@@ -39,5 +39,11 @@ class CertificationListFragment() : BaseFragment<FragmentCertificationListBindin
                 addItemDecoration(DividerItemDecoration(context, LinearLayout.VERTICAL))
             }
         }
+
+        binding.btnAddCert.setOnClickListener { // 헌혈 인증 추가하기 버튼 클릭
+            // certificationFragment open open
+            val addCertFrag = CertificationFragment()
+            addCertFrag.show(requireActivity().supportFragmentManager, addCertFrag.tag)
+        }
     }
 }
