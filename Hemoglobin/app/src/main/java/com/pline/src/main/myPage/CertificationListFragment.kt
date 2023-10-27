@@ -20,24 +20,24 @@ class CertificationListFragment() : BaseFragment<FragmentCertificationListBindin
                 // Move to previous page
                 activity?.let { it.onBackPressed() }
             }
-        }
 
-        binding.rvCertList.run {
-            var certList: ArrayList<String> = arrayListOf()
-            certList.add("서서리 / 2023.09.27 / FE234DV9")
-            certList.add("서서리 / 2023.09.27 / FE234DV9")
-            certList.add("서서리 / 2023.09.27 / FE234DV9")
-            certList.add("서서리 / 2023.09.27 / FE234DV9")
-            certList.add("서서리 / 2023.09.27 / FE234DV9")
-            certList.add("서서리 / 2023.09.27 / FE234DV9")
+            rvCertList.run {
+                var certList: ArrayList<String> = arrayListOf()
+                certList.add("서서리 / 2023.09.27 / FE234DV9")
+                certList.add("서서리 / 2023.09.27 / FE234DV9")
+                certList.add("서서리 / 2023.09.27 / FE234DV9")
+                certList.add("서서리 / 2023.09.27 / FE234DV9")
+                certList.add("서서리 / 2023.09.27 / FE234DV9")
+                certList.add("서서리 / 2023.09.27 / FE234DV9")
 
-            // Set Recycler View Adapter
-            val certAdapter = CertificationListRVAdapter(certList)
-            adapter = certAdapter
+                // Set Recycler View Adapter
+                val certAdapter = CertificationListRVAdapter(certList)
+                adapter = certAdapter
 
-            // Set layout of recycler view
-            layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
-            addItemDecoration(DividerItemDecoration(context, LinearLayout.VERTICAL))
+                // Set layout of recycler view
+                layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
+                addItemDecoration(DividerItemDecoration(context, LinearLayout.VERTICAL))
+            }
         }
     }
 }
