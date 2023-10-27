@@ -47,7 +47,9 @@ class FragmentNewPostReceiver(val isReceiver: Boolean): BaseFragment<FragmentNew
         super.onResume()
         // Spinner Adapter
         val spinnerAdapter = ArrayAdapter(
-            requireContext(), R.layout.support_simple_spinner_dropdown_item, resources.getStringArray(R.array.spinner_area_list)
+            requireContext()
+            , R.layout.support_simple_spinner_dropdown_item
+            , resources.getStringArray(R.array.spinner_area_list)
         )
 
         binding.newPostReceiverAreaSpinner.adapter = spinnerAdapter

@@ -98,7 +98,9 @@ class FragmentPostReceiver(val abo: ArrayList<Int>, val rh: Int, val location: S
 
         postAdapter.setOnItemClickListener(object : PostListRVAdapter.OnItemClickListener{
             override fun onPostClick(feedId: Int) {
-                requireActivity().supportFragmentManager.beginTransaction().replace(R.id.main_frm, FragmentPostDetail(feedId)).addToBackStack(null).commit()
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.main_frm, FragmentPostDetail(feedId)).addToBackStack(null)
+                    .commit()
             }
         })
     }
