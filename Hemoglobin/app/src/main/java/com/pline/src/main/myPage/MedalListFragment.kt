@@ -24,7 +24,11 @@ class MedalListFragment :
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
-
+            // Set click event of back button
+            imgbtnBack.setOnClickListener {
+                // Move to previous page
+                activity?.let { it.onBackPressed() }
+            }
         }
     }
 

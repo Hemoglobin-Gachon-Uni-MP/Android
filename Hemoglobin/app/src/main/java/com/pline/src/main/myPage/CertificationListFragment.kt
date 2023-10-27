@@ -12,6 +12,14 @@ class CertificationListFragment() : BaseFragment<FragmentCertificationListBindin
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.apply {
+            // Set click event of back button
+            imgbtnBack.setOnClickListener {
+                // Move to previous page
+                activity?.let { it.onBackPressed() }
+            }
+        }
+
         binding.rvCertList.run {
 //            var feedList: ArrayList<FeedListResult> = arrayListOf()
 //            myPostList.forEach {
