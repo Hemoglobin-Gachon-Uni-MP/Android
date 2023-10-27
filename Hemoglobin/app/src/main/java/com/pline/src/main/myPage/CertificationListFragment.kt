@@ -2,6 +2,8 @@ package com.pline.src.main.myPage
 
 import android.os.Bundle
 import android.view.View
+import android.widget.LinearLayout
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pline.R
 import com.pline.config.BaseFragment
@@ -21,27 +23,21 @@ class CertificationListFragment() : BaseFragment<FragmentCertificationListBindin
         }
 
         binding.rvCertList.run {
-//            var feedList: ArrayList<FeedListResult> = arrayListOf()
-//            myPostList.forEach {
-//                feedList.add(FeedListResult(null, it.commentCnt, it.context, it.date, it.feedId, it.isReceiver, null, it.nickname, it.profileImg, null, it.userId))
-//            }
-//
-//            // Set Recycler View Adapter
-//            val postAdapter = PostListRVAdapter(feedList)
-//            adapter = postAdapter
-//            // Set click event of my post element in recycler view
-//            postAdapter.setOnItemClickListener(object: PostListRVAdapter.OnItemClickListener {
-//                override fun onPostClick(feedId:Int) {
-//                    // Show clicked post
-//                    parentFragmentManager
-//                        .beginTransaction()
-//                        .replace(R.id.main_frm, FragmentPostDetail(feedId))
-//                        .addToBackStack(null)
-//                        .commitAllowingStateLoss()
-//                }
-//            })
-//            // Set layout of recycler view
-//            layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
+            var certList: ArrayList<String> = arrayListOf()
+            certList.add("서서리 / 2023.09.27 / FE234DV9")
+            certList.add("서서리 / 2023.09.27 / FE234DV9")
+            certList.add("서서리 / 2023.09.27 / FE234DV9")
+            certList.add("서서리 / 2023.09.27 / FE234DV9")
+            certList.add("서서리 / 2023.09.27 / FE234DV9")
+            certList.add("서서리 / 2023.09.27 / FE234DV9")
+
+            // Set Recycler View Adapter
+            val certAdapter = CertificationListRVAdapter(certList)
+            adapter = certAdapter
+
+            // Set layout of recycler view
+            layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
+            addItemDecoration(DividerItemDecoration(context, LinearLayout.VERTICAL))
         }
     }
 }
