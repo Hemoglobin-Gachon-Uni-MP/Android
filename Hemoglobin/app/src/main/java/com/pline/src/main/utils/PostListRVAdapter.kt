@@ -25,11 +25,6 @@ class PostListRVAdapter(private val postList: ArrayList<FeedListResult>): Recycl
 
     // Bind post with data
     inner class PostViewHolder(private val postBinding: ItemPostBinding): RecyclerView.ViewHolder(postBinding.root) {
-        init {
-            // Set Click Listener
-        }
-//        var itemView = postBinding.root
-
         // Set data
         fun bind(post: FeedListResult) {
             postBinding.apply {
