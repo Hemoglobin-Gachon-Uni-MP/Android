@@ -39,6 +39,8 @@
         <item>서울시 중구</item>
         <item>서울시 중량구</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!--Map-->
 

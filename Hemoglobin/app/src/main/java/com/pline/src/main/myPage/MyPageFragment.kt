@@ -53,6 +53,26 @@ class MyPageFragment :
                 startActivity(intent)
                 requireActivity().finish()
             }
+
+            btnCertList.setOnClickListener {
+                // Show CertificationListFragment
+                activity?.let {
+                    it.supportFragmentManager.beginTransaction()
+                        .replace(R.id.main_frm, CertificationListFragment())
+                        .addToBackStack(null)
+                        .commitAllowingStateLoss()
+                }
+            }
+
+            btnMedalList.setOnClickListener {
+                // Show MedalListFragment
+                activity?.let {
+                    it.supportFragmentManager.beginTransaction()
+                        .replace(R.id.main_frm, MedalListFragment())
+                        .addToBackStack(null)
+                        .commitAllowingStateLoss()
+                }
+            }
         }
     }
 
