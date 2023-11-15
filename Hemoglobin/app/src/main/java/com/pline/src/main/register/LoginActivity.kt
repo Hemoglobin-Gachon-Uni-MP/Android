@@ -11,7 +11,7 @@ import com.pline.config.ApplicationClass.Companion.sRetrofit
 import com.pline.config.ApplicationClass.Companion.sSharedPreferences
 import com.pline.config.BaseActivity
 import com.pline.databinding.ActivityLoginBinding
-import com.pline.model.ApiInterface
+import com.pline.model.MemberApiInterface
 import com.pline.model.LoginResponse
 import com.pline.src.main.MainActivity
 import retrofit2.Call
@@ -37,7 +37,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
             if (error != null) {
                 Log.e("LOGIN", "Login fail with kakao account", error)
             } else if (token != null) {
-                Log.i("LOGIN", "Login success with kakao account")
+                Log.i("LOGIN", "Login success with kakao account : ${token.idToken}")
                 postLogin(token.accessToken)
             }
         }
@@ -50,8 +50,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                     }
                     UserApiClient.instance.loginWithKakaoAccount(this, callback = callback)
                 } else if (token != null) {
-                    Log.i("LOGIN", "Login success with kakaoTalk")
-                    postLogin(token.accessToken)
+                    Log.i("LOGIN", "Login success with kakao account : ${token.idToken}")
+                    postLogin(token.idToken!!)
                 }
             }
         } else {
@@ -59,17 +59,17 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
         }
     }
     // Call login api and get jwt token
-    private fun postLogin(kToken : String) {
-        val service = sRetrofit.create(ApiInterface::class.java)
-        service.postLogIn(kToken)?.enqueue(object : Callback<LoginResponse> {
+    private fun postLogin(kakaoToken : String) {
+        val service = sRetrofit.create(MemberApiInterface::class.java)
+        service.postLogIn(kakaoToken)?.enqueue(object : Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                Log.d("kakaoLogin", "postLogin success")
+                Log.d("kakaoLogin", "postLogin success : ${response}")
                 if (response.isSuccessful){
                     if(response.body()?.isSuccess == true) {
                         sSharedPreferences.edit()
-                            .putString("kToken", kToken)
+                            .putString("kakaoToken", kakaoToken)
                             .putString("jwt", response.body()!!.result.jwt)
-                            .putInt("userId",response.body()!!.result.userId).apply()
+                            .putInt("memeberId",response.body()!!.result.memberId).apply()
                         Log.d("kakaoLogin", "response success")
                         startActivity(Intent(this@LoginActivity, MainActivity::class.java)
                             .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
@@ -77,7 +77,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                     }
                     else if(response.body()?.code == 2028) {
                         Log.d("kakaoLogin", "response fail")
-                        sSharedPreferences.edit().putString("kToken", kToken).apply()
+                        sSharedPreferences.edit().putString("kakaoToken", kakaoToken).apply()
                         startActivity(Intent(this@LoginActivity, RegisterNameActivity::class.java)
                             .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
                         finish()
