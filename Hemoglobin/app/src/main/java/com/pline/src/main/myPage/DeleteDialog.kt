@@ -58,7 +58,7 @@ class DeleteDialog : DialogFragment() {
         // Request delete account through API
         jwt?.let {
             // Jwt is in header, userId is in Path Variable
-            service.deleteMyAccount(jwt, userId)
+            service.deleteMyAccount("Bearer $jwt")
                 .enqueue(object : Callback<MyAccountDeleteResponse> {
                     override fun onResponse(
                         call: Call<MyAccountDeleteResponse>,

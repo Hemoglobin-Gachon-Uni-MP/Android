@@ -88,16 +88,14 @@ class MyPageFragment :
         val service = ApplicationClass.sRetrofit.create(MyPageRetrofitInterface::class.java)
         // Get jwt, userId from sp
         val jwt = sSharedPreferences.getString("jwt", "")
-        val userId = sSharedPreferences.getInt("userId", 0)
         if (jwt != null) {
             Log.d("seori", jwt)
-            Log.d("seori", userId.toString())
         }
 
         // Request my page info through API
         jwt?.let {
             // Jwt is in header, userId is in Path Variable
-            service.getMyPageInfo(jwt, userId).enqueue(object : Callback<MyPageResponse> {
+            service.getMyPageInfo("Bearer $jwt").enqueue(object : Callback<MyPageResponse> {
                     override fun onResponse(call: Call<MyPageResponse>, response: Response<MyPageResponse>) {
                         if (response.isSuccessful) {
                             val body = response.body()
@@ -133,16 +131,21 @@ class MyPageFragment :
                                     }
                                 }
                                 // If GET fails, show toast message to user
-                                else -> body?.message?.let { it1 -> showCustomToast(it1) }
+                                else -> body?.message?.let { it1
+                                    -> showCustomToast(it1)
+                                    Log.d("seori", response.message())
+                                }
                             }
                         } else {
                             // If fail, show toast message to user
                             showCustomToast("네트워크 연결에 실패했습니다")
+                            Log.d("seori1115", response.body().toString())
                         }
                     }
                     // If fail, show toast message to user
                     override fun onFailure(call: Call<MyPageResponse>, t: Throwable) {
                         showCustomToast("네트워크 연결에 실패했습니다")
+                        Log.d("seori1115", "?")
                     }
                 })
         }
