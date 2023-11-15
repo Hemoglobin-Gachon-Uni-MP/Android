@@ -8,5 +8,5 @@ data class LoginResponse(
 
 data class LoginResult(
     val jwt: String,
-    val userId: Int
+    val memberId: Int
 )
