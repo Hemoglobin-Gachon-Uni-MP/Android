@@ -45,14 +45,13 @@ class EditInfoActivity : BaseActivity<ActivityEditInfoBinding>(ActivityEditInfoB
     private fun editMyPageInfo(location: String, nickname: String) {
         val service = ApplicationClass.sRetrofit.create(MyPageRetrofitInterface::class.java)
         // Get jwt from sp
-        val jwt = ApplicationClass.sSharedPreferences.getString("jwt", "")
-        val userId = ApplicationClass.sSharedPreferences.getInt("userId", 0)
+        val jwt = "eyJ0eXBlIjoiand0IiwiYWxnIjoiSFMyNTYifQ.eyJ1c2VySWQiOjEsImlhdCI6MTcwMDAzNjIzNiwiZXhwIjoxNzYzMTA4MjM3fQ.-0DzDtYbcQQWHVHrMoWy1YPSzLTSTLpeyQOWYIIze8Q"
         // Configure request body
         val req = MyPageEditRequest(location, nickname)
         // Request my page info through API
         jwt?.let {
             // Jwt is in header, userId is in Path Variable, req is in request body
-            service.editMyPageInfo(jwt, userId, req).enqueue(object : Callback<MyPageEditResponse> {
+            service.editMyPageInfo("Bearer $jwt", req).enqueue(object : Callback<MyPageEditResponse> {
                 override fun onResponse(call: Call<MyPageEditResponse>, response: Response<MyPageEditResponse>) {
                     if (response.isSuccessful) {
                         val body = response.body()

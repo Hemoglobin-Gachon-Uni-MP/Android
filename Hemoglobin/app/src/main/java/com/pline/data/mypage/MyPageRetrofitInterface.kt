@@ -1,9 +1,6 @@
 package com.pline.data.mypage
 
-import com.pline.data.mypage.model.MyAccountDeleteResponse
-import com.pline.data.mypage.model.MyPageEditRequest
-import com.pline.data.mypage.model.MyPageEditResponse
-import com.pline.data.mypage.model.MyPageResponse
+import com.pline.data.mypage.model.*
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -14,24 +11,33 @@ import retrofit2.http.Path
 interface MyPageRetrofitInterface {
 
     // GET API for getting my page
-    @GET("/mypages/{userId}")
+    @GET("/mypages")
     fun getMyPageInfo(
-        @Header("X-ACCESS-TOKEN") xAccessToken : String,
-        @Path("userId") userId: Int
+        @Header("Authorization") xAccessToken : String
     ): Call<MyPageResponse>
 
+    // GET API for getting my medals
+    @GET("/mypages/certification/reward-list")
+    fun getMyMedalList(
+        @Header("Authorization") xAccessToken : String
+    ): Call<MyMedalListResponse>
+
+    // GET API for getting my certifications
+    @GET("/mypages/certification/list")
+    fun getMyCertifications(
+        @Header("Authorization") xAccessToken : String
+    ): Call<MyCertListResponse>
+
     // PATCH API for editing my page
-    @PATCH("/mypages/{userId}")
+    @PATCH("/mypages")
     fun editMyPageInfo(
-        @Header("X-ACCESS-TOKEN") xAccessToken : String,
-        @Path("userId") userId: Int,
+        @Header("Authorization") xAccessToken : String,
         @Body myPageEditRequest: MyPageEditRequest
     ): Call<MyPageEditResponse>
 
     // PATCH API for deleting my account
-    @PATCH("/resign/{userId}")
+    @PATCH("/resign")
     fun deleteMyAccount(
-        @Header("X-ACCESS-TOKEN") xAccessToken : String,
-        @Path("userId") userId: Int
+        @Header("Authorization") xAccessToken : String
     ): Call<MyAccountDeleteResponse>
 }
