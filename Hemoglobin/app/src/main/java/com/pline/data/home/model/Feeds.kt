@@ -23,10 +23,10 @@ data class FeedListResult(
     val context: String,
     val date: String,
     val feedId: Int,
-    val isReceiver: String,
+    val isReceiver: Boolean,
     val location: String?,
     val nickname: String,
-    val profileImg: Int,
+    val profileImg: String,
     val rh: Int?,
     val userId: Int
 )
@@ -69,7 +69,7 @@ data class Reply(
 data class FeedInfoResult(
     @SerializedName("feedId") var feedId: Int,
     @SerializedName("userId") var userId: Int,
-    @SerializedName("profileImg") var profileImg: Int,
+    @SerializedName("profileImg") var profileImg: String,
     @SerializedName("nickname") var nickname: String,
     @SerializedName("context") var context: String,
     @SerializedName("commentCnt") var commentCnt: Int,

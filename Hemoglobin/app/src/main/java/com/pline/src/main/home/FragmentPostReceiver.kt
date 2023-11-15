@@ -48,42 +48,42 @@ class FragmentPostReceiver(val abo: ArrayList<Int>, val rh: Int, val location: S
 
         for (i in 0..locationList.size -1){
             if ((rh == 1 || rh == 3) && abo[0] == 1){
-                if (locationList[i].isReceiver == "T" && locationList[i].rh == 0 && locationList[i].abo == 0){
+                if (locationList[i].isReceiver && locationList[i].rh == 0 && locationList[i].abo == 0){
                     receiverList.add(locationList[i])
                 }
             }
             if ((rh == 1 || rh == 3) && abo[1] == 1){
-                if (locationList[i].isReceiver == "T" && locationList[i].rh == 0 && locationList[i].abo == 1){
+                if (locationList[i].isReceiver && locationList[i].rh == 0 && locationList[i].abo == 1){
                     receiverList.add(locationList[i])
                 }
             }
             if ((rh == 1 || rh == 3) && abo[2] == 1){
-                if (locationList[i].isReceiver == "T" && locationList[i].rh == 0 && locationList[i].abo == 2){
+                if (locationList[i].isReceiver && locationList[i].rh == 0 && locationList[i].abo == 2){
                     receiverList.add(locationList[i])
                 }
             }
             if ((rh == 1 || rh == 3) && abo[3] == 1){
-                if (locationList[i].isReceiver == "T" && locationList[i].rh == 0 && locationList[i].abo == 3){
+                if (locationList[i].isReceiver && locationList[i].rh == 0 && locationList[i].abo == 3){
                     receiverList.add(locationList[i])
                 }
             }
             if ((rh == 2 || rh == 3) && abo[0] == 1){
-                if (locationList[i].isReceiver == "T" && locationList[i].rh == 1 && locationList[i].abo == 0){
+                if (locationList[i].isReceiver && locationList[i].rh == 1 && locationList[i].abo == 0){
                     receiverList.add(locationList[i])
                 }
             }
             if ((rh == 2 || rh == 3) && abo[1] == 1){
-                if (locationList[i].isReceiver == "T" && locationList[i].rh == 1 && locationList[i].abo == 1){
+                if (locationList[i].isReceiver && locationList[i].rh == 1 && locationList[i].abo == 1){
                     receiverList.add(locationList[i])
                 }
             }
             if ((rh == 2 || rh == 3) && abo[2] == 1){
-                if (locationList[i].isReceiver == "T" && locationList[i].rh == 1 && locationList[i].abo == 2){
+                if (locationList[i].isReceiver && locationList[i].rh == 1 && locationList[i].abo == 2){
                     receiverList.add(locationList[i])
                 }
             }
             if ((rh == 2 || rh == 3) && abo[3] == 1){
-                if (locationList[i].isReceiver == "T" && locationList[i].rh == 1 && locationList[i].abo == 3){
+                if (locationList[i].isReceiver && locationList[i].rh == 1 && locationList[i].abo == 3){
                     receiverList.add(locationList[i])
                 }
             }
