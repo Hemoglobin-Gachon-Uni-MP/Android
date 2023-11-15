@@ -16,7 +16,7 @@ data class MyPageResult(
     val name: String,
     val nickname: String,
     val phone: String,
-    val profileImg: Int,
+    val profileImg: String,
     val memberId: Int
 )
 
@@ -25,9 +25,9 @@ data class MyPageFeedResult(
     val context: String,
     val date: String,
     val feedId: Int,
-    val isReceiver: String,
+    val isReceiver: Boolean,
     val nickname: String,
-    val profileImg: Int,
+    val profileImg: String,
     val memberId: Int
 )
 

@@ -12,8 +12,8 @@ class MyPostListVPAdapter(fragmentActivity: FragmentActivity, var postList: Arra
 
     // Set page according to clicked position
     override fun createFragment(position: Int): Fragment {
-        val postListFromReceiver = postList.filter { it.isReceiver == "T" }
-        val postListFromProvider = postList.filter { it.isReceiver == "F" }
+        val postListFromReceiver = postList.filter { it.isReceiver }
+        val postListFromProvider = postList.filter { !it.isReceiver }
 
         return when(position) {
             0 -> MyPostListRVVFragment(postListFromReceiver as ArrayList<MyPageFeedResult>)

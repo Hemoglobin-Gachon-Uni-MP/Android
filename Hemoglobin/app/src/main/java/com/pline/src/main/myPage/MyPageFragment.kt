@@ -97,6 +97,7 @@ class MyPageFragment :
             // Jwt is in header, userId is in Path Variable
             service.getMyPageInfo("Bearer $jwt").enqueue(object : Callback<MyPageResponse> {
                     override fun onResponse(call: Call<MyPageResponse>, response: Response<MyPageResponse>) {
+                        Log.d("seori000", response.toString())
                         if (response.isSuccessful) {
                             val body = response.body()
                             when (body?.code) {
@@ -133,19 +134,19 @@ class MyPageFragment :
                                 // If GET fails, show toast message to user
                                 else -> body?.message?.let { it1
                                     -> showCustomToast(it1)
-                                    Log.d("seori", response.message())
+                                    Log.d("seori111", response.message())
                                 }
                             }
                         } else {
                             // If fail, show toast message to user
                             showCustomToast("네트워크 연결에 실패했습니다")
-                            Log.d("seori1115", response.body().toString())
+                            Log.d("seori222", response.body().toString())
                         }
                     }
                     // If fail, show toast message to user
                     override fun onFailure(call: Call<MyPageResponse>, t: Throwable) {
                         showCustomToast("네트워크 연결에 실패했습니다")
-                        Log.d("seori1115", "?")
+                        Log.d("seori333", "?") // 여기에 걸리다
                     }
                 })
         }

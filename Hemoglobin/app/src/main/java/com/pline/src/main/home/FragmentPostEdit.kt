@@ -86,11 +86,7 @@ class FragmentPostEdit(val feedId: Int): BaseFragment<FragmentPostEditBinding>(F
         binding.itemPostUserNameTv.text = response.nickname
         binding.postEditReceiverTextEnterfieldEt.setText(response.context)
         content = response.context
-        if (response.profileImg == 1){
-            binding.itemEditProfileImageIv.setImageResource(R.drawable.ic_profile_ver1)
-        } else {
-            binding.itemEditProfileImageIv.setImageResource(R.drawable.ic_profile_ver2)
-        }
+        setDefaultProfile(binding.itemEditProfileImageIv, response.profileImg)
 
         when (response.rh){
             0 -> binding.postEditSelectedRhTypeTv.text = "Rh+"
