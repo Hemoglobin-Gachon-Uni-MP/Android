@@ -47,7 +47,7 @@ class CertificationListFragment() : BaseFragment<FragmentCertificationListBindin
     private fun getMyCertifications() {
         val service = ApplicationClass.sRetrofit.create(MyPageRetrofitInterface::class.java)
         // Get jwt, userId from sp
-        val jwt = "eyJ0eXBlIjoiand0IiwiYWxnIjoiSFMyNTYifQ.eyJ1c2VySWQiOjEsImlhdCI6MTcwMDA0ODQyMSwiZXhwIjoxNzYzMTIwNDIxfQ.Q86t9vwMhf97A0IKZC_dmUZQTuGKhgSjDW7cZvpkObI"
+        val jwt = ApplicationClass.sSharedPreferences.getString("jwt", "")
         if (jwt != null) {
             Log.d("seori", jwt)
         }
