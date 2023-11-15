@@ -20,12 +20,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // When already signed up and logged in
-        /*if(sSharedPreferences.getString("jwt","") == "") {
+        if(sSharedPreferences.getString("jwt","") == "") {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
-        }*/
-        sSharedPreferences.edit().putString("jwt","eyJ0eXBlIjoiand0IiwiYWxnIjoiSFMyNTYifQ.eyJ1c2VySWQiOjEsImlhdCI6MTcwMDAzNjIzNiwiZXhwIjoxNzYzMTA4MjM3fQ.-0DzDtYbcQQWHVHrMoWy1YPSzLTSTLpeyQOWYIIze8Q").apply()
-        sSharedPreferences.edit().putInt("memberId",1).apply()
+        }
+
         // Set default bottom navigation item
         supportFragmentManager.beginTransaction().replace(R.id.main_frm, HomeFragment()).commitAllowingStateLoss()
         // Switch fragments when click on each tab

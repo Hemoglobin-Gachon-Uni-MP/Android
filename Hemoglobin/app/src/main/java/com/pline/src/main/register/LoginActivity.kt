@@ -11,6 +11,7 @@ import com.pline.config.ApplicationClass.Companion.sRetrofit
 import com.pline.config.ApplicationClass.Companion.sSharedPreferences
 import com.pline.config.BaseActivity
 import com.pline.databinding.ActivityLoginBinding
+import com.pline.model.LoginRequest
 import com.pline.model.MemberApiInterface
 import com.pline.model.LoginResponse
 import com.pline.src.main.MainActivity
@@ -38,7 +39,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                 Log.e("LOGIN", "Login fail with kakao account", error)
             } else if (token != null) {
                 Log.i("LOGIN", "Login success with kakao account : ${token.idToken}")
-                postLogin(token.accessToken)
+                postLogin(token.idToken!!)
             }
         }
         if (UserApiClient.instance.isKakaoTalkLoginAvailable(this)) {
@@ -61,7 +62,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
     // Call login api and get jwt token
     private fun postLogin(kakaoToken : String) {
         val service = sRetrofit.create(MemberApiInterface::class.java)
-        service.postLogIn(kakaoToken)?.enqueue(object : Callback<LoginResponse> {
+        service.postLogin(LoginRequest(kakaoToken))?.enqueue(object : Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 Log.d("kakaoLogin", "postLogin success : ${response}")
                 if (response.isSuccessful){
@@ -69,7 +70,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                         sSharedPreferences.edit()
                             .putString("kakaoToken", kakaoToken)
                             .putString("jwt", response.body()!!.result.jwt)
-                            .putInt("memeberId",response.body()!!.result.memberId).apply()
+                            .putInt("memberId",response.body()!!.result.memberId).apply()
                         Log.d("kakaoLogin", "response success")
                         startActivity(Intent(this@LoginActivity, MainActivity::class.java)
                             .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
