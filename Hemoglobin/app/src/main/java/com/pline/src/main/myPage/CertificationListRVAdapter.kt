@@ -3,18 +3,19 @@ package com.pline.src.main.myPage
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.pline.data.mypage.model.MyCertListResult
 import com.pline.databinding.ItemCertBinding
 
 // Vertical RecyclerView adapter for Certification List
-class CertificationListRVAdapter(private val certList: ArrayList<String>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CertificationListRVAdapter(private val certList: ArrayList<MyCertListResult>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private lateinit var certListBinding: ItemCertBinding
 
     // Bind
     inner class ViewHolder(private val certListBinding: ItemCertBinding): RecyclerView.ViewHolder(certListBinding.root) {
         // Set data
-        fun bind(text: String) {
+        fun bind(cert: MyCertListResult) {
             certListBinding.apply {
-                itemTv.text = text
+                itemTv.text = "${cert.name} / ${cert.date} / ${cert.certificationNum}"
             }
         }
     }

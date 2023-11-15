@@ -87,7 +87,7 @@ class MyPageFragment :
     private fun getMyPageInfo() {
         val service = ApplicationClass.sRetrofit.create(MyPageRetrofitInterface::class.java)
         // Get jwt, userId from sp
-        val jwt = "eyJ0eXBlIjoiand0IiwiYWxnIjoiSFMyNTYifQ.eyJ1c2VySWQiOjEsImlhdCI6MTcwMDAzNjIzNiwiZXhwIjoxNzYzMTA4MjM3fQ.-0DzDtYbcQQWHVHrMoWy1YPSzLTSTLpeyQOWYIIze8Q"
+        val jwt = "eyJ0eXBlIjoiand0IiwiYWxnIjoiSFMyNTYifQ.eyJ1c2VySWQiOjEsImlhdCI6MTcwMDA0ODQyMSwiZXhwIjoxNzYzMTIwNDIxfQ.Q86t9vwMhf97A0IKZC_dmUZQTuGKhgSjDW7cZvpkObI"
         if (jwt != null) {
             Log.d("seori", jwt)
         }
