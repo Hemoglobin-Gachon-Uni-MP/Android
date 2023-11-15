@@ -33,7 +33,6 @@ class RegisterCompleteActivity : BaseActivity<ActivityRegisterCompleteBinding>(
             sSharedPreferences.getString("registerName","")!!,
             sSharedPreferences.getString("registerNickname","")!!,
             sSharedPreferences.getString("registerPhone","")!!,
-            (1..2).random(),
             sSharedPreferences.getInt("registerTypeInfoRH",-1),
             sSharedPreferences.getString("kakaoToken", "")!!
         )

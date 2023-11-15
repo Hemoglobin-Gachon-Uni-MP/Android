@@ -11,9 +11,8 @@ data class RegisterRequest(
     val name: String,
     val nickname: String,
     val phone: String,
-    val profileImg: Int,
     val rh: Int,
-    val socialId: String,
+    val idToken: String,
 )
 
 data class RegisterResponse(
