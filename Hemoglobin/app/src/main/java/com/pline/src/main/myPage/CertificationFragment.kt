@@ -1,5 +1,6 @@
 package com.pline.src.main.myPage
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -89,9 +90,16 @@ class CertificationFragment(val name: String): BottomSheetDialogFragment() {
 
         /**  다음 페이지로 넘어가기 **/
         binding.fragmentCertificationNextBtnTv.setOnClickListener {
-
+            dismiss()
         }
 
         return binding.root
+    }
+
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+
+        val dialog = CertificationPhotoFragment(name)
+        dialog.show(requireActivity().supportFragmentManager, dialog.tag)
     }
 }
