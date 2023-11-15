@@ -83,7 +83,8 @@
                 android:layout_marginStart="2dp"
                 android:gravity="bottom"
                 app:layout_constraintTop_toBottomOf="@+id/fragment_cert_contents_name_textfield_et"
-                app:layout_constraintStart_toStartOf="@+id/fragment_cert_contents_name_textfield_et">
+                app:layout_constraintStart_toStartOf="@+id/fragment_cert_contents_name_textfield_et"
+                android:visibility="invisible">
 
                 <ImageView
                     android:id="@+id/name_warning_icon_iv"
@@ -141,7 +142,8 @@
                 android:layout_marginStart="2dp"
                 android:gravity="bottom"
                 app:layout_constraintTop_toBottomOf="@+id/fragment_cert_contents_num_textfield_et"
-                app:layout_constraintStart_toStartOf="@+id/fragment_cert_contents_num_textfield_et">
+                app:layout_constraintStart_toStartOf="@+id/fragment_cert_contents_num_textfield_et"
+                android:visibility="invisible">
 
                 <ImageView
                     android:id="@+id/num_warning_icon_iv"
@@ -199,7 +201,8 @@
                 android:layout_marginStart="2dp"
                 android:gravity="bottom"
                 app:layout_constraintTop_toBottomOf="@+id/fragment_cert_contents_date_textfield_et"
-                app:layout_constraintStart_toStartOf="@+id/fragment_cert_contents_date_textfield_et">
+                app:layout_constraintStart_toStartOf="@+id/fragment_cert_contents_date_textfield_et"
+                android:visibility="invisible">
 
                 <ImageView
                     android:id="@+id/date_warning_icon_iv"

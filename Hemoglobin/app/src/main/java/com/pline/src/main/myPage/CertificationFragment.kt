@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.pline.databinding.FragmentCertificationBinding
 
-class CertificationFragment(): BottomSheetDialogFragment() {
+class CertificationFragment(val name: String): BottomSheetDialogFragment() {
     private lateinit var binding: FragmentCertificationBinding
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,13 +27,12 @@ class CertificationFragment(): BottomSheetDialogFragment() {
             }
 
             override fun afterTextChanged(s: Editable?) {
-                /**
-                 * 서버에서 이름 받아오기
-                 * 받아온 이름이랑 입력한 이름이랑 다르면 경고문구 표시**/
-                // 같을때
-                binding.warningNameLl.visibility = View.INVISIBLE
-                // 다를 때
-                binding.warningNameLl.visibility = View.VISIBLE
+                if (s.toString().equals(name)){  // 같을때
+                    binding.warningNameLl.visibility = View.INVISIBLE
+                } else{  // 다를 때
+                    binding.warningNameLl.visibility = View.VISIBLE
+                }
+
             }
 
         })
@@ -50,10 +49,15 @@ class CertificationFragment(): BottomSheetDialogFragment() {
                 /**
                  * 증서 번호 형식 정하기
                  * 입력한 번호랑 형식 다르면 경고문구 표시**/
-                // 같을때
-                binding.warningNumLl.visibility = View.INVISIBLE
-                // 다를 때
-                binding.warningNumLl.visibility = View.VISIBLE
+                if (s.toString().length == 12
+                    && s.toString()[2].equals('-')
+                    && s.toString()[5].equals('-')){
+                    // 같을때
+                    binding.warningNumLl.visibility = View.INVISIBLE
+                } else {
+                    // 다를 때
+                    binding.warningNumLl.visibility = View.VISIBLE
+                }
             }
 
         })
@@ -70,14 +74,20 @@ class CertificationFragment(): BottomSheetDialogFragment() {
                 /**
                  * 날짜 형식 정하기
                  * 입력한 날짜랑 형식 다르면 경고문구 표시**/
-                // 같을때
-                binding.warningDateLl.visibility = View.INVISIBLE
-                // 다를 때
-                binding.warningDateLl.visibility = View.VISIBLE
+                if (s.toString().length == 10
+                    && s.toString()[4].equals('.')
+                    && s.toString()[7].equals('.')) {
+                    // 같을때
+                    binding.warningDateLl.visibility = View.INVISIBLE
+                } else {
+                    // 다를 때
+                    binding.warningDateLl.visibility = View.VISIBLE
+                }
             }
 
         })
 
+        /**  다음 페이지로 넘어가기 **/
         binding.fragmentCertificationNextBtnTv.setOnClickListener {
 
         }
