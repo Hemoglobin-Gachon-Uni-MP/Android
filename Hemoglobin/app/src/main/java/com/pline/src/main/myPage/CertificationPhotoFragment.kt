@@ -1,5 +1,6 @@
 package com.pline.src.main.myPage
 
+import android.Manifest
 import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.content.DialogInterface
@@ -8,6 +9,7 @@ import android.content.pm.PackageManager
 import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,11 +19,12 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.pline.config.ApplicationClass
 import com.pline.data.mypage.MyPageRetrofitInterface
-import com.pline.data.mypage.model.PostCertReq
 import com.pline.data.mypage.model.PostCertResponse
 import com.pline.databinding.FragmentCertificationPhotoBinding
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -32,12 +35,14 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
-
+import java.text.SimpleDateFormat
+import java.util.*
 
 class CertificationPhotoFragment(val eName: String, val eNum: String, val eDate: String): BottomSheetDialogFragment() {
     private lateinit var binding: FragmentCertificationPhotoBinding
     private lateinit var getResult: ActivityResultLauncher<Intent>
     private lateinit var permissionResultLauncher: ActivityResultLauncher<Array<String>>
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -66,6 +71,10 @@ class CertificationPhotoFragment(val eName: String, val eNum: String, val eDate:
 
         binding.certificationPhotoImageCl.setOnClickListener {
             initImageViewProfile()
+        }
+
+        binding.certificationPhotoCameraCl.setOnClickListener {
+            requestCameraPermission()
         }
 
         /** 이전 버튼 클릭 **/
@@ -104,9 +113,8 @@ class CertificationPhotoFragment(val eName: String, val eNum: String, val eDate:
 
         Log.d("seori1116", "imgPath $imgPath")
         Log.d("seori1116", "body $body")
-        val req = PostCertReq(eNum, eDate, eName)
 
-        postCert(req, body)
+        postCert(body)
     }
     private fun handleImageResult(result: ActivityResult) {
         Log.d("image","handleImageResult")
@@ -132,7 +140,7 @@ class CertificationPhotoFragment(val eName: String, val eNum: String, val eDate:
         return result!!
     }
 
-    private fun postCert(req: PostCertReq, body: MultipartBody.Part) {
+    private fun postCert(body: MultipartBody.Part) {
         val service = ApplicationClass.sRetrofit.create(MyPageRetrofitInterface::class.java)
         // Get jwt, userId from sp
         val jwt = ApplicationClass.sSharedPreferences.getString("jwt", "")
@@ -157,7 +165,7 @@ class CertificationPhotoFragment(val eName: String, val eNum: String, val eDate:
                         when (body?.code) {
                             // If success, fill the data
                             1000 -> {
-                                Log.d("seori1116", "사진 전송 성공")
+                                Log.d("seori4444", "사진 전송 성공")
                                 val result = body.result
                                 binding.run {
                                     //
@@ -179,6 +187,104 @@ class CertificationPhotoFragment(val eName: String, val eNum: String, val eDate:
                     Log.d("seori1116", "?") // 여기에 걸리다
                 }
             })
+        }
+    }
+
+    // 액티비티에서 권한 요청 코드
+    private val CAMER_REQUEST_CODE = 1001
+
+    // 권한을 요청하는 함수
+    private fun requestCameraPermission() {
+        if (this.activity?.let {
+                ContextCompat.checkSelfPermission(
+                    it,
+                    Manifest.permission.CAMERA
+                )
+            } != PackageManager.PERMISSION_GRANTED
+        ) {
+            // 카메라 권한이 없으면 요청
+            this.activity?.let {
+                ActivityCompat.requestPermissions(
+                    it,
+                    arrayOf(Manifest.permission.CAMERA),
+                    CAMER_REQUEST_CODE
+                )
+            }
+        } else {
+            // 이미 권한이 있는 경우 카메라 앱 시작
+            startCamera()
+        }
+    }
+
+    // 권한 요청 결과 처리
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        when (requestCode) {
+            CAMER_REQUEST_CODE -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // 권한이 부여된 경우 카메라 앱 시작
+                    startCamera()
+                } else {
+                    // 권한이 거부된 경우 사용자에게 설명 등을 보여줄 수 있음
+                    Toast.makeText(this.requireContext(), "카메라 권한이 필요합니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    // 카메라 앱 시작
+    private fun startCamera() {
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        if (this.activity?.let { intent.resolveActivity(it.packageManager) } != null) {
+            // 이미지를 저장할 파일 생성
+            val photoFile: File? = createImageFile()
+
+            // 파일이 생성되었으면 카메라 앱으로 전달
+            photoFile?.let {
+                val photoUri: Uri = FileProvider.getUriForFile(
+                    this.requireContext(),
+                    "com.pline.fileprovider",
+                    it
+                )
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
+                startActivityForResult(intent, CAMERA_REQUEST_CODE)
+            }
+        }
+    }
+
+    // 액티비티 상수
+    private val CAMERA_REQUEST_CODE = 1002
+    private var currentPhotoPath: String? = null
+
+    // 이미지를 저장할 파일 생성
+    private fun createImageFile(): File? {
+        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
+        val storageDir: File? = this.requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        return File.createTempFile(
+            "JPEG_${timeStamp}_",
+            ".jpg",
+            storageDir
+        ).apply {
+            // 파일 경로 저장
+            currentPhotoPath = absolutePath
+        }
+    }
+
+    // onActivityResult에서 결과 처리
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == CAMERA_REQUEST_CODE && resultCode == RESULT_OK) {
+            // 카메라로부터 받아온 이미지를 File 형식으로 사용
+            val photoFile = File(currentPhotoPath)
+            val requestBody = RequestBody.create("image/*".toMediaTypeOrNull(), photoFile)
+            val body = MultipartBody.Part.createFormData("image", photoFile.name, requestBody)
+
+            Log.d("seori4444", "성공임")
+            Log.d("seori4444", body.toString())
+            postCert(body)
         }
     }
 
