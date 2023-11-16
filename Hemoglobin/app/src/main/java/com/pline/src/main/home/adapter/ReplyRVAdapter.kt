@@ -61,7 +61,7 @@ class ReplyRVAdapter(private var replyList: ArrayList<Reply>):
                 holder.menu.visibility = View.VISIBLE
             }
 
-            if (replyList[position].userId == userId){
+            if (replyList[position].memberId == userId){
                 holder.menu.text = "삭제하기"
                 holder.menu.setOnClickListener {
                     Log.d("Reply Delete", "CLICKED")

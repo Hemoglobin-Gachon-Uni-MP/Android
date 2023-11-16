@@ -94,7 +94,7 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
         var watcher = MyEditWatcher()
         binding.commentEnterfieldEt.addTextChangedListener(watcher)
         binding.commentSendIconIv.setOnClickListener {
-            val body = PostCommentReqBody(comment, myId)
+            val body = PostCommentReqBody(comment)
             Log.d("onPostComment", "Send btn selected")
             FeedDetailService(this).tryPostNewComment(feedId, body)
             binding.commentEnterfieldEt.text.clear()
@@ -172,7 +172,7 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
     }
 
     override fun onGetFeedInfoSuccess(response: FeedInfoResult) {
-        postUserId = response.userId
+        postUserId = response.memberId
         binding.itemPostUserNameTv.text = response.nickname
         binding.itemPostDateTv.text = response.date
         binding.postDetailContentsTextTv.text = response.context
@@ -212,7 +212,7 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
                     binding.commentEnterfieldEt.addTextChangedListener(watcher)
                     binding.commentSendIconIv.setOnClickListener {
                         binding.postDetailCommentEnterContainerLl.setBackgroundResource(R.drawable.style_filter_unselected)
-                        val body = PostReplyReqBody(reply, feedId, myId)
+                        val body = PostReplyReqBody(reply, feedId)
                         FeedDetailService(this@FragmentPostDetail).tryPostReply(commentId, body)
                         binding.commentEnterfieldEt.text.clear()
                     }
@@ -235,7 +235,6 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
     }
 
     override fun onGetFeedInfoFailure(message: String) {
-        TODO("Not yet implemented")
     }
 
     override fun onPostNewCommentSuccess(response: PostNewCommentResponse) {

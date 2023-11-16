@@ -11,10 +11,9 @@ data class Feeds(
 data class postFeedReqBody(
     var abo: Int,
     var context: String,
-    var isReceiver: String,
+    var isReceiver: Boolean,
     var location: String,
-    var rh: Int,
-    var userId: Int
+    var rh: Int
 )
 
 data class FeedListResult(
@@ -25,10 +24,10 @@ data class FeedListResult(
     val feedId: Int,
     val isReceiver: Boolean,
     val location: String?,
+    val memberId: Int,
     val nickname: String,
     val profileImg: String,
-    val rh: Int?,
-    val userId: Int
+    val rh: Int?
 )
 
 data class GetFeedListResponse(
@@ -49,36 +48,39 @@ data class GetFeedInfoResponse(
 
 data class Comment(
     var commentId: Int,
-    var userId: Int,
-    var profileImg: Int,
-    var nickname: String,
     var context: String,
-    var replyList: ArrayList<Reply>,
-    var date: String
+    var date: String,
+    var isReportedFromUser: Boolean,
+    var memberId: Int,
+    var nickname: String,
+    var profileImg: Int,
+    var replyList: ArrayList<Reply>
 )
 
 data class Reply(
     var context: String,
     var date: String,
+    val isReportedFromUser: Boolean,
+    var memberId: Int,
     var nickname: String,
     var profileImg: Int,
-    var replyId: Int,
-    var userId: Int
+    var replyId: Int
 )
 
 data class FeedInfoResult(
-    @SerializedName("feedId") var feedId: Int,
-    @SerializedName("userId") var userId: Int,
-    @SerializedName("profileImg") var profileImg: String,
-    @SerializedName("nickname") var nickname: String,
-    @SerializedName("context") var context: String,
+    @SerializedName("abo") var abo: Int,
     @SerializedName("commentCnt") var commentCnt: Int,
     @SerializedName("commentList") var commentList: ArrayList<Comment>?,
+    @SerializedName("context") var context: String,
     @SerializedName("date") var date: String,
-    @SerializedName("abo") var abo: Int,
-    @SerializedName("rh") var rh: Int,
+    @SerializedName("feedId") var feedId: Int,
+    @SerializedName("isReceiver") var isReceiver: Boolean,
+    @SerializedName("isReportedFromUser") var isReportedFromUser: Boolean,
     @SerializedName("location") var location: String,
-    @SerializedName("isReceiver") var isReceiver: String
+    @SerializedName("memberId") var memberId: Int,
+    @SerializedName("nickname") var nickname: String,
+    @SerializedName("profileImg") var profileImg: String,
+    @SerializedName("rh") var rh: Int
 )
 
 data class baseUserIdReq(
@@ -90,8 +92,7 @@ data class DeleteFeedResponse(
 ): BaseResponse()
 
 data class PostCommentReqBody(
-    var context: String,
-    val userId: Int
+    var context: String
 )
 
 data class PostNewCommentResponse(
@@ -109,8 +110,7 @@ data class DeleteCommentResponse(
 
 data class PostReplyReqBody(
     @SerializedName("context") var context: String,
-    @SerializedName("feedId") val feedId: Int,
-    @SerializedName("userId") val userId: Int
+    @SerializedName("feedId") val feedId: Int
 )
 
 data class PostNewReplyResponse(

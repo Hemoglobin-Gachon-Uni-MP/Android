@@ -1,5 +1,7 @@
 package com.pline.data.home
 
+import android.util.Log
+import android.widget.Toast
 import com.pline.config.ApplicationClass
 import com.pline.data.home.model.DeleteCommentResponse
 import com.pline.data.home.model.DeleteFeedResponse
@@ -22,9 +24,10 @@ import retrofit2.create
 
 class FeedService(val view: HomeFragmentView) {
     val homeRetrofitInterface = ApplicationClass.sRetrofit.create(HomeRetrofitInterface::class.java)
+    val jwt = ApplicationClass.sSharedPreferences.getString("jwt", "")
 
     fun tryGetFeedList() {
-        homeRetrofitInterface.getFeedList().enqueue(object: Callback<GetFeedListResponse>{
+        homeRetrofitInterface.getFeedList("Bearer $jwt").enqueue(object: Callback<GetFeedListResponse>{
             override fun onResponse(
                 call: Call<GetFeedListResponse>,
                 response: Response<GetFeedListResponse>
@@ -34,6 +37,7 @@ class FeedService(val view: HomeFragmentView) {
 
             override fun onFailure(call: Call<GetFeedListResponse>, t: Throwable) {
                 view.onGetFeedListFailure(t.message ?: "통신 오류")
+
             }
 
         })
@@ -47,7 +51,7 @@ class NewFeedService(val view: CreateFeedFragmentView) {
 
     fun tryPostNewFeed(body: postFeedReqBody){
         if (jwt != null) {
-            homeRetrofitInterface.createNewPost(body, jwt).enqueue(object : Callback<FeedsResponse>{
+            homeRetrofitInterface.createNewPost("Bearer $jwt", body).enqueue(object : Callback<FeedsResponse>{
                 override fun onResponse(call: Call<FeedsResponse>, response: Response<FeedsResponse>) {
                     view.onPostNewFeedSuccess(response.body()!!)
                 }
@@ -67,7 +71,7 @@ class FeedDetailService(val view: FeedDetailView) {
     val jwt = ApplicationClass.sSharedPreferences.getString("jwt", "")
 
     fun tryGetFeedDetail(feedId: Int){
-        homeRetrofitInterface.getFeedInfo(feedId).enqueue(object : Callback<GetFeedInfoResponse>{
+        homeRetrofitInterface.getFeedInfo("Bearer $jwt", feedId).enqueue(object : Callback<GetFeedInfoResponse>{
             override fun onResponse(
                 call: Call<GetFeedInfoResponse>,
                 response: Response<GetFeedInfoResponse>
@@ -85,7 +89,7 @@ class FeedDetailService(val view: FeedDetailView) {
 
     fun tryPostNewComment(feedId: Int, body: PostCommentReqBody){
         if (jwt != null){
-            homeRetrofitInterface.postNewComment(feedId, body, jwt).enqueue(object : Callback<PostNewCommentResponse>{
+            homeRetrofitInterface.postNewComment("Bearer $jwt", feedId, body).enqueue(object : Callback<PostNewCommentResponse>{
                 override fun onResponse(
                     call: Call<PostNewCommentResponse>,
                     response: Response<PostNewCommentResponse>
@@ -103,7 +107,7 @@ class FeedDetailService(val view: FeedDetailView) {
 
     fun tryPostReply(commentId: Int, body: PostReplyReqBody){
         if (jwt != null){
-            homeRetrofitInterface.postNewReply(commentId, body, jwt).enqueue(object : Callback<PostNewReplyResponse>{
+            homeRetrofitInterface.postNewReply("Bearer $jwt", commentId, body).enqueue(object : Callback<PostNewReplyResponse>{
                 override fun onResponse(
                     call: Call<PostNewReplyResponse>,
                     response: Response<PostNewReplyResponse>
@@ -125,7 +129,7 @@ class FeedDeleteService(val view:FeedDeleteView){
     val jwt = ApplicationClass.sSharedPreferences.getString("jwt", "")
     fun tryDeleteFeed(body: baseUserIdReq, feedId: Int){
         if (jwt != null){
-            homeRetrofitInterface.deletePost(body, feedId, jwt).enqueue(object : Callback<DeleteFeedResponse>{
+            homeRetrofitInterface.deletePost("Bearer $jwt", feedId).enqueue(object : Callback<DeleteFeedResponse>{
                 override fun onResponse(
                     call: Call<DeleteFeedResponse>,
                     response: Response<DeleteFeedResponse>
@@ -149,7 +153,7 @@ class EditPostService(val view:FeedEditView){
 
     fun tryEditFeed(feedId: Int, body: PostCommentReqBody){
         if (jwt != null){
-            homeRetrofitInterface.editPost(feedId, body, jwt).enqueue(object : Callback<EditPostResponse>{
+            homeRetrofitInterface.editPost("Bearer $jwt", feedId, body).enqueue(object : Callback<EditPostResponse>{
                 override fun onResponse(
                     call: Call<EditPostResponse>,
                     response: Response<EditPostResponse>
@@ -173,7 +177,7 @@ class DeleteCommentService(val view: CommentView){
 
     fun tryDeleteComment(body: baseUserIdReq, commentId: Int){
         if (jwt != null){
-            homeRetrofitInterface.deleteComment(body, commentId, jwt).enqueue(object : Callback<DeleteCommentResponse>{
+            homeRetrofitInterface.deleteComment("Bearer $jwt", commentId).enqueue(object : Callback<DeleteCommentResponse>{
                 override fun onResponse(
                     call: Call<DeleteCommentResponse>,
                     response: Response<DeleteCommentResponse>
@@ -196,7 +200,7 @@ class DeleteReplyService(val view: DeleteReplyView){
 
     fun tryDeleteReply(body: baseUserIdReq, replyId: Int){
         if (jwt != null){
-            homeRetrofitInterface.deleteReply(body, replyId, jwt).enqueue(object : Callback<DeleteReplyResponse>{
+            homeRetrofitInterface.deleteReply("Bearer $jwt", replyId).enqueue(object : Callback<DeleteReplyResponse>{
                 override fun onResponse(
                     call: Call<DeleteReplyResponse>,
                     response: Response<DeleteReplyResponse>

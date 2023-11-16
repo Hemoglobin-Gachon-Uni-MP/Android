@@ -89,7 +89,7 @@ class CommentRVAdapter(private val commentList: ArrayList<Comment>): RecyclerVie
 
             }
         }
-        if (commentList[position].userId == userId){
+        if (commentList[position].memberId == userId){
             holder.menu.text = "댓글 삭제하기"
             holder.menu.setOnClickListener {
                 // deleting dialog

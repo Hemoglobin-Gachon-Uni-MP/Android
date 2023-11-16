@@ -25,66 +25,67 @@ interface HomeRetrofitInterface {
     // 게시물 생성 api
     @POST("feeds")
     fun createNewPost(
-        @Body data: postFeedReqBody,
-        @Header("X-ACCESS-TOKEN") xAccessToken: String
+        @Header("Authorization") xAccessToken: String,
+        @Body data: postFeedReqBody
     ): Call<FeedsResponse>
 
     // 게시물 수정 api
     @PATCH("feeds/{feedId}")
     fun editPost(
+        @Header("Authorization") xAccessToken: String,
         @Path("feedId") feedId: Int,
         @Body body: PostCommentReqBody,
-        @Header("X-ACCESS-TOKEN") xAccessToken: String
     ):Call<EditPostResponse>
 
     // 게시물 삭제 api
     @PATCH("feeds/{feedId}/status")
     fun deletePost(
-        @Body body: baseUserIdReq,
-        @Path("feedId") feedId: Int,
-        @Header("X-ACCESS-TOKEN") xAccessToken: String
+        @Header("Authorization") xAccessToken: String,
+        //@Body body: baseUserIdReq,
+        @Path("feedId") feedId: Int
     ): Call<DeleteFeedResponse>
 
     // 댓글 삭제 api
     @PATCH("feeds/comment/{commentId}/status")
     fun deleteComment(
-        @Body body: baseUserIdReq,
-        @Path("commentId") commentId: Int,
-        @Header("X-ACCESS-TOKEN") xAccessToken: String
+        @Header("Authorization") xAccessToken: String,
+//        @Body body: baseUserIdReq,
+        @Path("commentId") commentId: Int
     ): Call<DeleteCommentResponse>
 
     // 댓글 달기 api
     @POST("feeds/comment/{feedId}")
     fun postNewComment(
+        @Header("Authorization") xAccessToken: String,
         @Path("feedId") feedId: Int,
-        @Body body: PostCommentReqBody,
-        @Header("X-ACCESS-TOKEN") xAccessToken: String
+        @Body body: PostCommentReqBody
     ): Call<PostNewCommentResponse>
 
     // 게시물 목록 반환 api
     @GET("feeds/info-list")
     fun getFeedList(
+        @Header("Authorization") xAccessToken: String
     ): Call<GetFeedListResponse>
 
     // 게시물 정보 반환 api
     @GET("feeds/info/{feedId}")
     fun getFeedInfo(
+        @Header("Authorization") xAccessToken: String,
         @Path("feedId") feedId: Int
     ): Call<GetFeedInfoResponse>
 
     // 답글 달기 api
     @POST("feeds/reply/{commentId}")
     fun postNewReply(
+        @Header("Authorization") xAccessToken: String,
         @Path("commentId") commentId: Int,
         @Body body: PostReplyReqBody,
-        @Header("X-ACCESS-TOKEN") xAccessToken: String
     ): Call<PostNewReplyResponse>
 
     // 답글 삭제 api
     @PATCH("feeds/reply/{replyId}/status")
     fun deleteReply(
-        @Body body: baseUserIdReq,
-        @Path("replyId") replyId: Int,
-        @Header("X-ACCESS-TOKEN") xAccessToken: String
+        @Header("Authorization") xAccessToken: String,
+        @Path("replyId") replyId: Int
     ): Call<DeleteReplyResponse>
 }
