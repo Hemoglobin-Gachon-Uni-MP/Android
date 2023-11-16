@@ -9,7 +9,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.pline.databinding.FragmentCertificationPhotoBinding
 
-class CertificationPhotoFragment(val name: String): BottomSheetDialogFragment() {
+class CertificationPhotoFragment(): BottomSheetDialogFragment() {
     private lateinit var binding: FragmentCertificationPhotoBinding
 
     override fun onCreateView(
@@ -21,7 +21,7 @@ class CertificationPhotoFragment(val name: String): BottomSheetDialogFragment() 
 
         /** 이전 버튼 클릭 **/
         binding.fragmentCertificationPhotoPreviousBtnTv.setOnClickListener {
-            val dialog = CertificationFragment(name)
+            val dialog = CertificationFragment()
             dialog.show(requireActivity().supportFragmentManager, dialog.tag)
             dismiss()
         }

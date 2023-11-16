@@ -117,6 +117,7 @@ class MyPageFragment :
                                         }
 
                                         setDefaultProfile(imgProfile, result.profileImg)
+                                        saveUserName(result.name)
                                         tvNickname.text = result.nickname
                                         tvName.text = result.name + " (${result.gender})"
                                         tvBirth.text = result.birth
@@ -182,6 +183,13 @@ class MyPageFragment :
                 )
             addItemDecoration(MyPostListRVHDecoration(30))
         }
+    }
+
+    // Save user's name to sp
+    private fun saveUserName(name: String) {
+        val editor = sSharedPreferences.edit()
+        editor.putString("name", name)
+        editor.apply()
     }
 
     // Show delete account dialog
