@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="30dp"
+    android:paddingBottom="80dp"
+    app:layout_behavior="draggable"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!-- TOP -->
@@ -63,8 +64,9 @@
                 app:layout_constraintTop_toTopOf="parent"/>
             <EditText
                 android:id="@+id/fragment_cert_contents_name_textfield_et"
-                android:layout_width="280dp"
+                android:layout_width="265dp"
                 android:maxLines="1"
+                android:singleLine="true"
                 android:maxLength="8"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -123,7 +125,7 @@
                 app:layout_constraintTop_toTopOf="parent"/>
             <EditText
                 android:id="@+id/fragment_cert_contents_num_textfield_et"
-                android:layout_width="280dp"
+                android:layout_width="265dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:background="@drawable/style_line_bottom"
@@ -182,7 +184,7 @@
                 app:layout_constraintTop_toTopOf="parent"/>
             <EditText
                 android:id="@+id/fragment_cert_contents_date_textfield_et"
-                android:layout_width="280dp"
+                android:layout_width="265dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:background="@drawable/style_line_bottom"
