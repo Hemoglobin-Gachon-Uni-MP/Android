@@ -166,20 +166,20 @@ class CertificationPhotoFragment(val eName: String, val eNum: String, val eDate:
                             // If success, fill the data
                             1000 -> {
                                 Log.d("seori4444", "사진 전송 성공")
-                                val result = body.result
-                                binding.run {
-                                    //
-                                }
+                                dismiss()
                             }
-//                             If GET fails, show toast message to user
-//                            else -> body?.message?.let { it1
-//                                -> showCustomToast(it1)
-//                                Log.d("seori111", response.message())
-//                            }
+                            // If POST fails, show toast message to user
+                            else -> body?.message?.let { it1
+                                -> Toast.makeText(context, "잠시 후 다시 시도해주세요", Toast.LENGTH_SHORT)
+                                .show()
+                                Log.d("seori111", response.message())
+                            }
                         }
                     } else {
                         // If fail, show toast message to user
-                        Log.d("seori1116", response.body().toString())
+                        Toast.makeText(context, "잠시 후 다시 시도해주세요", Toast.LENGTH_SHORT)
+                            .show()
+                        Log.d("seori111", response.message())
                     }
                 }
                 // If fail, show toast message to user
