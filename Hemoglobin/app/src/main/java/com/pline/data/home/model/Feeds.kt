@@ -31,7 +31,7 @@ data class FeedListResult(
 )
 
 data class GetFeedListResponse(
-    val result: ArrayList<FeedListResult>
+    val result: ArrayList<FeedListResult>?
 ): BaseResponse()
 
 data class FeedsResponse(
@@ -81,10 +81,6 @@ data class FeedInfoResult(
     @SerializedName("nickname") var nickname: String,
     @SerializedName("profileImg") var profileImg: String,
     @SerializedName("rh") var rh: Int
-)
-
-data class baseUserIdReq(
-    val userId: Int
 )
 
 data class DeleteFeedResponse(

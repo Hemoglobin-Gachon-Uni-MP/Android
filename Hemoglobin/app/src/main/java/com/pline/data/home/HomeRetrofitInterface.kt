@@ -11,7 +11,6 @@ import com.pline.data.home.model.PostCommentReqBody
 import com.pline.data.home.model.PostNewCommentResponse
 import com.pline.data.home.model.PostNewReplyResponse
 import com.pline.data.home.model.PostReplyReqBody
-import com.pline.data.home.model.baseUserIdReq
 import com.pline.data.home.model.postFeedReqBody
 import retrofit2.Call
 import retrofit2.http.Body

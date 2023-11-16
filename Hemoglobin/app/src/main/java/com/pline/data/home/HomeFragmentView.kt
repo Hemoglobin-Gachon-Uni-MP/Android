@@ -14,7 +14,7 @@ import com.pline.data.home.model.PostNewReplyResponse
 
 interface HomeFragmentView {
     // 글 목록 반환
-    fun onGetFeedListSuccess(response: ArrayList<FeedListResult>)
+    fun onGetFeedListSuccess(response: ArrayList<FeedListResult>?)
     fun onGetFeedListFailure(message: String)
 }
 

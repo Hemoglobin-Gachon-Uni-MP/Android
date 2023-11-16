@@ -15,6 +15,7 @@ import com.pline.src.main.utils.PostListRVAdapter
 class FragmentPostReceiver(val abo: ArrayList<Int>, val rh: Int, val location: String) :BaseFragment<FragmentPostListReceiverBinding>(FragmentPostListReceiverBinding::bind, R.layout.fragment_post_list_receiver), HomeFragmentView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.d("FeedServiceErrorDetect", "FragmentPostReceiverOnViewCreated")
         FeedService(this).tryGetFeedList()
     }
 
@@ -32,17 +33,21 @@ class FragmentPostReceiver(val abo: ArrayList<Int>, val rh: Int, val location: S
         }
     }
 
-    override fun onGetFeedListSuccess(response: ArrayList<FeedListResult>) {
+    override fun onGetFeedListSuccess(response: ArrayList<FeedListResult>?) {
         var receiverList: ArrayList<FeedListResult> = ArrayList()
         var locationList: ArrayList<FeedListResult> = ArrayList()
 
-        for (i in 0.. response.size - 1){
-            if (location != "전체 지역"){
-                if (response[i].location == location){
+        Log.d("FeedListUpComment", response.toString())
+
+        if(response != null){
+            for (i in 0.. response.size - 1){
+                if (location != "전체 지역"){
+                    if (response[i].location == location){
+                        locationList.add(response[i])
+                    }
+                } else{
                     locationList.add(response[i])
                 }
-            } else{
-                locationList.add(response[i])
             }
         }
 

@@ -16,7 +16,7 @@ import com.pline.databinding.ItemReplyBinding
 class ReplyRVAdapter(private var replyList: ArrayList<Reply>):
     RecyclerView.Adapter<ReplyRVAdapter.ViewHolder>() {
 
-    val userId = ApplicationClass.sSharedPreferences.getInt("userId", 0)
+    val userId = ApplicationClass.sSharedPreferences.getInt("memberId", 0)
 
     interface ReplyListener{
         fun dialog(replyId: Int)
@@ -62,6 +62,8 @@ class ReplyRVAdapter(private var replyList: ArrayList<Reply>):
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(replyList[position])
+
+        Log.d("ReplyMemberId", userId.toString())
 
         holder.more.setOnClickListener {
             if (holder.menu.isVisible){

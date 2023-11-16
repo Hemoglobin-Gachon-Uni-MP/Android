@@ -39,7 +39,7 @@ class PostListRVAdapter(private val postList: ArrayList<FeedListResult>): Recycl
                     .error(defaultImage) // 로딩 에러 발생 시 표시할 이미지
                     .fallback(defaultImage) // 로드할 url 이 비어있을(null 등) 경우 표시할 이미지
                     .into(itemPostProfileImageIv) // 이미지를 넣을 뷰
-                itemPostCommentCountTv.text = "${post.commentCnt}"
+                itemPostCommentCountTv.text = post.commentCnt.toString()
             }
         }
     }

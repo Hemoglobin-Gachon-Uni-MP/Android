@@ -34,7 +34,7 @@ class CommentRVAdapter(private val commentList: ArrayList<Comment>): RecyclerVie
         myCommentListner = listner
     }
 
-    val userId = ApplicationClass.sSharedPreferences.getInt("userId", 0)
+    val userId = ApplicationClass.sSharedPreferences.getInt("memberId", 0)
 
     inner class ViewHolder(val binding: ItemCommentBinding, val context: Context): RecyclerView.ViewHolder(binding.root){
         val more = binding.itemCommentMoreIconIv
@@ -90,6 +90,7 @@ class CommentRVAdapter(private val commentList: ArrayList<Comment>): RecyclerVie
     override fun getItemCount(): Int = commentList.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        Log.d("CommentmemberID", userId.toString())
         holder.bind(commentList[position])
         holder.more.setOnClickListener {
             if (holder.menu.isVisible){

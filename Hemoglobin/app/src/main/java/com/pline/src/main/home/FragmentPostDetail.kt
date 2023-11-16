@@ -17,7 +17,6 @@ import com.pline.data.home.model.PostCommentReqBody
 import com.pline.data.home.model.PostNewCommentResponse
 import com.pline.data.home.model.PostNewReplyResponse
 import com.pline.data.home.model.PostReplyReqBody
-import com.pline.data.home.model.baseUserIdReq
 import com.pline.databinding.FragmentPostDetailBinding
 import com.pline.src.main.home.adapter.CommentRVAdapter
 import com.pline.src.main.home.dialog.CommentDeleteDialog
@@ -124,8 +123,7 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
     }
 
     fun deletePostDialog(){
-        val body = baseUserIdReq(postUserId)
-        val dialog = FeedDeleteDialog(body, feedId)
+        val dialog = FeedDeleteDialog(feedId)
         dialog.isCancelable = false
         dialog.show(this.requireFragmentManager(), "DeleteFeedDialog")
     }
@@ -144,8 +142,7 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
     }
 
     fun deleteCommentDialog(commentId: Int){
-        val body = baseUserIdReq(myId)
-        val dialog = CommentDeleteDialog(body, commentId)
+        val dialog = CommentDeleteDialog(commentId)
         dialog.isCancelable = false
 
         dialog.setmListner(object : CommentDeleteDialog.Listner{
@@ -159,8 +156,7 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
     }
 
     fun deleteReplyDialog(replyId: Int){
-        val body = baseUserIdReq(myId)
-        val dialog = ReplyDeleteDialog(body, replyId)
+        val dialog = ReplyDeleteDialog(replyId)
         dialog.isCancelable = false
 
         dialog.setReplyListner(object : ReplyDeleteDialog.ReplyDeleteListener{

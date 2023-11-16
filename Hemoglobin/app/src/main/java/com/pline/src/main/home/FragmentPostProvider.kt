@@ -26,19 +26,23 @@ class FragmentPostProvider(val abo: ArrayList<Int>, val rh: Int, val location: S
         super.onResume()
     }
 
-    override fun onGetFeedListSuccess(response: ArrayList<FeedListResult>) {
+    override fun onGetFeedListSuccess(response: ArrayList<FeedListResult>?) {
         var receiverList: ArrayList<FeedListResult> = ArrayList()
         var locationList: ArrayList<FeedListResult> = ArrayList()
 
-        for (i in 0.. response.size - 1){
-            if (location != "전체 지역"){
-                if (response[i].location == location){
+        if (response != null){
+            for (i in 0.. response.size - 1){
+                if (location != "전체 지역"){
+                    if (response[i].location == location){
+                        locationList.add(response[i])
+                    }
+                } else{
                     locationList.add(response[i])
                 }
-            } else{
-                locationList.add(response[i])
             }
         }
+
+
 
         for (i in 0..locationList.size -1){
             if ((rh == 1 || rh == 3) && abo[0] == 1){

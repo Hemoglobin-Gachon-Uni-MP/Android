@@ -12,10 +12,9 @@ import androidx.fragment.app.DialogFragment
 import com.pline.data.home.CommentView
 import com.pline.data.home.DeleteCommentService
 import com.pline.data.home.model.DeleteCommentResponse
-import com.pline.data.home.model.baseUserIdReq
 import com.pline.databinding.DialogDeleteCommentBinding
 
-class CommentDeleteDialog(val body: baseUserIdReq, val commentId: Int): DialogFragment(), CommentView {
+class CommentDeleteDialog(val commentId: Int): DialogFragment(), CommentView {
     private lateinit var binding: DialogDeleteCommentBinding
 
     interface Listner{
@@ -43,7 +42,7 @@ class CommentDeleteDialog(val body: baseUserIdReq, val commentId: Int): DialogFr
 
         // Set click event of delete button
         btnDeleteComment.setOnClickListener {
-            DeleteCommentService(this@CommentDeleteDialog).tryDeleteComment(body, commentId)
+            DeleteCommentService(this@CommentDeleteDialog).tryDeleteComment(commentId)
         }
         // Set click event of cancel button
         btnCancelComment.setOnClickListener {
