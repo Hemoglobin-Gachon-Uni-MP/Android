@@ -11,10 +11,12 @@ import android.widget.Toast
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.pline.R
+import com.pline.config.ApplicationClass.Companion.sSharedPreferences
 import com.pline.databinding.FragmentCertificationBinding
 
-class CertificationFragment(val name: String): BottomSheetDialogFragment() {
+class CertificationFragment(): BottomSheetDialogFragment() {
     private lateinit var binding: FragmentCertificationBinding
+    val name = sSharedPreferences.getString("name", "홍길동")
     var eName: String = ""
     var eNum: String = ""
     var eDate: String = ""
@@ -33,7 +35,7 @@ class CertificationFragment(val name: String): BottomSheetDialogFragment() {
 
 
         /** 이름 경고 문구 **/
-        binding.fragmentCertContentsNameTextfieldEt.addTextChangedListener(object: TextWatcher{
+        binding.fragmentCertContentsNameTextfieldEt.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
@@ -51,7 +53,7 @@ class CertificationFragment(val name: String): BottomSheetDialogFragment() {
         })
 
         /** 증서 번호 경고 문구 **/
-        binding.fragmentCertContentsNumTextfieldEt.addTextChangedListener(object: TextWatcher{
+        binding.fragmentCertContentsNumTextfieldEt.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
@@ -82,7 +84,7 @@ class CertificationFragment(val name: String): BottomSheetDialogFragment() {
         })
 
         /** 날짜 경고 문구 **/
-        binding.fragmentCertContentsDateTextfieldEt.addTextChangedListener(object: TextWatcher{
+        binding.fragmentCertContentsDateTextfieldEt.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
@@ -119,7 +121,7 @@ class CertificationFragment(val name: String): BottomSheetDialogFragment() {
                 && isValidNum()
                 && isValidDate()){  // 제대로 입력했을 때
 
-                val dialog = CertificationPhotoFragment(name)
+                val dialog = CertificationPhotoFragment(eName, eNum, eDate)
                 dialog.show(requireActivity().supportFragmentManager, dialog.tag)
                 dismiss()
             } else{
@@ -130,17 +132,17 @@ class CertificationFragment(val name: String): BottomSheetDialogFragment() {
         return binding.root
     }
 
-    private fun isValidName(): Boolean{
+    private fun isValidName(): Boolean {
         return eName.equals(name)
     }
 
-    private fun isValidNum(): Boolean{
+    private fun isValidNum(): Boolean {
         return eNum.length == 12
                 && eNum[2].equals('-')
                 && eNum[5].equals('-')
     }
 
-    private fun isValidDate(): Boolean{
+    private fun isValidDate(): Boolean {
         return eDate.length == 10
                 && eDate[4].equals('.')
                 && eDate[7].equals('.')

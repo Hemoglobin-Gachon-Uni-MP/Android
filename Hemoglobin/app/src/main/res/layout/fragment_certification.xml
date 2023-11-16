@@ -193,7 +193,6 @@
                 android:inputType="number"
                 android:hint="2023.01.01"
                 app:layout_constraintBottom_toBottomOf="@+id/fragment_cert_contents_date_text_tv"/>
-
             <LinearLayout
                 android:id="@+id/warning_date_ll"
                 android:layout_width="wrap_content"

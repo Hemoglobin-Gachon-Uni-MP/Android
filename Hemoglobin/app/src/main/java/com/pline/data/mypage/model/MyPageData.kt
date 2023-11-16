@@ -71,6 +71,18 @@ data class MyCertListResult(
     val name: String
 )
 
+// Req data class for posting my certification
+data class PostCertReq(
+    val certificationNum: String,
+    val date: String,
+    val name: String
+)
+
+// Res data class for posting my certification
+data class PostCertResponse(
+    val result: Int
+) : BaseResponse()
+
 // Response data class for deleting my account
 data class MyAccountDeleteResponse(
     val result: String
