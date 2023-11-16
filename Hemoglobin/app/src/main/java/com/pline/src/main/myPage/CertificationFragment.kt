@@ -56,6 +56,7 @@ class CertificationFragment(val name: String): BottomSheetDialogFragment() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
             }
 
             override fun afterTextChanged(s: Editable?) {
@@ -63,6 +64,13 @@ class CertificationFragment(val name: String): BottomSheetDialogFragment() {
                  * 증서 번호 형식 정하기
                  * 입력한 번호랑 형식 다르면 경고문구 표시**/
                 eNum = binding.fragmentCertContentsNumTextfieldEt.text.toString()
+                if (eNum.length == 2 || eNum.length == 5){
+                    eNum += "-"
+                    binding.fragmentCertContentsNumTextfieldEt.setText(eNum)
+
+                    var pos: Int = eNum.length
+                    binding.fragmentCertContentsNumTextfieldEt.setSelection(pos)
+                }
                 if (isValidNum()){
                     // 같을때
                     binding.warningNumLl.visibility = View.INVISIBLE
@@ -86,6 +94,14 @@ class CertificationFragment(val name: String): BottomSheetDialogFragment() {
                  * 날짜 형식 정하기
                  * 입력한 날짜랑 형식 다르면 경고문구 표시**/
                 eDate = binding.fragmentCertContentsDateTextfieldEt.text.toString()
+                if (eDate.length == 4 || eDate.length == 7){
+                    eDate += "."
+                    binding.fragmentCertContentsDateTextfieldEt.setText(eDate)
+
+                    var pos: Int = eDate.length
+                    binding.fragmentCertContentsDateTextfieldEt.setSelection(pos)
+                }
+
                 if (isValidDate()) {
                     // 같을때
                     binding.warningDateLl.visibility = View.INVISIBLE
