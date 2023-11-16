@@ -124,6 +124,8 @@ class MyPageFragment :
                                         tvLocation.text = result.location
                                         tvBloodType.text = result.blood
                                         myPostList = result.feedList
+                                        btnCertList.text = "인증된 헌혈 ${result.certificationCnt}회"
+                                        btnMedalList.text = "획득한 메달 ${result.rewardCnt}개"
 
                                         if (myPostList.isEmpty()) {
                                             rvPostList.visibility = GONE

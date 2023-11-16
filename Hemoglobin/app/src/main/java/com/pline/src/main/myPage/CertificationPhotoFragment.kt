@@ -165,6 +165,8 @@ class CertificationPhotoFragment(val eName: String, val eNum: String, val eDate:
                         when (body?.code) {
                             // If success, fill the data
                             1000 -> {
+                                Toast.makeText(context, "관리자의 승인 후 헌혈목록에 추가됩니다.", Toast.LENGTH_SHORT)
+                                    .show()
                                 Log.d("seori4444", "사진 전송 성공")
                                 dismiss()
                             }
