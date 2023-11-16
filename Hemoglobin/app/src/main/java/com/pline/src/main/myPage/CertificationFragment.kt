@@ -7,7 +7,9 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.pline.R
 import com.pline.databinding.FragmentCertificationBinding
 
 class CertificationFragment(val name: String): BottomSheetDialogFragment() {
@@ -18,6 +20,10 @@ class CertificationFragment(val name: String): BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentCertificationBinding.inflate(inflater, container, false)
+
+        val bottomView = layoutInflater.inflate(R.layout.fragment_certification, null)
+        val bottomDialog = BottomSheetDialog(this.requireContext())
+        bottomDialog.behavior.isDraggable = true
 
         /** 이름 경고 문구 **/
         binding.fragmentCertContentsNameTextfieldEt.addTextChangedListener(object: TextWatcher{
@@ -90,6 +96,8 @@ class CertificationFragment(val name: String): BottomSheetDialogFragment() {
 
         /**  다음 페이지로 넘어가기 **/
         binding.fragmentCertificationNextBtnTv.setOnClickListener {
+            val dialog = CertificationPhotoFragment(name)
+            dialog.show(requireActivity().supportFragmentManager, dialog.tag)
             dismiss()
         }
 
@@ -99,7 +107,5 @@ class CertificationFragment(val name: String): BottomSheetDialogFragment() {
     override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
 
-        val dialog = CertificationPhotoFragment(name)
-        dialog.show(requireActivity().supportFragmentManager, dialog.tag)
     }
 }
