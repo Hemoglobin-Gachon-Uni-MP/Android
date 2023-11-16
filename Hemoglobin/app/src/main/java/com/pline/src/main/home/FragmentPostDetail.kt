@@ -12,6 +12,7 @@ import com.pline.config.BaseFragment
 import com.pline.data.home.FeedDetailService
 import com.pline.data.home.FeedDetailView
 import com.pline.data.home.model.FeedInfoResult
+import com.pline.data.home.model.GetFeedInfoResponse
 import com.pline.data.home.model.PostCommentReqBody
 import com.pline.data.home.model.PostNewCommentResponse
 import com.pline.data.home.model.PostNewReplyResponse
@@ -234,7 +235,9 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
         }
     }
 
+
     override fun onGetFeedInfoFailure(message: String) {
+        Log.d("FragmentPostDetailFailure", message)
     }
 
     override fun onPostNewCommentSuccess(response: PostNewCommentResponse) {

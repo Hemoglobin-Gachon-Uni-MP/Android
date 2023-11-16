@@ -53,7 +53,7 @@ data class Comment(
     var isReportedFromUser: Boolean,
     var memberId: Int,
     var nickname: String,
-    var profileImg: Int,
+    var profileImg: String,
     var replyList: ArrayList<Reply>
 )
 
@@ -63,7 +63,7 @@ data class Reply(
     val isReportedFromUser: Boolean,
     var memberId: Int,
     var nickname: String,
-    var profileImg: Int,
+    var profileImg: String,
     var replyId: Int
 )
 
