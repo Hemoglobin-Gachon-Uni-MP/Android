@@ -5,9 +5,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.pline.R
 import com.pline.config.ApplicationClass
 import com.pline.data.home.model.Comment
@@ -40,11 +42,19 @@ class CommentRVAdapter(private val commentList: ArrayList<Comment>): RecyclerVie
         val reply = binding.itemCommentReplyIconIv
         fun bind(comment: Comment){
             with(binding){
-                if (comment.profileImg == 1){
-                    itemCommentProfileImageIv.setImageResource(R.drawable.ic_profile_ver1)
-                } else {
-                    itemCommentProfileImageIv.setImageResource(R.drawable.ic_profile_ver2)
-                }
+//                if (comment.profileImg == 1){
+//                    itemCommentProfileImageIv.setImageResource(R.drawable.ic_profile_ver1)
+//                } else {
+//                    itemCommentProfileImageIv.setImageResource(R.drawable.ic_profile_ver2)
+//                }
+
+                val defaultImage = R.drawable.ic_profile_ver1
+                Glide.with(context)
+                    .load(comment.profileImg) // 불러올 이미지 url
+                    .error(defaultImage) // 로딩 에러 발생 시 표시할 이미지
+                    .fallback(defaultImage) // 로드할 url 이 비어있을(null 등) 경우 표시할 이미지
+                    .into(itemCommentProfileImageIv) // 이미지를 넣을 뷰
+
                 itemCommentUserNameTv.text = comment.nickname
                 itemCommentReplyCountTv.text = comment.replyList.size.toString()
                 itemCommentContentsTextTv.text = comment.context
@@ -89,7 +99,7 @@ class CommentRVAdapter(private val commentList: ArrayList<Comment>): RecyclerVie
 
             }
         }
-        if (commentList[position].userId == userId){
+        if (commentList[position].memberId == userId){
             holder.menu.text = "댓글 삭제하기"
             holder.menu.setOnClickListener {
                 // deleting dialog
@@ -108,4 +118,13 @@ class CommentRVAdapter(private val commentList: ArrayList<Comment>): RecyclerVie
             myCommentListner.reply(commentList[position].commentId)
         }
     }
+
+//    fun setDefaultProfile(imgView: ImageView, imgUrlString: String) {
+//        val defaultImage = R.drawable.ic_profile_ver1
+//        Glide.with()
+//            .load(imgUrlString) // 불러올 이미지 url
+//            .error(defaultImage) // 로딩 에러 발생 시 표시할 이미지
+//            .fallback(defaultImage) // 로드할 url 이 비어있을(null 등) 경우 표시할 이미지
+//            .into(imgView) // 이미지를 넣을 뷰
+//    }
 }
