@@ -190,7 +190,6 @@
                 android:background="@drawable/style_line_bottom"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                android:inputType="date"
                 android:hint="2023.01.01"
                 app:layout_constraintBottom_toBottomOf="@+id/fragment_cert_contents_date_text_tv"/>
 

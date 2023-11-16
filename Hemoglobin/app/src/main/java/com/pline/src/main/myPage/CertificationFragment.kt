@@ -105,7 +105,7 @@ class CertificationFragment(): BottomSheetDialogFragment() {
                 && isValidNum()
                 && isValidDate()){  // 제대로 입력했을 때
 
-                val dialog = CertificationPhotoFragment()
+                val dialog = CertificationPhotoFragment(eName, eNum, eDate)
                 dialog.show(requireActivity().supportFragmentManager, dialog.tag)
                 dismiss()
             } else{
