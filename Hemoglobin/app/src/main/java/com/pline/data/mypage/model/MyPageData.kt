@@ -17,7 +17,9 @@ data class MyPageResult(
     val nickname: String,
     val phone: String,
     val profileImg: String,
-    val memberId: Int
+    val memberId: Int,
+    val rewardCnt: Int,
+    val certificationCnt: Int
 )
 
 data class MyPageFeedResult(
@@ -68,13 +70,6 @@ data class MyCertListResult(
     val certificationNum: String,
     val date: String,
     val memberId: Int,
-    val name: String
-)
-
-// Req data class for posting my certification
-data class PostCertReq(
-    val certificationNum: String,
-    val date: String,
     val name: String
 )
 
