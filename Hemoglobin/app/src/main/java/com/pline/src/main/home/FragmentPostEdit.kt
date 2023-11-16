@@ -71,7 +71,7 @@ class FragmentPostEdit(val feedId: Int): BaseFragment<FragmentPostEditBinding>(F
 
         binding.postEditDoneTv.setOnClickListener {
             if (content != ""){
-                var body = PostCommentReqBody(content, userId)
+                var body = PostCommentReqBody(content)
                 EditPostService(this).tryEditFeed(feedId,body)
                 requireActivity().supportFragmentManager.beginTransaction().replace(R.id.main_frm, FragmentPostDetail(feedId)).commit()
             } else{

@@ -19,7 +19,7 @@ class MyPostListRVVFragment(var myPostList: ArrayList<MyPageFeedResult>) : BaseF
         binding.rvMyPostList.run {
             var feedList: ArrayList<FeedListResult> = arrayListOf()
             myPostList.forEach {
-                feedList.add(FeedListResult(null, it.commentCnt, it.context, it.date, it.feedId, it.isReceiver, null, it.nickname, it.profileImg, null, it.memberId))
+                feedList.add(FeedListResult(null, it.commentCnt, it.context, it.date, it.feedId, it.isReceiver, null, it.memberId, it.nickname, it.profileImg, null))
             }
 
             // Set Recycler View Adapter

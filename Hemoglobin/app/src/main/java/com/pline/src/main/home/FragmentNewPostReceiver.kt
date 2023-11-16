@@ -26,7 +26,7 @@ class FragmentNewPostReceiver(val isReceiver: Boolean): BaseFragment<FragmentNew
     var postData = data("", -1, -1, "")
 
     val userId = ApplicationClass.sSharedPreferences.getInt("userId", 0)
-    var body = postFeedReqBody(-1, "", "", "", -1, userId)
+    var body = postFeedReqBody(-1, "", true, "", -1)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -34,8 +34,8 @@ class FragmentNewPostReceiver(val isReceiver: Boolean): BaseFragment<FragmentNew
             binding.newPostReceiverToolbarTv.setText("공혈자 새 게시물")
             binding.newPostReceiverBloodTypeTextTv.setText("공혈자의 혈액형을 입력해주세요")
             binding.newPostReceiverTextAreaTv.setText("거주지역")
-            body.isReceiver = "F"
-        }else body.isReceiver = "T"
+            body.isReceiver = false
+        }else body.isReceiver = true
     }
 
     override fun onStart() {
