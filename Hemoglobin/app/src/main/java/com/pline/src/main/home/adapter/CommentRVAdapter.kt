@@ -25,8 +25,8 @@ class CommentRVAdapter(private val commentList: ArrayList<Comment>): RecyclerVie
         fun dialog(commentId: Int)
         fun reply(commentId: Int)
         fun replyDialog(replyId: Int)
-        fun reportComment()
-        fun reportReply()
+        fun reportComment(commentId: Int)
+        fun reportReply(replyId: Int)
     }
 
     private lateinit var myCommentListner: MyCommentListner
@@ -70,8 +70,8 @@ class CommentRVAdapter(private val commentList: ArrayList<Comment>): RecyclerVie
                             myCommentListner.replyDialog(replyId)
                         }
 
-                        override fun reportReply() {
-                            myCommentListner.reportReply()
+                        override fun reportReply(replyId: Int) {
+                            myCommentListner.reportReply(replyId)
                         }
                     })
                     itemCommentReplyRv.adapter = replyRVAdapter
@@ -111,7 +111,7 @@ class CommentRVAdapter(private val commentList: ArrayList<Comment>): RecyclerVie
             holder.menu.text = "댓글 신고하기"
             holder.menu.setOnClickListener {
                 holder.menu.visibility = View.GONE
-                myCommentListner.reportComment()
+                myCommentListner.reportComment(commentList[position].commentId)
             }
         }
 

@@ -20,7 +20,7 @@ class ReplyRVAdapter(private var replyList: ArrayList<Reply>):
 
     interface ReplyListener{
         fun dialog(replyId: Int)
-        fun reportReply()
+        fun reportReply(replyId: Int)
     }
     lateinit var myListner: ReplyListener
     fun setMyReplyListner(listener: ReplyListener){
@@ -31,6 +31,8 @@ class ReplyRVAdapter(private var replyList: ArrayList<Reply>):
     inner class ViewHolder(val binding: ItemReplyBinding, val context: Context): RecyclerView.ViewHolder(binding.root){
         val more = binding.itemReplyMoreIconIv
         val menu = binding.itemReplyMoreMenuReportTv
+
+
 
         fun bind(reply: Reply){
             with(binding){
@@ -63,8 +65,6 @@ class ReplyRVAdapter(private var replyList: ArrayList<Reply>):
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(replyList[position])
 
-        Log.d("ReplyMemberId", userId.toString())
-
         holder.more.setOnClickListener {
             if (holder.menu.isVisible){
                 holder.menu.visibility = View.GONE
@@ -72,6 +72,8 @@ class ReplyRVAdapter(private var replyList: ArrayList<Reply>):
                 holder.menu.visibility = View.VISIBLE
             }
 
+            Log.d("ReplyRVAdapter", "replylist[pos].memid : ${replyList[position].memberId}")
+            Log.d("ReplyRVAdapter", "userId : ${userId}")
             if (replyList[position].memberId == userId){
                 holder.menu.text = "삭제하기"
                 holder.menu.setOnClickListener {
@@ -79,11 +81,11 @@ class ReplyRVAdapter(private var replyList: ArrayList<Reply>):
                     // deleting dialog
                     myListner.dialog(replyList[position].replyId)
                 }
-            } else{
+            } else{ /** 답글 신고하기 **/
                 holder.menu.text = "신고하기"
                 holder.menu.setOnClickListener {
                     holder.menu.visibility = View.GONE
-                    myListner.reportReply() // reporting dialog
+                    myListner.reportReply(replyList[position].replyId) // reporting dialog
                 }
             }
 
