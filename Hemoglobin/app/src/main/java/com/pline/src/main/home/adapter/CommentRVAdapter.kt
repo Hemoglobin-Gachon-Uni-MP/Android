@@ -25,8 +25,8 @@ class CommentRVAdapter(private val commentList: ArrayList<Comment>): RecyclerVie
         fun dialog(commentId: Int)
         fun reply(commentId: Int)
         fun replyDialog(replyId: Int)
-        fun reportComment()
-        fun reportReply()
+        fun reportComment(commentId: Int)
+        fun reportReply(replyId: Int)
     }
 
     private lateinit var myCommentListner: MyCommentListner
@@ -34,7 +34,7 @@ class CommentRVAdapter(private val commentList: ArrayList<Comment>): RecyclerVie
         myCommentListner = listner
     }
 
-    val userId = ApplicationClass.sSharedPreferences.getInt("userId", 0)
+    val userId = ApplicationClass.sSharedPreferences.getInt("memberId", 0)
 
     inner class ViewHolder(val binding: ItemCommentBinding, val context: Context): RecyclerView.ViewHolder(binding.root){
         val more = binding.itemCommentMoreIconIv
@@ -70,8 +70,8 @@ class CommentRVAdapter(private val commentList: ArrayList<Comment>): RecyclerVie
                             myCommentListner.replyDialog(replyId)
                         }
 
-                        override fun reportReply() {
-                            myCommentListner.reportReply()
+                        override fun reportReply(replyId: Int) {
+                            myCommentListner.reportReply(replyId)
                         }
                     })
                     itemCommentReplyRv.adapter = replyRVAdapter
@@ -90,6 +90,7 @@ class CommentRVAdapter(private val commentList: ArrayList<Comment>): RecyclerVie
     override fun getItemCount(): Int = commentList.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        Log.d("CommentmemberID", userId.toString())
         holder.bind(commentList[position])
         holder.more.setOnClickListener {
             if (holder.menu.isVisible){
@@ -110,7 +111,7 @@ class CommentRVAdapter(private val commentList: ArrayList<Comment>): RecyclerVie
             holder.menu.text = "댓글 신고하기"
             holder.menu.setOnClickListener {
                 holder.menu.visibility = View.GONE
-                myCommentListner.reportComment()
+                myCommentListner.reportComment(commentList[position].commentId)
             }
         }
 

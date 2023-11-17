@@ -17,7 +17,6 @@ import com.pline.data.home.model.PostCommentReqBody
 import com.pline.data.home.model.PostNewCommentResponse
 import com.pline.data.home.model.PostNewReplyResponse
 import com.pline.data.home.model.PostReplyReqBody
-import com.pline.data.home.model.baseUserIdReq
 import com.pline.databinding.FragmentPostDetailBinding
 import com.pline.src.main.home.adapter.CommentRVAdapter
 import com.pline.src.main.home.dialog.CommentDeleteDialog
@@ -27,7 +26,7 @@ import com.pline.src.main.home.dialog.ReportDialog
 
 class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBinding>(FragmentPostDetailBinding::bind, R.layout.fragment_post_detail),
     FeedDetailView {
-    val myId = ApplicationClass.sSharedPreferences.getInt("userId", 0)
+    val myId = ApplicationClass.sSharedPreferences.getInt("memberId", 0)
     var postUserId = 0
     var moreVisible = false
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -76,7 +75,7 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
         // report feed
         binding.fragmentDetailMoreMenuReportTv.setOnClickListener {
             binding.fragmentDetailMoreMenuNotMineLl.visibility = View.GONE
-            reportDialog(0)
+            reportDialog(0, feedId)
         }
 
 
@@ -124,19 +123,18 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
     }
 
     fun deletePostDialog(){
-        val body = baseUserIdReq(postUserId)
-        val dialog = FeedDeleteDialog(body, feedId)
+        val dialog = FeedDeleteDialog(feedId)
         dialog.isCancelable = false
         dialog.show(this.requireFragmentManager(), "DeleteFeedDialog")
     }
 
-    fun reportDialog(type: Int){
-        val dialog = ReportDialog(type)
+    fun reportDialog(type: Int, thisId: Int){
+        val dialog = ReportDialog(type, thisId, postUserId)
         dialog.isCancelable = false
 
         dialog.setReportListner(object : ReportDialog.ToastListner{
-            override fun toast() {
-                showCustomToast("Reported Successfully")
+            override fun toast(msg: String) {
+                showCustomToast(msg)
             }
         })
 
@@ -144,8 +142,7 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
     }
 
     fun deleteCommentDialog(commentId: Int){
-        val body = baseUserIdReq(myId)
-        val dialog = CommentDeleteDialog(body, commentId)
+        val dialog = CommentDeleteDialog(commentId)
         dialog.isCancelable = false
 
         dialog.setmListner(object : CommentDeleteDialog.Listner{
@@ -159,8 +156,7 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
     }
 
     fun deleteReplyDialog(replyId: Int){
-        val body = baseUserIdReq(myId)
-        val dialog = ReplyDeleteDialog(body, replyId)
+        val dialog = ReplyDeleteDialog(replyId)
         dialog.isCancelable = false
 
         dialog.setReplyListner(object : ReplyDeleteDialog.ReplyDeleteListener{
@@ -224,12 +220,12 @@ class FragmentPostDetail(val feedId: Int): BaseFragment<FragmentPostDetailBindin
                     deleteReplyDialog(replyId)
                 }
 
-                override fun reportComment() {
-                    reportDialog(1)
+                override fun reportComment(commentId: Int) {
+                    reportDialog(1, commentId)
                 }
 
-                override fun reportReply() {
-                    reportDialog(2)
+                override fun reportReply(replyId: Int) {
+                    reportDialog(2, replyId)
                 }
             })
         }

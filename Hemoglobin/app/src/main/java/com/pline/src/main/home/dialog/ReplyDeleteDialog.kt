@@ -12,10 +12,9 @@ import androidx.fragment.app.DialogFragment
 import com.pline.data.home.DeleteReplyService
 import com.pline.data.home.DeleteReplyView
 import com.pline.data.home.model.DeleteReplyResponse
-import com.pline.data.home.model.baseUserIdReq
 import com.pline.databinding.DialogDeleteCommentBinding
 
-class ReplyDeleteDialog(val body: baseUserIdReq, val replyId: Int): DialogFragment(),
+class ReplyDeleteDialog(val replyId: Int): DialogFragment(),
     DeleteReplyView {
     private lateinit var binding: DialogDeleteCommentBinding
 
@@ -46,7 +45,7 @@ class ReplyDeleteDialog(val body: baseUserIdReq, val replyId: Int): DialogFragme
 
         // Set click event of delete button
         btnDeleteComment.setOnClickListener {
-            DeleteReplyService(this@ReplyDeleteDialog).tryDeleteReply(body, replyId)
+            DeleteReplyService(this@ReplyDeleteDialog).tryDeleteReply(replyId)
         }
         // Set click event of cancel button
         btnCancelComment.setOnClickListener {

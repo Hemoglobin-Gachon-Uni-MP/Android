@@ -67,6 +67,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                 Log.d("kakaoLogin", "postLogin success : ${response}")
                 if (response.isSuccessful){
                     if(response.body()?.isSuccess == true) {
+                        Log.d("LoginActivity memId check", response.body()!!.result.memberId.toString())
                         sSharedPreferences.edit()
                             .putString("kakaoToken", kakaoToken)
                             .putString("jwt", response.body()!!.result.jwt)
@@ -84,6 +85,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                         finish()
                     }
                 }
+
             }
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 Log.d("kakaoLogin", "postLogin fail")

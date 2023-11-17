@@ -12,11 +12,10 @@ import com.pline.R
 import com.pline.data.home.FeedDeleteService
 import com.pline.data.home.FeedDeleteView
 import com.pline.data.home.model.DeleteFeedResponse
-import com.pline.data.home.model.baseUserIdReq
 import com.pline.databinding.DialogDeleteFeedBinding
 import com.pline.src.main.home.HomeFragment
 
-class FeedDeleteDialog(val body: baseUserIdReq, val feedId: Int) : DialogFragment(), FeedDeleteView {
+class FeedDeleteDialog(val feedId: Int) : DialogFragment(), FeedDeleteView {
     private lateinit var binding: DialogDeleteFeedBinding
 
     override fun onCreateView(
@@ -36,7 +35,7 @@ class FeedDeleteDialog(val body: baseUserIdReq, val feedId: Int) : DialogFragmen
 
         // Set click event of delete button
         btnDelete.setOnClickListener {
-            FeedDeleteService(this@FeedDeleteDialog).tryDeleteFeed(body, feedId)
+            FeedDeleteService(this@FeedDeleteDialog).tryDeleteFeed(feedId)
             requireActivity().supportFragmentManager.beginTransaction().replace(R.id.main_frm, HomeFragment()).commit()
             dismiss()
         }
